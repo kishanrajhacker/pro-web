@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Free APK Store</title>
+<meta name="theme-color" content="#01875F" />
+<meta name="description" content="Free APK Store — Download free Android APKs. No login, no ads, no payments." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   THEME VARIABLES + 6 AUTO-CHANGING INTERNATIONAL THEMES
+   ============================================================ */
+:root {
+  --brand: #01875F;
+  --brand-2: #22B4C4;
+  --bg: #f4fbf7;
+  --bg-2: #e8f5ee;
+  --surface: #ffffff;
+  --surface-2: #f0f7f3;
+  --text: #0b1f17;
+  --text-2: #4b6159;
+  --border: #d6e8dd;
+  --shadow: 0 8px 28px rgba(1,135,95,.10);
+  --radius: 18px;
+  --radius-sm: 14px;
+  --font-h: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-b: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-m: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+  --g1: #01875F;
+  --g2: #22B4C4;
+  --g3: #4FD1A0;
+  --bg-a: #01875F;
+  --bg-b: #22B4C4;
+  --bg-c: #0b1f17;
+}
+
+/* THEME: Default Green International */
+:root[data-skin="green"] {
+  --brand: #01875F; --brand-2: #22B4C4;
+  --bg: #f4fbf7; --bg-2: #e8f5ee; --surface: #ffffff; --surface-2: #f0f7f3;
+  --text: #0b1f17; --text-2: #4b6159; --border: #d6e8dd;
+  --shadow: 0 8px 28px rgba(1,135,95,.10);
+  --g1: #01875F; --g2: #22B4C4; --g3: #4FD1A0;
+  --bg-a: #01875F; --bg-b: #22B4C4; --bg-c: #0b1f17;
+  color-scheme: light;
+}
+
+/* THEME: Tokyo Neon (Japan) */
+:root[data-skin="tokyo"] {
+  --brand: #ff3c8e; --brand-2: #a855f7;
+  --bg: #0b0614; --bg-2: #140a24; --surface: #1a0f2e; --surface-2: #221440;
+  --text: #f5e9ff; --text-2: #b49cd6; --border: #2e1d52;
+  --shadow: 0 8px 28px rgba(255,60,142,.18);
+  --g1: #ff3c8e; --g2: #a855f7; --g3: #fbbf24;
+  --bg-a: #ff3c8e; --bg-b: #a855f7; --bg-c: #0b0614;
+  color-scheme: dark;
+}
+
+/* THEME: Dubai Gold */
+:root[data-skin="dubai"] {
+  --brand: #c9a227; --brand-2: #e0b73a;
+  --bg: #14110a; --bg-2: #1d1810; --surface: #241d12; --surface-2: #2e2617;
+  --text: #fff6dc; --text-2: #c9b98e; --border: #3d3219;
+  --shadow: 0 8px 28px rgba(201,162,39,.22);
+  --g1: #e0b73a; --g2: #c9a227; --g3: #f5e6a8;
+  --bg-a: #c9a227; --bg-b: #e0b73a; --bg-c: #14110a;
+  color-scheme: dark;
+}
+
+/* THEME: Paris Rose */
+:root[data-skin="paris"] {
+  --brand: #e11d6f; --brand-2: #f472b6;
+  --bg: #fff5f9; --bg-2: #ffe8f1; --surface: #ffffff; --surface-2: #ffeef5;
+  --text: #2b0a19; --text-2: #8a4a63; --border: #f8d3e2;
+  --shadow: 0 8px 28px rgba(225,29,111,.12);
+  --g1: #e11d6f; --g2: #f472b6; --g3: #fbbf24;
+  --bg-a: #e11d6f; --bg-b: #f472b6; --bg-c: #2b0a19;
+  color-scheme: light;
+}
+
+/* THEME: NYC Cyber */
+:root[data-skin="nyc"] {
+  --brand: #06b6d4; --brand-2: #3b82f6;
+  --bg: #050a12; --bg-2: #0a1420; --surface: #0e1c2c; --surface-2: #13263a;
+  --text: #e0f2ff; --text-2: #7fa8c4; --border: #1e3a52;
+  --shadow: 0 8px 28px rgba(6,182,212,.18);
+  --g1: #06b6d4; --g2: #3b82f6; --g3: #22d3ee;
+  --bg-a: #06b6d4; --bg-b: #3b82f6; --bg-c: #050a12;
+  color-scheme: dark;
+}
+
+/* THEME: Rio Carnival */
+:root[data-skin="rio"] {
+  --brand: #10b981; --brand-2: #fbbf24;
+  --bg: #f0fdf4; --bg-2: #dcfce7; --surface: #ffffff; --surface-2: #ecfdf3;
+  --text: #052e16; --text-2: #3f6b52; --border: #bbf7d0;
+  --shadow: 0 8px 28px rgba(16,185,129,.14);
+  --g1: #10b981; --g2: #fbbf24; --g3: #f43f5e;
+  --bg-a: #10b981; --bg-b: #fbbf24; --bg-c: #052e16;
+  color-scheme: light;
+}
+
+/* Manual dark toggle overrides light skins */
+:root[data-theme="dark"] {
+  --bg: #0b1512; --bg-2: #0f1d18; --surface: #13251f; --surface-2: #183028;
+  --text: #e6f4ee; --text-2: #9bbcb0; --border: #213d33;
+  --shadow: 0 8px 28px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-b);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background .6s ease, color .6s ease;
+}
+
+/* ============================================================
+   VIRAL ANIMATED AURORA BACKGROUND
+   ============================================================ */
+.viral-bg {
+  position: fixed; inset: 0; z-index: -2;
+  overflow: hidden;
+  background: var(--bg);
+  transition: background .6s ease;
+}
+.viral-bg .blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: .55;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.viral-bg .blob.b1 { width: 55vmax; height: 55vmax; top: -20vmax; left: -15vmax; background: var(--bg-a); animation: float1 18s ease-in-out infinite; }
+.viral-bg .blob.b2 { width: 45vmax; height: 45vmax; bottom: -18vmax; right: -12vmax; background: var(--bg-b); animation: float2 22s ease-in-out infinite; }
+.viral-bg .blob.b3 { width: 35vmax; height: 35vmax; top: 35%; left: 40%; background: var(--g3); opacity: .35; animation: float3 26s ease-in-out infinite; }
+.viral-bg .grid-overlay {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: .06;
+  mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
+}
+@keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(8vmax,6vmax) scale(1.15)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-7vmax,-5vmax) scale(1.2)} }
+@keyframes float3 { 0%,100%{transform:translate(0,0) scale(.9)} 50%{transform:translate(6vmax,-8vmax) scale(1.1)} }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header.site {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition: background .6s ease, border-color .6s ease;
+  flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-h); font-weight: 800; font-size: 1.05rem; letter-spacing: -.02em; cursor: pointer; }
+.brand .logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--g1), var(--g2)); display: grid; place-items: center; color: #fff; font-size: 1.1rem; box-shadow: var(--shadow); }
+.search-wrap { flex: 1 1 220px; position: relative; min-width: 140px; }
+.search-wrap input {
+  width: 100%; padding: 10px 36px 10px 34px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+  font-family: var(--font-b); font-size: .92rem; outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.search-wrap input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 25%, transparent); }
+.search-wrap .ico { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-2); pointer-events: none; font-size: .9rem; }
+.search-wrap .clear-btn {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  border: none; background: transparent; color: var(--text-2); cursor: pointer;
+  width: 28px; height: 28px; border-radius: 50%; display: none; font-size: 1.1rem;
+}
+.search-wrap .clear-btn.show { display: block; }
+.header-actions { display: flex; align-items: center; gap: 6px; }
+.icon-btn {
+  width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); cursor: pointer; display: grid; place-items: center;
+  font-size: 1.05rem; transition: transform .15s, background .2s; text-decoration: none;
+}
+.icon-btn:hover { transform: translateY(-1px); }
+.icon-btn:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.pill-btn {
+  padding: 8px 14px; border-radius: 999px; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--g1), var(--g2)); color: #fff; font-weight: 700;
+  font-family: var(--font-b); font-size: .85rem; display: none; white-space: nowrap;
+}
+.pill-btn.show { display: inline-block; }
+
+/* ============================================================
+   MAIN LAYOUT
+   ============================================================ */
+main { max-width: 1180px; margin: 0 auto; padding: 18px 16px 100px; }
+.page { animation: fadeSlide .28s ease both; }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Offline banner */
+.offline-banner {
+  display: none; align-items: center; justify-content: center; gap: 8px;
+  background: linear-gradient(90deg, #f59e0b, #f97316); color: #1a1a1a;
+  font-weight: 700; font-size: .82rem; padding: 8px 16px; text-align: center;
+  position: sticky; top: 63px; z-index: 40;
+  animation: bannerPulse 2s ease-in-out infinite;
+}
+.offline-banner.show { display: flex; }
+@keyframes bannerPulse { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.15)} }
+
+/* Section headers */
+.section-head { display: flex; align-items: center; justify-content: space-between; margin: 22px 0 12px; gap: 10px; flex-wrap: wrap; }
+.section-head h2 { font-family: var(--font-h); font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; }
+.section-head .sub { color: var(--text-2); font-size: .82rem; }
+
+/* Featured row */
+.featured-row { display: flex; gap: 12px; overflow-x: auto; padding: 4px 0 12px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.featured-row::-webkit-scrollbar { display: none; }
+.featured-card {
+  flex: 0 0 auto; width: 260px; scroll-snap-align: start;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px; display: flex; gap: 12px; align-items: center; cursor: pointer;
+  box-shadow: var(--shadow); transition: transform .2s, border-color .2s;
+  position: relative; overflow: hidden;
+}
+.featured-card::before { content: "★ Featured"; position: absolute; top: 0; right: 0; background: linear-gradient(135deg,var(--g1),var(--g2)); color:#fff; font-size:.62rem; font-weight:800; padding:3px 8px; border-bottom-left-radius:10px; letter-spacing:.04em; }
+.featured-card:hover { transform: translateY(-3px); border-color: var(--brand); }
+.featured-card .fi { width: 60px; height: 60px; border-radius: 14px; object-fit: cover; flex-shrink: 0; background: var(--surface-2); display:grid; place-items:center; font-family: var(--font-h); font-weight:800; font-size:1.4rem; color: var(--brand); overflow:hidden; }
+.featured-card .fi img { width:100%; height:100%; object-fit:cover; }
+.featured-card .fm { min-width: 0; }
+.featured-card .fm h3 { font-family: var(--font-h); font-size: .95rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.featured-card .fm p { color: var(--text-2); font-size: .75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Chips + sort */
+.controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0 14px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; flex: 1 1 200px; padding-bottom: 4px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-2); font-family: var(--font-b); font-size: .82rem;
+  font-weight: 600; cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.chip.active { background: linear-gradient(135deg, var(--g1), var(--g2)); color: #fff; border-color: transparent; }
+select.sort {
+  padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface);
+  color: var(--text); font-family: var(--font-b); font-size: .82rem; cursor: pointer; outline: none;
+}
+
+/* App grid */
+.grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 520px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 820px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1080px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+.app-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px; display: flex; gap: 12px; cursor: pointer; box-shadow: var(--shadow);
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+  content-visibility: auto; contain-intrinsic-size: 120px;
+  position: relative; overflow: hidden;
+}
+.app-card:hover { transform: translateY(-2px); border-color: var(--brand); }
+.app-card .ico-wrap { width: 64px; height: 64px; border-radius: 16px; flex-shrink: 0; overflow: hidden; background: var(--surface-2); display: grid; place-items: center; font-family: var(--font-h); font-weight: 800; font-size: 1.4rem; color: var(--brand); }
+.app-card .ico-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.app-card .body { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.app-card .body h3 { font-family: var(--font-h); font-size: .98rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-card .body .pub { color: var(--text-2); font-size: .78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+.app-card .body .meta { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: .74rem; color: var(--text-2); flex-wrap: wrap; }
+.app-card .body .meta .star { color: #f59e0b; font-weight: 700; }
+.app-card .dl-btn {
+  margin-top: 8px; align-self: flex-start; padding: 6px 14px; border-radius: 999px;
+  border: none; background: linear-gradient(135deg, var(--g1), var(--g2)); color: #fff;
+  font-family: var(--font-b); font-weight: 700; font-size: .78rem; cursor: pointer;
+  text-decoration: none; display: inline-block;
+}
+.app-card .dl-btn:disabled { background: var(--border); color: var(--text-2); cursor: not-allowed; }
+
+/* Empty / error / no-internet screens */
+.center-screen { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 30px 16px; }
+.center-screen h2 { font-family: var(--font-h); font-size: 1.4rem; }
+.center-screen p { color: var(--text-2); max-width: 340px; line-height: 1.5; }
+.big-btn {
+  padding: 12px 24px; border-radius: 999px; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--g1), var(--g2)); color: #fff;
+  font-family: var(--font-b); font-weight: 700; font-size: .95rem;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.big-btn:active { transform: scale(.97); }
+.big-btn:disabled { opacity: .7; cursor: wait; }
+
+/* Cloud animations */
+.cloud-wrap { animation: floatCloud 2.2s ease-in-out infinite alternate; }
+@keyframes floatCloud { from { transform: translateY(-6px); } to { transform: translateY(6px); } }
+.cloud-wrap.shake { animation: shake .4s ease; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
+.wifi-arc { opacity: 0; animation: wifiPulse 2.4s infinite; }
+.wifi-arc.a1 { animation-delay: 0s; }
+.wifi-arc.a2 { animation-delay: .3s; }
+.wifi-arc.a3 { animation-delay: .6s; }
+@keyframes wifiPulse { 0%,100%{opacity:0} 40%,60%{opacity:1} }
+
+/* Loader wrapper */
+.loader-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 40px 0; color: var(--text-2); font-size: .9rem; }
+
+/* Detail page */
+.back-btn { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--brand); font-family: var(--font-b); font-weight: 700; font-size: .9rem; cursor: pointer; margin-bottom: 14px; padding: 6px 0; }
+.detail-hero { display: flex; gap: 16px; align-items: center; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+.detail-hero .dico { width: 90px; height: 90px; border-radius: 20px; object-fit: cover; flex-shrink: 0; background: var(--surface-2); display: grid; place-items: center; font-family: var(--font-h); font-weight: 800; font-size: 2rem; color: var(--brand); overflow: hidden; }
+.detail-hero .dico img { width: 100%; height: 100%; object-fit: cover; }
+.detail-hero .dinfo { min-width: 0; }
+.detail-hero .dinfo h1 { font-family: var(--font-h); font-size: 1.35rem; font-weight: 800; line-height: 1.15; }
+.detail-hero .dinfo .pub { color: var(--text-2); font-size: .85rem; margin-top: 2px; }
+.detail-hero .dinfo .cat { display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); color: var(--brand); font-size: .72rem; font-weight: 700; }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.stats-row .stat { padding: 12px 8px; text-align: center; border-right: 1px solid var(--border); }
+.stats-row .stat:last-child { border-right: none; }
+.stats-row .stat .v { font-family: var(--font-h); font-weight: 800; font-size: 1rem; }
+.stats-row .stat .k { color: var(--text-2); font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+.download-big { display: block; width: 100%; text-align: center; padding: 16px; border-radius: var(--radius); border: none; cursor: pointer; background: linear-gradient(135deg, var(--g1), var(--g2)); color: #fff; font-family: var(--font-h); font-weight: 800; font-size: 1.1rem; text-decoration: none; box-shadow: var(--shadow); transition: transform .15s; }
+.download-big:active { transform: scale(.98); }
+.download-big:disabled { background: var(--border); color: var(--text-2); cursor: not-allowed; box-shadow: none; }
+.detail-actions { display: flex; gap: 10px; margin-top: 10px; }
+.detail-actions .icon-btn { flex: 1; width: auto; height: 44px; }
+.screenshots { display: flex; gap: 10px; overflow-x: auto; padding: 4px 0 12px; scrollbar-width: none; }
+.screenshots::-webkit-scrollbar { display: none; }
+.screenshots img { height: 240px; border-radius: 14px; border: 1px solid var(--border); object-fit: cover; flex-shrink: 0; background: var(--surface-2); }
+.detail-section { margin-top: 20px; }
+.detail-section h2 { font-family: var(--font-h); font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+.detail-section p { color: var(--text-2); line-height: 1.6; font-size: .9rem; white-space: pre-wrap; }
+.pkg { font-family: var(--font-m); font-size: .82rem; background: var(--surface-2); padding: 8px 12px; border-radius: 10px; display: inline-block; color: var(--text); word-break: break-all; border: 1px solid var(--border); }
+.help-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-top: 16px; }
+.help-card h2 { font-family: var(--font-h); font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+.help-card ol { padding-left: 20px; color: var(--text-2); font-size: .88rem; line-height: 1.8; }
+
+/* Help page */
+.help-links { display: grid; gap: 12px; max-width: 420px; width: 100%; }
+.help-links a { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); text-decoration: none; color: var(--text); font-weight: 700; box-shadow: var(--shadow); transition: transform .15s; }
+.help-links a:hover { transform: translateY(-2px); }
+.help-links .em { font-size: 1.6rem; }
+
+/* Toast */
+.toast-wrap { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; flex-direction: column; gap: 8px; align-items: center; pointer-events: none; }
+.toast {
+  background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 999px;
+  font-size: .85rem; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  animation: toastIn .3s ease both; max-width: 90vw; text-align: center;
+}
+@keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Setup card */
+.setup-card { max-width: 520px; margin: 40px auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); text-align: center; }
+.setup-card h1 { font-family: var(--font-h); font-size: 1.5rem; margin-bottom: 8px; }
+.setup-card p { color: var(--text-2); margin-bottom: 14px; line-height: 1.5; }
+.setup-card ol { text-align: left; padding-left: 20px; line-height: 1.9; color: var(--text-2); font-size: .9rem; }
+
+/* Skeleton */
+.skeleton { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; display: flex; gap: 12px; }
+.sk { background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 50%, var(--surface-2) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 8px; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.sk-ico { width: 64px; height: 64px; border-radius: 16px; flex-shrink: 0; }
+.sk-lines { flex: 1; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+.sk-l1 { height: 14px; width: 70%; }
+.sk-l2 { height: 11px; width: 45%; }
+.sk-l3 { height: 11px; width: 60%; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .viral-bg .blob { animation-duration: 60s !important; animation-iteration-count: infinite !important; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .brand span.txt { display: none; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .stats-row .stat:nth-child(2) { border-right: none; }
+  .stats-row .stat:nth-child(1), .stats-row .stat:nth-child(2) { border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<!-- VIRAL BACKGROUND -->
+<div class="viral-bg" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<!-- HIDDEN SVG DEFS (loader gradient) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="var(--g1)" />
+      <stop offset="60%" stop-color="var(--g2)" />
+      <stop offset="100%" stop-color="var(--g3)" />
+    </linearGradient>
+  </defs>
+</svg>
+
+<header class="site">
+  <div class="brand" id="brandHome" role="button" tabindex="0" aria-label="Home">
+    <div class="logo">⬇</div>
+    <span class="txt" id="storeName">Free APK Store</span>
+  </div>
+  <div class="search-wrap">
+    <span class="ico">🔍</span>
+    <input type="search" id="searchInput" placeholder="App, publisher, category…" aria-label="Search apps" autocomplete="off" />
+    <button class="clear-btn" id="clearSearch" aria-label="Clear search">×</button>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    <a class="icon-btn" href="#/help" aria-label="Help">❓</a>
+    <button class="pill-btn" id="installBtn" aria-label="Install app">Install</button>
+  </div>
+</header>
+
+<div class="offline-banner" id="offlineBanner">📴 Offline mode — purani list dikh rahi hai</div>
+
+<main id="app">
+  <div class="loader-wrap">
+    <div id="firstLoader"></div>
+    <p>Apps load ho rahe hain…</p>
+  </div>
+</main>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script type="module">
+/* ============================================================
+   FIREBASE CONFIG — YOUR PROJECT
+   Firebase Console -> Project settings -> Your apps -> Web app
+   Project number: 529479289404
+   ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyDazB0gpgOS3RKqURgWcG8QgL3qOpoFGdI",
+  authDomain: "apk-store-kishan-998c4.firebaseapp.com",
+  databaseURL: "https://apk-store-kishan-998c4-default-rtdb.firebaseio.com",
+  projectId: "apk-store-kishan-998c4",
+  storageBucket: "apk-store-kishan-998c4.firebasestorage.app",
+  messagingSenderId: "529479289404",
+  appId: "1:529479289404:web:ddc8f00f65fae56799d139"
+};
+const APPS_COLLECTION = "apps";
+const STORE_NAME = "Free APK Store";
+const SUPPORT_WHATSAPP_URL = "https://api.whatsapp.com/send?phone=919507952101";
+const SUPPORT_INSTAGRAM_URL = "https://www.instagram.com/modded_1";
+
+/* ============================================================
+   GLOBAL STATE
+   ============================================================ */
+const state = {
+  apps: [],
+  categories: [],
+  activeCategory: "All",
+  search: "",
+  sort: "newest",
+  route: "home",
+  currentDocId: null,
+  online: navigator.onLine,
+  lastSnapshotOk: false,
+  unsub: null,
+  fbReady: false,
+  db: null,
+  pendingInstall: null,
+  isSetup: Object.values(firebaseConfig).some(v => String(v).includes("PASTE_")),
+  theme: "light",
+  skin: "green",
+  bootDone: false
+};
+
+/* ============================================================
+   UTILS
+   ============================================================ */
+function $(sel, root = document) { return root.querySelector(sel); }
+function el(tag, cls, txt) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (txt != null) e.textContent = txt;
+  return e;
+}
+function safeLocalGet(k) { try { return localStorage.getItem(k); } catch { return null; } }
+function safeLocalSet(k, v) { try { localStorage.setItem(k, v); } catch {} }
+function isHttps(u) { return typeof u === "string" && /^https:\/\//i.test(u.trim()); }
+function firstNonEmpty(...vals) {
+  for (const v of vals) {
+    if (v == null) continue;
+    if (typeof v === "string" && v.trim() !== "") return v.trim();
+    if (typeof v === "number" && !isNaN(v)) return v;
+    if (typeof v === "object") return v;
+  }
+  return "";
+}
+function toMillis(v) {
+  try {
+    if (!v) return 0;
+    if (typeof v === "number") return v;
+    if (typeof v === "string") { const n = Date.parse(v); return isNaN(n) ? 0 : n; }
+    if (typeof v.toMillis === "function") return v.toMillis();
+    if (typeof v.seconds === "number") return v.seconds * 1000;
+    return 0;
+  } catch { return 0; }
+}
+function parseDownloads(txt) {
+  if (!txt) return 0;
+  const m = String(txt).trim().toUpperCase().match(/([\d.]+)\s*([KMB]?)/);
+  if (!m) return 0;
+  let n = parseFloat(m[1]);
+  if (isNaN(n)) return 0;
+  if (m[2] === "K") n *= 1e3;
+  else if (m[2] === "M") n *= 1e6;
+  else if (m[2] === "B") n *= 1e9;
+  return n;
+}
+function capitalize(s) {
+  s = String(s || "").trim();
+  if (!s) return "";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+function debounce(fn, ms) {
+  let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+function toast(msg, ms = 2600) {
+  const wrap = $("#toastWrap");
+  if (!wrap) return;
+  const t = el("div", "toast", msg);
+  wrap.appendChild(t);
+  setTimeout(() => { t.style.opacity = "0"; t.style.transition = "opacity .3s"; setTimeout(() => t.remove(), 320); }, ms);
+}
+
+/* ============================================================
+   NORMALIZE APP (tolerant to old field names)
+   ============================================================ */
+function normalizeApp(id, data) {
+  try {
+    if (!data || typeof data !== "object") return null;
+    const name = firstNonEmpty(data.name, data.appName, data.title, data.app_name, data.app_title, "Unnamed app");
+    if (!name) return null;
+    const published = data.published === false ? false : true;
+    if (!published) return null;
+
+    const rawIcon = firstNonEmpty(data.icon, data.iconUrl, data.app_icon, data.logo, "");
+    const rawApk = firstNonEmpty(data.apkUrl, data.downloadUrl, data.apk, data.url, "");
+    const rawShots = Array.isArray(data.screenshots) ? data.screenshots.filter(isHttps) : [];
+
+    let rating = Number(firstNonEmpty(data.rating, 0));
+    if (!isFinite(rating) || rating < 0) rating = 0;
+    if (rating > 5) rating = 5;
+
+    const createdAt = toMillis(firstNonEmpty(data.createdAt, data.timestamp, 0));
+    const updatedAt = toMillis(firstNonEmpty(data.updatedAt, 0));
+
+    return {
+      id,
+      name: String(name),
+      publisher: String(firstNonEmpty(data.publisher, data.developer, data.author, "")),
+      category: capitalize(firstNonEmpty(data.category, data.cat, "Other")),
+      version: String(firstNonEmpty(data.version, data.app_version, "")),
+      size: String(firstNonEmpty(data.size, data.appSize, data.apk_size, "")),
+      icon: isHttps(rawIcon) ? rawIcon.trim() : "",
+      apkUrl: isHttps(rawApk) ? rawApk.trim() : "",
+      description: String(firstNonEmpty(data.description, data.about, "")),
+      fullDescription: String(firstNonEmpty(data.fullDescription, data.description, "")),
+      whatsNew: String(firstNonEmpty(data.whatsNew, "")),
+      screenshots: rawShots.map(s => s.trim()),
+      rating,
+      downloads: String(firstNonEmpty(data.downloads, "")),
+      published: true,
+      featured: data.featured === true,
+      createdAt,
+      updatedAt,
+      packageName: String(firstNonEmpty(data.packageName, "")),
+      sha256: String(firstNonEmpty(data.sha256, ""))
+    };
+  } catch (e) {
+    console.warn("normalizeApp failed for", id, e);
+    return null;
+  }
+}
+
+/* ============================================================
+   UNIQUE ROUND LOADER (inline SVG)
+   ============================================================ */
+function createLoader(size = 64) {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("width", size);
+  svg.setAttribute("height", size);
+  svg.setAttribute("viewBox", "0 0 100 100");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", "Loading");
+  svg.style.display = "block";
+
+  const style = document.createElementNS(NS, "style");
+  style.textContent = `
+    @keyframes ldr-outer { to { transform: rotate(360deg); } }
+    @keyframes ldr-inner { to { transform: rotate(-360deg); } }
+    @keyframes ldr-dot { 0%,100%{transform:scale(.6)} 50%{transform:scale(1.15)} }
+    @keyframes ldr-arrow { from{transform:scale(.85);opacity:.7} to{transform:scale(1.1);opacity:1} }
+    .ldr-outer { transform-origin:50px 50px; animation: ldr-outer 1.1s linear infinite; }
+    .ldr-inner { transform-origin:50px 50px; animation: ldr-inner 1.8s linear infinite; }
+    .ldr-dot { transform-origin:center; transform-box:fill-box; animation: ldr-dot 1.3s ease-in-out infinite; }
+    .ldr-dot.d1 { animation-delay:0s; }
+    .ldr-dot.d2 { animation-delay:.22s; }
+    .ldr-dot.d3 { animation-delay:.44s; }
+    .ldr-arrow { transform-origin:50px 50px; animation: ldr-arrow .9s ease-in-out infinite alternate; }
+  `;
+  svg.appendChild(style);
+
+  const arc = document.createElementNS(NS, "circle");
+  arc.setAttribute("cx","50"); arc.setAttribute("cy","50"); arc.setAttribute("r","40");
+  arc.setAttribute("fill","none");
+  arc.setAttribute("stroke","url(#loaderGrad)");
+  arc.setAttribute("stroke-width","5");
+  arc.setAttribute("stroke-linecap","round");
+  arc.setAttribute("stroke-dasharray","188 63");
+  arc.setAttribute("class","ldr-outer");
+  svg.appendChild(arc);
+
+  const dashed = document.createElementNS(NS, "circle");
+  dashed.setAttribute("cx","50"); dashed.setAttribute("cy","50"); dashed.setAttribute("r","32");
+  dashed.setAttribute("fill","none");
+  dashed.setAttribute("stroke","var(--brand-2)");
+  dashed.setAttribute("stroke-width","2");
+  dashed.setAttribute("stroke-dasharray","4 8");
+  dashed.setAttribute("stroke-linecap","round");
+  dashed.setAttribute("class","ldr-inner");
+  svg.appendChild(dashed);
+
+  const dotsGroup = document.createElementNS(NS, "g");
+  for (let i = 0; i < 3; i++) {
+    const angle = (i * 120 - 90) * Math.PI / 180;
+    const cx = 50 + Math.cos(angle) * 36;
+    const cy = 50 + Math.sin(angle) * 36;
+    const dot = document.createElementNS(NS, "circle");
+    dot.setAttribute("cx", cx.toFixed(2));
+    dot.setAttribute("cy", cy.toFixed(2));
+    dot.setAttribute("r", "3");
+    dot.setAttribute("fill", "var(--brand)");
+    dot.setAttribute("class", "ldr-dot d" + (i + 1));
+    dotsGroup.appendChild(dot);
+  }
+  svg.appendChild(dotsGroup);
+
+  const arrow = document.createElementNS(NS, "path");
+  arrow.setAttribute("d", "M50 38 L50 58 M44 52 L50 58 L56 52");
+  arrow.setAttribute("stroke", "var(--brand)");
+  arrow.setAttribute("stroke-width", "3.5");
+  arrow.setAttribute("stroke-linecap", "round");
+  arrow.setAttribute("stroke-linejoin", "round");
+  arrow.setAttribute("fill", "none");
+  arrow.setAttribute("class", "ldr-arrow");
+  svg.appendChild(arrow);
+
+  return svg;
+}
+
+/* ============================================================
+   THEME + SKIN AUTO-CHANGER (every 5 seconds)
+   ============================================================ */
+const SKINS = ["green", "tokyo", "dubai", "paris", "nyc", "rio"];
+const SKIN_COLORS = { green:"#01875F", tokyo:"#ff3c8e", dubai:"#c9a227", paris:"#e11d6f", nyc:"#06b6d4", rio:"#10b981" };
+let skinIndex = 0;
+let skinTimer = null;
+
+function applySkin(name) {
+  document.documentElement.setAttribute("data-skin", name);
+  safeLocalSet("fas_skin", name);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute("content", SKIN_COLORS[name] || "#01875F");
+}
+
+function startSkinCycle() {
+  if (skinTimer) clearInterval(skinTimer);
+  skinTimer = setInterval(() => {
+    skinIndex = (skinIndex + 1) % SKINS.length;
+    applySkin(SKINS[skinIndex]);
+  }, 5000);
+}
+
+function updateThemeIcon() {
+  const btn = $("#themeToggle");
+  if (btn) btn.textContent = state.theme === "dark" ? "☀️" : "🌙";
+}
+
+function initTheme() {
+  const savedSkin = safeLocalGet("fas_skin");
+  skinIndex = (savedSkin && SKINS.includes(savedSkin)) ? SKINS.indexOf(savedSkin) : 0;
+  applySkin(SKINS[skinIndex]);
+
+  let savedTheme = safeLocalGet("fas_theme");
+  if (!savedTheme) {
+    savedTheme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  state.theme = savedTheme;
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeIcon();
+  startSkinCycle();
+}
+
+function toggleTheme() {
+  state.theme = state.theme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", state.theme);
+  safeLocalSet("fas_theme", state.theme);
+  updateThemeIcon();
+}
+
+/* ============================================================
+   FIREBASE
+   ============================================================ */
+let fbModule = null;
+
+async function initFirebase() {
+  if (state.isSetup) return false;
+  try {
+    const appMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+    const fsMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    const app = appMod.initializeApp(firebaseConfig);
+    let db;
+    try {
+      const { initializeFirestore, persistentLocalCache } = fsMod;
+      db = initializeFirestore(app, { localCache: persistentLocalCache() });
+    } catch (e) {
+      console.warn("persistentLocalCache failed, using getFirestore", e);
+      db = fsMod.getFirestore(app);
+    }
+    state.db = db;
+    fbModule = fsMod;
+    state.fbReady = true;
+    return true;
+  } catch (e) {
+    console.error("Firebase init failed", e);
+    return false;
+  }
+}
+
+function startRealtime() {
+  if (!state.fbReady || state.unsub || !state.db) return;
+  const { onSnapshot, collection } = fbModule;
+  try {
+    const colRef = collection(state.db, APPS_COLLECTION);
+    let firstDocLogged = false;
+    state.unsub = onSnapshot(colRef, (snap) => {
+      const list = [];
+      snap.forEach(doc => {
+        if (!firstDocLogged) {
+          firstDocLogged = true;
+          console.log("[FreeAPK] First raw document:", { id: doc.id, data: doc.data() });
+        }
+        const norm = normalizeApp(doc.id, doc.data());
+        if (norm) list.push(norm);
+      });
+      state.apps = list;
+      state.lastSnapshotOk = true;
+      rebuildCategories();
+      saveCache();
+      updateOfflineBanner();
+      if (state.route === "home") renderHome();
+      else if (state.route === "app") renderDetail(state.currentDocId, true);
+      else if (state.route === "help") renderHelp();
+    }, (err) => {
+      console.error("[FreeAPK] Snapshot error", err);
+      state.lastSnapshotOk = false;
+      if (!state.apps.length) {
+        if (err && err.code === "permission-denied") {
+          renderError("Firestore rules me apps ka read allow karein.");
+        } else {
+          renderError(err && err.message ? err.message : "Firestore se data nahi aa raha.");
+        }
+      } else {
+        toast("Live update nahi mila — purani list dikh rahi hai");
+      }
+    });
+  } catch (e) {
+    console.error("startRealtime failed", e);
+    renderError("Firestore se connect nahi ho paya.");
+  }
+}
+
+function saveCache() {
+  try {
+    const slim = state.apps.map(a => ({
+      id: a.id, name: a.name, publisher: a.publisher, category: a.category,
+      version: a.version, size: a.size, icon: a.icon, apkUrl: a.apkUrl,
+      description: a.description, fullDescription: a.fullDescription,
+      whatsNew: a.whatsNew, screenshots: a.screenshots, rating: a.rating,
+      downloads: a.downloads, featured: a.featured, createdAt: a.createdAt,
+      packageName: a.packageName, sha256: a.sha256
+    }));
+    safeLocalSet("fas_cache", JSON.stringify(slim));
+  } catch {}
+}
+
+function loadCache() {
+  try {
+    const raw = safeLocalGet("fas_cache");
+    if (!raw) return false;
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr) || !arr.length) return false;
+    state.apps = arr.filter(a => a && a.name);
+    rebuildCategories();
+    return state.apps.length > 0;
+  } catch { return false; }
+}
+
+function rebuildCategories() {
+  const set = new Set();
+  state.apps.forEach(a => { if (a.category) set.add(a.category); });
+  state.categories = ["All", ...Array.from(set).sort((a,b) => a.localeCompare(b))];
+  if (state.activeCategory !== "All" && !set.has(state.activeCategory)) {
+    state.activeCategory = "All";
+  }
+}
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+function parseHash() {
+  const h = (location.hash || "#/").replace(/^#/, "");
+  if (h.startsWith("/app/")) return { route: "app", id: decodeURIComponent(h.slice(5)) };
+  if (h.startsWith("/help")) return { route: "help" };
+  return { route: "home" };
+}
+
+function onRouteChange() {
+  const { route, id } = parseHash();
+  state.route = route;
+  state.currentDocId = id || null;
+  if (route === "app") renderDetail(id);
+  else if (route === "help") renderHelp();
+  else renderHome();
+}
+
+function go(path) {
+  if (location.hash === path) onRouteChange();
+  else location.hash = path;
+}
+
+/* ============================================================
+   HOME RENDER
+   ============================================================ */
+function getFiltered() {
+  let list = state.apps.slice();
+  const q = state.search.toLowerCase();
+  if (q) {
+    list = list.filter(a =>
+      a.name.toLowerCase().includes(q) ||
+      (a.publisher || "").toLowerCase().includes(q) ||
+      (a.category || "").toLowerCase().includes(q)
+    );
+  }
+  if (state.activeCategory !== "All") {
+    list = list.filter(a => a.category === state.activeCategory);
+  }
+  switch (state.sort) {
+    case "downloads": list.sort((a,b) => parseDownloads(b.downloads) - parseDownloads(a.downloads)); break;
+    case "rating": list.sort((a,b) => b.rating - a.rating); break;
+    case "az": list.sort((a,b) => a.name.localeCompare(b.name)); break;
+    default: list.sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0));
+  }
+  return list;
+}
+
+function renderHome() {
+  const main = $("#app");
+  if (!main) return;
+  if (state.isSetup) { renderSetup(); return; }
+
+  if (!state.online && !state.apps.length) { renderNoInternet(); return; }
+
+  const page = el("div", "page");
+  const filtered = getFiltered();
+  const featured = state.apps.filter(a => a.featured);
+
+  if (featured.length) {
+    const head = el("div", "section-head");
+    head.appendChild(el("h2", "", "★ Featured apps"));
+    page.appendChild(head);
+    const row = el("div", "featured-row");
+    featured.forEach(a => row.appendChild(buildFeaturedCard(a)));
+    page.appendChild(row);
+  }
+
+  const gridHead = el("div", "section-head");
+  gridHead.appendChild(el("h2", "", state.activeCategory === "All" ? "All apps" : state.activeCategory));
+  gridHead.appendChild(el("div", "sub", `${filtered.length} app${filtered.length === 1 ? "" : "s"}`));
+  page.appendChild(gridHead);
+
+  const controls = el("div", "controls");
+  const chips = el("div", "chips");
+  state.categories.forEach(cat => {
+    const chip = el("button", "chip" + (cat === state.activeCategory ? " active" : ""), cat);
+    chip.type = "button";
+    chip.addEventListener("click", () => { state.activeCategory = cat; renderHome(); });
+    chips.appendChild(chip);
+  });
+  controls.appendChild(chips);
+
+  const sortSel = document.createElement("select");
+  sortSel.className = "sort";
+  sortSel.setAttribute("aria-label", "Sort apps");
+  [["newest","Newest"],["downloads","Most downloaded"],["rating","Top rated"],["az","A-Z"]].forEach(([v,l]) => {
+    const o = document.createElement("option");
+    o.value = v; o.textContent = l;
+    if (state.sort === v) o.selected = true;
+    sortSel.appendChild(o);
+  });
+  sortSel.addEventListener("change", () => { state.sort = sortSel.value; renderHome(); });
+  controls.appendChild(sortSel);
+  page.appendChild(controls);
+
+  const grid = el("div", "grid");
+  if (!filtered.length) {
+    const empty = el("div", "center-screen");
+    empty.style.gridColumn = "1 / -1";
+    empty.appendChild(createLoader(60));
+    empty.appendChild(el("h2", "", "Koi app nahi mili"));
+    empty.appendChild(el("p", "", "Search ya category change karke dekhein."));
+    grid.appendChild(empty);
+  } else {
+    filtered.forEach(a => grid.appendChild(buildAppCard(a)));
+  }
+  page.appendChild(grid);
+  main.replaceChildren(page);
+}
+
+function buildFeaturedCard(a) {
+  const card = el("div", "featured-card");
+  card.setAttribute("role", "button");
+  card.tabIndex = 0;
+  const iconWrap = el("div", "fi");
+  if (a.icon) {
+    const img = document.createElement("img");
+    img.src = a.icon; img.alt = a.name; img.loading = "lazy"; img.decoding = "async";
+    img.addEventListener("error", () => { img.remove(); iconWrap.textContent = a.name.charAt(0).toUpperCase(); });
+    iconWrap.appendChild(img);
+  } else {
+    iconWrap.textContent = a.name.charAt(0).toUpperCase();
+  }
+  const fm = el("div", "fm");
+  fm.appendChild(el("h3", "", a.name));
+  fm.appendChild(el("p", "", a.publisher || a.category || ""));
+  card.appendChild(iconWrap);
+  card.appendChild(fm);
+  const go_ = () => go(`#/app/${encodeURIComponent(a.id)}`);
+  card.addEventListener("click", go_);
+  card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go_(); } });
+  return card;
+}
+
+function buildAppCard(a) {
+  const card = el("div", "app-card");
+  card.setAttribute("role", "button");
+  card.tabIndex = 0;
+
+  const icoWrap = el("div", "ico-wrap");
+  if (a.icon) {
+    const img = document.createElement("img");
+    img.src = a.icon; img.alt = a.name; img.loading = "lazy"; img.decoding = "async";
+    img.addEventListener("error", () => { img.remove(); icoWrap.textContent = a.name.charAt(0).toUpperCase(); });
+    icoWrap.appendChild(img);
+  } else {
+    icoWrap.textContent = a.name.charAt(0).toUpperCase();
+  }
+  card.appendChild(icoWrap);
+
+  const body = el("div", "body");
+  body.appendChild(el("h3", "", a.name));
+  if (a.publisher) body.appendChild(el("div", "pub", a.publisher));
+
+  const meta = el("div", "meta");
+  if (a.rating > 0) meta.appendChild(el("span", "star", "★ " + a.rating.toFixed(1)));
+  if (a.size) meta.appendChild(el("span", "", a.size));
+  if (a.category) meta.appendChild(el("span", "", a.category));
+  body.appendChild(meta);
+
+  if (a.apkUrl && state.online) {
+    const btn = document.createElement("a");
+    btn.className = "dl-btn";
+    btn.href = a.apkUrl;
+    btn.setAttribute("download", "");
+    btn.setAttribute("rel", "noopener");
+    btn.textContent = "Download";
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      if (!state.online) { e.preventDefault(); toast("Internet nahi hai"); return; }
+      toast("Download shuru ho raha hai");
+    });
+    body.appendChild(btn);
+  } else {
+    const btn = document.createElement("button");
+    btn.className = "dl-btn";
+    btn.disabled = true;
+    btn.textContent = a.apkUrl ? "Offline" : "Link nahi hai";
+    body.appendChild(btn);
+  }
+  card.appendChild(body);
+
+  const go_ = () => go(`#/app/${encodeURIComponent(a.id)}`);
+  card.addEventListener("click", go_);
+  card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go_(); } });
+  return card;
+}
+
+/* ============================================================
+   DETAIL RENDER
+   ============================================================ */
+function renderDetail(id, silent) {
+  const main = $("#app");
+  if (!main || !id) { renderHome(); return; }
+  if (state.isSetup) { renderSetup(); return; }
+  const a = state.apps.find(x => x.id === id);
+  if (!a) {
+    if (!state.apps.length) {
+      if (!state.online) { renderNoInternet(); return; }
+      main.replaceChildren();
+      const p = el("div", "page");
+      const cs = el("div", "center-screen");
+      cs.appendChild(createLoader(64));
+      cs.appendChild(el("p", "", "App load ho raha hai…"));
+      p.appendChild(cs);
+      main.appendChild(p);
+    } else {
+      renderError("App nahi mili. Ho sakta hai hata di gayi ho.");
+    }
+    return;
+  }
+
+  const page = el("div", "page");
+  const back = el("button", "back-btn", "← Back");
+  back.type = "button";
+  back.addEventListener("click", () => { if (history.length > 1) history.back(); else go("#/"); });
+  page.appendChild(back);
+
+  const hero = el("div", "detail-hero");
+  const dico = el("div", "dico");
+  if (a.icon) {
+    const img = document.createElement("img");
+    img.src = a.icon; img.alt = a.name; img.loading = "lazy"; img.decoding = "async";
+    img.addEventListener("error", () => { img.remove(); dico.textContent = a.name.charAt(0).toUpperCase(); });
+    dico.appendChild(img);
+  } else dico.textContent = a.name.charAt(0).toUpperCase();
+  hero.appendChild(dico);
+
+  const dinfo = el("div", "dinfo");
+  dinfo.appendChild(el("h1", "", a.name));
+  if (a.publisher) dinfo.appendChild(el("div", "pub", a.publisher));
+  if (a.category) dinfo.appendChild(el("span", "cat", a.category));
+  hero.appendChild(dinfo);
+  page.appendChild(hero);
+
+  const stats = el("div", "stats-row");
+  [
+    [a.rating > 0 ? a.rating.toFixed(1) + " ★" : "—", "Rating"],
+    [a.size || "—", "Size"],
+    [a.downloads || "—", "Downloads"],
+    [a.version || "—", "Version"]
+  ].forEach(([v,k]) => {
+    const s = el("div", "stat");
+    s.appendChild(el("div", "v", v));
+    s.appendChild(el("div", "k", k));
+    stats.appendChild(s);
+  });
+  page.appendChild(stats);
+
+  if (a.apkUrl && state.online) {
+    const aEl = document.createElement("a");
+    aEl.className = "download-big";
+    aEl.href = a.apkUrl;
+    aEl.setAttribute("download", "");
+    aEl.setAttribute("rel", "noopener");
+    aEl.textContent = "⬇ Download APK";
+    aEl.addEventListener("click", () => {
+      if (!state.online) { toast("Internet nahi hai"); return; }
+      toast("Download shuru ho raha hai");
+    });
+    page.appendChild(aEl);
+  } else {
+    const b = document.createElement("button");
+    b.className = "download-big";
+    b.disabled = true;
+    b.textContent = a.apkUrl ? "Offline — download abhi nahi" : "Link nahi hai";
+    page.appendChild(b);
+  }
+
+  const actions = el("div", "detail-actions");
+  const shareBtn = el("button", "icon-btn", "🔗 Share");
+  shareBtn.type = "button";
+  shareBtn.addEventListener("click", async () => {
+    const url = location.href;
+    try {
+      if (navigator.share) { await navigator.share({ title: a.name, text: "Download " + a.name, url }); }
+      else if (navigator.clipboard) { await navigator.clipboard.writeText(url); toast("Link copy ho gaya"); }
+      else { toast("Share support nahi hai"); }
+    } catch (e) { /* user cancelled */ }
+  });
+  actions.appendChild(shareBtn);
+  page.appendChild(actions);
+
+  if (a.apkUrl) {
+    const help = el("div", "help-card");
+    help.appendChild(el("h2", "", "Install kaise karein?"));
+    const ol = document.createElement("ol");
+    ["APK download hone do", "File kholo", "'Install unknown apps' allow karke Install dabao"].forEach(t => ol.appendChild(el("li", "", t)));
+    help.appendChild(ol);
+    page.appendChild(help);
+  }
+
+  if (a.screenshots && a.screenshots.length) {
+    const sec = el("div", "detail-section");
+    sec.appendChild(el("h2", "", "Screenshots"));
+    const row = el("div", "screenshots");
+    a.screenshots.forEach(src => {
+      const img = document.createElement("img");
+      img.src = src; img.alt = a.name + " screenshot"; img.loading = "lazy"; img.decoding = "async";
+      img.addEventListener("error", () => img.remove());
+      row.appendChild(img);
+    });
+    sec.appendChild(row);
+    page.appendChild(sec);
+  }
+
+  if (a.description) {
+    const sec = el("div", "detail-section");
+    sec.appendChild(el("h2", "", "About"));
+    sec.appendChild(el("p", "", a.description));
+    page.appendChild(sec);
+  }
+  if (a.fullDescription && a.fullDescription !== a.description) {
+    const sec = el("div", "detail-section");
+    sec.appendChild(el("h2", "", "Full description"));
+    sec.appendChild(el("p", "", a.fullDescription));
+    page.appendChild(sec);
+  }
+  if (a.whatsNew) {
+    const sec = el("div", "detail-section");
+    sec.appendChild(el("h2", "", "Naya kya hai"));
+    sec.appendChild(el("p", "", a.whatsNew));
+    page.appendChild(sec);
+  }
+  if (a.packageName) {
+    const sec = el("div", "detail-section");
+    sec.appendChild(el("h2", "", "Package name"));
+    const code = el("code", "pkg", a.packageName);
+    sec.appendChild(code);
+    page.appendChild(sec);
+  }
+
+  if (silent) page.style.animation = "none";
+  main.replaceChildren(page);
+  if (!silent) window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ============================================================
+   HELP RENDER
+   ============================================================ */
+function renderHelp() {
+  const main = $("#app");
+  if (!main) return;
+  if (state.isSetup) { renderSetup(); return; }
+  const page = el("div", "page");
+  const cs = el("div", "center-screen");
+  cs.appendChild(el("h2", "", "Help & Support"));
+  cs.appendChild(el("p", "", "Koi problem? Humse seedha WhatsApp ya Instagram pe baat karein."));
+  const links = el("div", "help-links");
+  const wa = document.createElement("a");
+  wa.href = SUPPORT_WHATSAPP_URL; wa.target = "_blank"; wa.rel = "noopener noreferrer";
+  wa.appendChild(el("span", "em", "💬"));
+  wa.appendChild(el("span", "", "WhatsApp par message karein"));
+  links.appendChild(wa);
+  const ig = document.createElement("a");
+  ig.href = SUPPORT_INSTAGRAM_URL; ig.target = "_blank"; ig.rel = "noopener noreferrer";
+  ig.appendChild(el("span", "em", "📸"));
+  ig.appendChild(el("span", "", "Instagram par follow karein"));
+  links.appendChild(ig);
+  cs.appendChild(links);
+  page.appendChild(cs);
+
+  const about = el("div", "detail-section");
+  about.appendChild(el("h2", "", "About"));
+  about.appendChild(el("p", "", "Free APK Store ek free APK download website hai. Sabhi apps bilkul free hain — koi login, koi payment, koi ads nahi."));
+  page.appendChild(about);
+  main.replaceChildren(page);
+}
+
+/* ============================================================
+   SETUP / ERROR / NO INTERNET
+   ============================================================ */
+function renderSetup() {
+  const main = $("#app");
+  if (!main) return;
+  main.replaceChildren();
+  const card = el("div", "setup-card");
+  card.appendChild(el("h1", "", "Setup baaki hai ⚙️"));
+  card.appendChild(el("p", "", "Firebase config me abhi bhi PASTE_ values hain. Neeche diye steps follow karein:"));
+  const ol = document.createElement("ol");
+  [
+    "Firebase Console -> Project settings -> Your apps -> Web app kholo",
+    "firebaseConfig copy karo",
+    "Is file me firebaseConfig object me saari values paste karo",
+    "Save karke page refresh karo — apps live aa jayengi"
+  ].forEach(t => ol.appendChild(el("li", "", t)));
+  card.appendChild(ol);
+  main.appendChild(card);
+}
+
+function buildCloudError() {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("width", "200"); svg.setAttribute("height", "160");
+  svg.setAttribute("viewBox", "0 0 200 160");
+  svg.setAttribute("class", "cloud-wrap");
+  svg.setAttribute("aria-label", "Server error");
+  const cloud = document.createElementNS(NS, "path");
+  cloud.setAttribute("d", "M50 110 h100 a28 28 0 0 0 0 -56 a38 38 0 0 0 -70 -14 a30 30 0 0 0 -40 28 a26 26 0 0 0 10 42 z");
+  cloud.setAttribute("fill", "var(--surface-2)");
+  cloud.setAttribute("stroke", "var(--border)");
+  cloud.setAttribute("stroke-width", "3");
+  svg.appendChild(cloud);
+  const ex = document.createElementNS(NS, "text");
+  ex.setAttribute("x", "100"); ex.setAttribute("y", "95");
+  ex.setAttribute("text-anchor", "middle");
+  ex.setAttribute("font-size", "42");
+  ex.setAttribute("font-weight", "800");
+  ex.setAttribute("fill", "#ef4444");
+  ex.textContent = "!";
+  svg.appendChild(ex);
+  return svg;
+}
+
+function renderError(reason) {
+  const main = $("#app");
+  if (!main) return;
+  main.replaceChildren();
+  const cs = el("div", "center-screen");
+  cs.appendChild(buildCloudError());
+  cs.appendChild(el("h2", "", "Kuch gadbad ho gayi"));
+  cs.appendChild(el("p", "", reason || "Data load nahi ho paya."));
+  const btn = el("button", "big-btn", "Dobara try karein");
+  btn.type = "button";
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    btn.textContent = "";
+    btn.appendChild(createLoader(22));
+    btn.appendChild(document.createTextNode(" Retry…"));
+    await new Promise(r => setTimeout(r, 600));
+    if (!state.online) {
+      btn.disabled = false;
+      btn.textContent = "Dobara try karein";
+      toast("Abhi bhi internet nahi hai");
+      return;
+    }
+    if (state.unsub) { try { state.unsub(); } catch {} state.unsub = null; }
+    state.lastSnapshotOk = false;
+    startRealtime();
+    setTimeout(() => {
+      if (state.apps.length) renderHome();
+      else { btn.disabled = false; btn.textContent = "Dobara try karein"; }
+    }, 900);
+  });
+  cs.appendChild(btn);
+  main.appendChild(cs);
+}
+
+function buildCloudOffline() {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("width", "220"); svg.setAttribute("height", "180");
+  svg.setAttribute("viewBox", "0 0 220 180");
+  svg.setAttribute("class", "cloud-wrap");
+  svg.setAttribute("aria-label", "No internet");
+
+  [["a1", 110, 70, 22], ["a2", 110, 60, 32], ["a3", 110, 50, 44]].forEach(([cls, cx, cy, r]) => {
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("d", `M ${cx - r} ${cy} a ${r} ${r} 0 0 1 ${r * 2} 0`);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "var(--brand-2)");
+    path.setAttribute("stroke-width", "4");
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("class", "wifi-arc " + cls);
+    svg.appendChild(path);
+  });
+
+  const cloud = document.createElementNS(NS, "path");
+  cloud.setAttribute("d", "M55 140 h110 a30 30 0 0 0 0 -60 a42 42 0 0 0 -78 -16 a33 33 0 0 0 -45 31 a28 28 0 0 0 13 45 z");
+  cloud.setAttribute("fill", "var(--surface-2)");
+  cloud.setAttribute("stroke", "var(--border)");
+  cloud.setAttribute("stroke-width", "3");
+  svg.appendChild(cloud);
+
+  const slash = document.createElementNS(NS, "line");
+  slash.setAttribute("x1", "40"); slash.setAttribute("y1", "60");
+  slash.setAttribute("x2", "180"); slash.setAttribute("y2", "150");
+  slash.setAttribute("stroke", "#ef4444");
+  slash.setAttribute("stroke-width", "6");
+  slash.setAttribute("stroke-linecap", "round");
+  slash.setAttribute("opacity", "0.9");
+  svg.appendChild(slash);
+
+  return svg;
+}
+
+function renderNoInternet() {
+  const main = $("#app");
+  if (!main) return;
+  main.replaceChildren();
+  const cs = el("div", "center-screen");
+  cs.appendChild(buildCloudOffline());
+  cs.appendChild(el("h2", "", "Internet nahi hai"));
+  cs.appendChild(el("p", "", "Apna WiFi ya mobile data check karein, phir dobara try karein."));
+  const btn = el("button", "big-btn", "Dobara try karein");
+  btn.type = "button";
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    btn.textContent = "";
+    btn.appendChild(createLoader(22));
+    btn.appendChild(document.createTextNode(" Check…"));
+    await new Promise(r => setTimeout(r, 650));
+    if (!state.online) {
+      const cloud = $(".cloud-wrap", cs);
+      if (cloud) {
+        cloud.classList.add("shake");
+        setTimeout(() => cloud.classList.remove("shake"), 420);
+      }
+      toast("Abhi bhi internet nahi hai");
+      btn.disabled = false;
+      btn.textContent = "Dobara try karein";
+      return;
+    }
+    toast("Internet wapas aa gaya");
+    if (state.fbReady && !state.unsub) startRealtime();
+    if (state.apps.length) renderHome();
+    else {
+      btn.disabled = false;
+      btn.textContent = "Dobara try karein";
+    }
+  });
+  cs.appendChild(btn);
+  main.appendChild(cs);
+}
+
+/* ============================================================
+   OFFLINE BANNER
+   ============================================================ */
+function updateOfflineBanner() {
+  const banner = $("#offlineBanner");
+  if (!banner) return;
+  if (!state.online && state.apps.length) banner.classList.add("show");
+  else banner.classList.remove("show");
+}
+
+/* ============================================================
+   GLOBAL HANDLERS
+   ============================================================ */
+function setupGlobalHandlers() {
+  const search = $("#searchInput");
+  const clearBtn = $("#clearSearch");
+
+  if (search) {
+    const doSearch = debounce((val) => {
+      state.search = val;
+      if (state.route !== "home") { location.hash = "#/"; }
+      else renderHome();
+    }, 200);
+    search.addEventListener("input", () => {
+      if (clearBtn) clearBtn.classList.toggle("show", search.value.length > 0);
+      doSearch(search.value);
+    });
+    search.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        search.value = "";
+        if (clearBtn) clearBtn.classList.remove("show");
+        doSearch("");
+      }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      const s = $("#searchInput");
+      if (s) { s.value = ""; s.focus(); }
+      clearBtn.classList.remove("show");
+      state.search = "";
+      if (state.route !== "home") location.hash = "#/"; else renderHome();
+    });
+  }
+
+  const themeBtn = $("#themeToggle");
+  if (themeBtn) themeBtn.addEventListener("click", toggleTheme);
+
+  const brand = $("#brandHome");
+  if (brand) {
+    const goHome = () => { if (location.hash !== "#/" && location.hash !== "") location.hash = "#/"; else onRouteChange(); };
+    brand.addEventListener("click", goHome);
+    brand.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goHome(); } });
+  }
+
+  window.addEventListener("hashchange", onRouteChange);
+
+  window.addEventListener("online", () => {
+    state.online = true;
+    updateOfflineBanner();
+    toast("Internet wapas aa gaya");
+    if (state.fbReady && !state.unsub) startRealtime();
+    onRouteChange();
+  });
+
+  window.addEventListener("offline", () => {
+    state.online = false;
+    updateOfflineBanner();
+    toast("Internet nahi hai");
+    onRouteChange();
+  });
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    state.pendingInstall = e;
+    const b = $("#installBtn");
+    if (b) b.classList.add("show");
+  });
+
+  const installBtn = $("#installBtn");
+  if (installBtn) {
+    installBtn.addEventListener("click", async () => {
+      if (!state.pendingInstall) { toast("Install option abhi available nahi hai"); return; }
+      try {
+        state.pendingInstall.prompt();
+        await state.pendingInstall.userChoice;
+        state.pendingInstall = null;
+        installBtn.classList.remove("show");
+      } catch { toast("Install nahi ho paya"); }
+    });
+  }
+
+  window.addEventListener("appinstalled", () => {
+    state.pendingInstall = null;
+    const b = $("#installBtn");
+    if (b) b.classList.remove("show");
+    toast("App install ho gaya 🎉");
+  });
+
+  const store = $("#storeName");
+  if (store) store.textContent = STORE_NAME;
+}
+
+/* ============================================================
+   PWA — inline service worker via Blob
+   ============================================================ */
+function registerSW() {
+  if (!("serviceWorker" in navigator)) return;
+  if (location.protocol !== "https:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") return;
+  const swCode = `
+const CACHE_NAME = 'freeapk-v2';
+const SHELL = ['/', '/index.html'];
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(SHELL).catch(()=>{})));
+  self.skipWaiting();
+});
+self.addEventListener('activate', e => {
+  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))));
+  self.clients.claim();
+});
+self.addEventListener('fetch', e => {
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  const isShell = url.origin === location.origin && (url.pathname === '/' || url.pathname.endsWith('.html') || url.pathname.endsWith('.css') || url.pathname.endsWith('.js') || url.pathname.endsWith('.svg') || url.pathname.endsWith('.webmanifest'));
+  if (isShell) {
+    e.respondWith(caches.match(req).then(cached => cached || fetch(req).then(res => {
+      const copy = res.clone();
+      caches.open(CACHE_NAME).then(c => c.put(req, copy)).catch(()=>{});
+      return res;
+    }).catch(() => caches.match('/index.html'))));
+  } else {
+    e.respondWith(fetch(req).then(res => {
+      const copy = res.clone();
+      caches.open(CACHE_NAME).then(c => c.put(req, copy)).catch(()=>{});
+      return res;
+    }).catch(() => caches.match(req)));
+  }
+});
+`;
+  try {
+    const blob = new Blob([swCode], { type: "application/javascript" });
+    const url = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(url).catch(() => {});
+  } catch {}
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+async function boot() {
+  initTheme();
+  setupGlobalHandlers();
+
+  const firstLoader = $("#firstLoader");
+  if (firstLoader) firstLoader.replaceChildren(createLoader(72));
+
+  if (state.isSetup) {
+    renderSetup();
+    registerSW();
+    return;
+  }
+
+  const cached = loadCache();
+  if (cached) { renderHome(); updateOfflineBanner(); }
+
+  const ok = await initFirebase();
+  if (!ok) {
+    if (!cached) renderError("Firebase se connect nahi ho paya. Config aur internet check karein.");
+    else toast("Live data abhi nahi mila — cached list dikh rahi hai");
+    registerSW();
+    return;
+  }
+
+  if (!state.online && !cached) renderNoInternet();
+
+  startRealtime();
+  registerSW();
+  onRouteChange();
+  updateOfflineBanner();
+
+  setTimeout(() => {
+    if (state.online && state.fbReady && !state.lastSnapshotOk && !state.apps.length && !cached) {
+      renderError("Data load nahi ho paya. Firestore rules ya internet check karein.");
+    }
+  }, 9000);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", boot);
+} else {
+  boot();
+}
+</script>
+
+</body>
+</html>
