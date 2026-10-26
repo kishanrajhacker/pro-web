@@ -25,20 +25,14 @@
   --border: #d6e8dd;
   --shadow: 0 8px 28px rgba(1,135,95,.10);
   --radius: 18px;
-  --radius-sm: 14px;
   --font-h: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-b: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-m: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   color-scheme: light;
-  --g1: #01875F;
-  --g2: #22B4C4;
-  --g3: #4FD1A0;
-  --bg-a: #01875F;
-  --bg-b: #22B4C4;
-  --bg-c: #0b1f17;
+  --g1: #01875F; --g2: #22B4C4; --g3: #4FD1A0;
+  --bg-a: #01875F; --bg-b: #22B4C4; --bg-c: #0b1f17;
 }
 
-/* THEME: Default Green International */
 :root[data-skin="green"] {
   --brand: #01875F; --brand-2: #22B4C4;
   --bg: #f4fbf7; --bg-2: #e8f5ee; --surface: #ffffff; --surface-2: #f0f7f3;
@@ -48,8 +42,6 @@
   --bg-a: #01875F; --bg-b: #22B4C4; --bg-c: #0b1f17;
   color-scheme: light;
 }
-
-/* THEME: Tokyo Neon (Japan) */
 :root[data-skin="tokyo"] {
   --brand: #ff3c8e; --brand-2: #a855f7;
   --bg: #0b0614; --bg-2: #140a24; --surface: #1a0f2e; --surface-2: #221440;
@@ -59,8 +51,6 @@
   --bg-a: #ff3c8e; --bg-b: #a855f7; --bg-c: #0b0614;
   color-scheme: dark;
 }
-
-/* THEME: Dubai Gold */
 :root[data-skin="dubai"] {
   --brand: #c9a227; --brand-2: #e0b73a;
   --bg: #14110a; --bg-2: #1d1810; --surface: #241d12; --surface-2: #2e2617;
@@ -70,8 +60,6 @@
   --bg-a: #c9a227; --bg-b: #e0b73a; --bg-c: #14110a;
   color-scheme: dark;
 }
-
-/* THEME: Paris Rose */
 :root[data-skin="paris"] {
   --brand: #e11d6f; --brand-2: #f472b6;
   --bg: #fff5f9; --bg-2: #ffe8f1; --surface: #ffffff; --surface-2: #ffeef5;
@@ -81,8 +69,6 @@
   --bg-a: #e11d6f; --bg-b: #f472b6; --bg-c: #2b0a19;
   color-scheme: light;
 }
-
-/* THEME: NYC Cyber */
 :root[data-skin="nyc"] {
   --brand: #06b6d4; --brand-2: #3b82f6;
   --bg: #050a12; --bg-2: #0a1420; --surface: #0e1c2c; --surface-2: #13263a;
@@ -92,8 +78,6 @@
   --bg-a: #06b6d4; --bg-b: #3b82f6; --bg-c: #050a12;
   color-scheme: dark;
 }
-
-/* THEME: Rio Carnival */
 :root[data-skin="rio"] {
   --brand: #10b981; --brand-2: #fbbf24;
   --bg: #f0fdf4; --bg-2: #dcfce7; --surface: #ffffff; --surface-2: #ecfdf3;
@@ -103,8 +87,6 @@
   --bg-a: #10b981; --bg-b: #fbbf24; --bg-c: #052e16;
   color-scheme: light;
 }
-
-/* Manual dark toggle overrides light skins */
 :root[data-theme="dark"] {
   --bg: #0b1512; --bg-2: #0f1d18; --surface: #13251f; --surface-2: #183028;
   --text: #e6f4ee; --text-2: #9bbcb0; --border: #213d33;
@@ -209,7 +191,6 @@ main { max-width: 1180px; margin: 0 auto; padding: 18px 16px 100px; }
 .page { animation: fadeSlide .28s ease both; }
 @keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Offline banner */
 .offline-banner {
   display: none; align-items: center; justify-content: center; gap: 8px;
   background: linear-gradient(90deg, #f59e0b, #f97316); color: #1a1a1a;
@@ -220,12 +201,10 @@ main { max-width: 1180px; margin: 0 auto; padding: 18px 16px 100px; }
 .offline-banner.show { display: flex; }
 @keyframes bannerPulse { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.15)} }
 
-/* Section headers */
 .section-head { display: flex; align-items: center; justify-content: space-between; margin: 22px 0 12px; gap: 10px; flex-wrap: wrap; }
 .section-head h2 { font-family: var(--font-h); font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; }
 .section-head .sub { color: var(--text-2); font-size: .82rem; }
 
-/* Featured row */
 .featured-row { display: flex; gap: 12px; overflow-x: auto; padding: 4px 0 12px; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .featured-row::-webkit-scrollbar { display: none; }
 .featured-card {
@@ -243,7 +222,6 @@ main { max-width: 1180px; margin: 0 auto; padding: 18px 16px 100px; }
 .featured-card .fm h3 { font-family: var(--font-h); font-size: .95rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .featured-card .fm p { color: var(--text-2); font-size: .75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Chips + sort */
 .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0 14px; }
 .chips { display: flex; gap: 8px; overflow-x: auto; flex: 1 1 200px; padding-bottom: 4px; scrollbar-width: none; }
 .chips::-webkit-scrollbar { display: none; }
@@ -258,7 +236,6 @@ select.sort {
   color: var(--text); font-family: var(--font-b); font-size: .82rem; cursor: pointer; outline: none;
 }
 
-/* App grid */
 .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
 @media (min-width: 520px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 820px) { .grid { grid-template-columns: repeat(3, 1fr); } }
@@ -287,7 +264,6 @@ select.sort {
 }
 .app-card .dl-btn:disabled { background: var(--border); color: var(--text-2); cursor: not-allowed; }
 
-/* Empty / error / no-internet screens */
 .center-screen { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 30px 16px; }
 .center-screen h2 { font-family: var(--font-h); font-size: 1.4rem; }
 .center-screen p { color: var(--text-2); max-width: 340px; line-height: 1.5; }
@@ -300,7 +276,6 @@ select.sort {
 .big-btn:active { transform: scale(.97); }
 .big-btn:disabled { opacity: .7; cursor: wait; }
 
-/* Cloud animations */
 .cloud-wrap { animation: floatCloud 2.2s ease-in-out infinite alternate; }
 @keyframes floatCloud { from { transform: translateY(-6px); } to { transform: translateY(6px); } }
 .cloud-wrap.shake { animation: shake .4s ease; }
@@ -311,10 +286,8 @@ select.sort {
 .wifi-arc.a3 { animation-delay: .6s; }
 @keyframes wifiPulse { 0%,100%{opacity:0} 40%,60%{opacity:1} }
 
-/* Loader wrapper */
 .loader-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 40px 0; color: var(--text-2); font-size: .9rem; }
 
-/* Detail page */
 .back-btn { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--brand); font-family: var(--font-b); font-weight: 700; font-size: .9rem; cursor: pointer; margin-bottom: 14px; padding: 6px 0; }
 .detail-hero { display: flex; gap: 16px; align-items: center; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
 .detail-hero .dico { width: 90px; height: 90px; border-radius: 20px; object-fit: cover; flex-shrink: 0; background: var(--surface-2); display: grid; place-items: center; font-family: var(--font-h); font-weight: 800; font-size: 2rem; color: var(--brand); overflow: hidden; }
@@ -344,13 +317,11 @@ select.sort {
 .help-card h2 { font-family: var(--font-h); font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
 .help-card ol { padding-left: 20px; color: var(--text-2); font-size: .88rem; line-height: 1.8; }
 
-/* Help page */
 .help-links { display: grid; gap: 12px; max-width: 420px; width: 100%; }
 .help-links a { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); text-decoration: none; color: var(--text); font-weight: 700; box-shadow: var(--shadow); transition: transform .15s; }
 .help-links a:hover { transform: translateY(-2px); }
 .help-links .em { font-size: 1.6rem; }
 
-/* Toast */
 .toast-wrap { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; flex-direction: column; gap: 8px; align-items: center; pointer-events: none; }
 .toast {
   background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 999px;
@@ -359,13 +330,11 @@ select.sort {
 }
 @keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Setup card */
 .setup-card { max-width: 520px; margin: 40px auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); text-align: center; }
 .setup-card h1 { font-family: var(--font-h); font-size: 1.5rem; margin-bottom: 8px; }
 .setup-card p { color: var(--text-2); margin-bottom: 14px; line-height: 1.5; }
 .setup-card ol { text-align: left; padding-left: 20px; line-height: 1.9; color: var(--text-2); font-size: .9rem; }
 
-/* Skeleton */
 .skeleton { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; display: flex; gap: 12px; }
 .sk { background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 50%, var(--surface-2) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 8px; }
 @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
@@ -375,13 +344,11 @@ select.sort {
 .sk-l2 { height: 11px; width: 45%; }
 .sk-l3 { height: 11px; width: 60%; }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .viral-bg .blob { animation-duration: 60s !important; animation-iteration-count: infinite !important; }
 }
 
-/* Small phones */
 @media (max-width: 380px) {
   .brand span.txt { display: none; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -392,7 +359,6 @@ select.sort {
 </head>
 <body>
 
-<!-- VIRAL BACKGROUND -->
 <div class="viral-bg" aria-hidden="true">
   <div class="blob b1"></div>
   <div class="blob b2"></div>
@@ -400,7 +366,6 @@ select.sort {
   <div class="grid-overlay"></div>
 </div>
 
-<!-- HIDDEN SVG DEFS (loader gradient) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -441,10 +406,11 @@ select.sort {
 
 <script type="module">
 /* ============================================================
-   FIREBASE CONFIG — YOUR PROJECT
-   Firebase Console -> Project settings -> Your apps -> Web app
-   Project number: 529479289404
+   FIREBASE — REALTIME DATABASE ONLY (no Firestore)
    ============================================================ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDazB0gpgOS3RKqURgWcG8QgL3qOpoFGdI",
   authDomain: "apk-store-kishan-998c4.firebaseapp.com",
@@ -454,7 +420,8 @@ const firebaseConfig = {
   messagingSenderId: "529479289404",
   appId: "1:529479289404:web:ddc8f00f65fae56799d139"
 };
-const APPS_COLLECTION = "apps";
+
+const APPS_PATH = "apps";
 const STORE_NAME = "Free APK Store";
 const SUPPORT_WHATSAPP_URL = "https://api.whatsapp.com/send?phone=919507952101";
 const SUPPORT_INSTAGRAM_URL = "https://www.instagram.com/modded_1";
@@ -476,10 +443,8 @@ const state = {
   fbReady: false,
   db: null,
   pendingInstall: null,
-  isSetup: Object.values(firebaseConfig).some(v => String(v).includes("PASTE_")),
   theme: "light",
-  skin: "green",
-  bootDone: false
+  skin: "green"
 };
 
 /* ============================================================
@@ -500,6 +465,7 @@ function firstNonEmpty(...vals) {
     if (v == null) continue;
     if (typeof v === "string" && v.trim() !== "") return v.trim();
     if (typeof v === "number" && !isNaN(v)) return v;
+    if (typeof v === "boolean") return v;
     if (typeof v === "object") return v;
   }
   return "";
@@ -540,28 +506,56 @@ function toast(msg, ms = 2600) {
   wrap.appendChild(t);
   setTimeout(() => { t.style.opacity = "0"; t.style.transition = "opacity .3s"; setTimeout(() => t.remove(), 320); }, ms);
 }
+/* screenshots: array OR object map -> array of https strings */
+function normalizeShots(v) {
+  const out = [];
+  try {
+    if (Array.isArray(v)) {
+      v.forEach(x => { if (isHttps(x)) out.push(x.trim()); });
+    } else if (v && typeof v === "object") {
+      Object.values(v).forEach(x => {
+        if (typeof x === "string" && isHttps(x)) out.push(x.trim());
+        else if (x && typeof x === "object") {
+          const u = firstNonEmpty(x.url, x.src, x.href, x.image, "");
+          if (isHttps(u)) out.push(String(u).trim());
+        }
+      });
+    }
+  } catch {}
+  return out;
+}
 
 /* ============================================================
-   NORMALIZE APP (tolerant to old field names)
+   NORMALIZE APP (tolerant — DB drops empty fields)
    ============================================================ */
 function normalizeApp(id, data) {
   try {
     if (!data || typeof data !== "object") return null;
     const name = firstNonEmpty(data.name, data.appName, data.title, data.app_name, data.app_title, "Unnamed app");
     if (!name) return null;
-    const published = data.published === false ? false : true;
+
+    // published: missing = true; only explicit false hides
+    let published = true;
+    if (typeof data.published === "boolean") published = data.published;
+    else if (typeof data.published === "string") {
+      const s = data.published.trim().toLowerCase();
+      if (s === "false" || s === "0" || s === "no") published = false;
+    }
     if (!published) return null;
 
     const rawIcon = firstNonEmpty(data.icon, data.iconUrl, data.app_icon, data.logo, "");
     const rawApk = firstNonEmpty(data.apkUrl, data.downloadUrl, data.apk, data.url, "");
-    const rawShots = Array.isArray(data.screenshots) ? data.screenshots.filter(isHttps) : [];
+    const shots = normalizeShots(data.screenshots);
 
     let rating = Number(firstNonEmpty(data.rating, 0));
     if (!isFinite(rating) || rating < 0) rating = 0;
     if (rating > 5) rating = 5;
 
-    const createdAt = toMillis(firstNonEmpty(data.createdAt, data.timestamp, 0));
-    const updatedAt = toMillis(firstNonEmpty(data.updatedAt, 0));
+    const createdAt = toMillis(firstNonEmpty(data.createdAt, data.timestamp, data.updatedAt, 0));
+
+    let featured = false;
+    if (typeof data.featured === "boolean") featured = data.featured;
+    else if (typeof data.featured === "string") featured = data.featured.trim().toLowerCase() === "true";
 
     return {
       id,
@@ -569,19 +563,18 @@ function normalizeApp(id, data) {
       publisher: String(firstNonEmpty(data.publisher, data.developer, data.author, "")),
       category: capitalize(firstNonEmpty(data.category, data.cat, "Other")),
       version: String(firstNonEmpty(data.version, data.app_version, "")),
+      versionCode: Number(firstNonEmpty(data.versionCode, 0)) || 0,
       size: String(firstNonEmpty(data.size, data.appSize, data.apk_size, "")),
       icon: isHttps(rawIcon) ? rawIcon.trim() : "",
       apkUrl: isHttps(rawApk) ? rawApk.trim() : "",
       description: String(firstNonEmpty(data.description, data.about, "")),
       fullDescription: String(firstNonEmpty(data.fullDescription, data.description, "")),
       whatsNew: String(firstNonEmpty(data.whatsNew, "")),
-      screenshots: rawShots.map(s => s.trim()),
+      screenshots: shots,
       rating,
       downloads: String(firstNonEmpty(data.downloads, "")),
-      published: true,
-      featured: data.featured === true,
+      featured,
       createdAt,
-      updatedAt,
       packageName: String(firstNonEmpty(data.packageName, "")),
       sha256: String(firstNonEmpty(data.sha256, ""))
     };
@@ -592,7 +585,7 @@ function normalizeApp(id, data) {
 }
 
 /* ============================================================
-   UNIQUE ROUND LOADER (inline SVG)
+   UNIQUE ROUND LOADER
    ============================================================ */
 function createLoader(size = 64) {
   const NS = "http://www.w3.org/2000/svg";
@@ -669,7 +662,7 @@ function createLoader(size = 64) {
 }
 
 /* ============================================================
-   THEME + SKIN AUTO-CHANGER (every 5 seconds)
+   THEME + SKIN AUTO-CHANGER (5s)
    ============================================================ */
 const SKINS = ["green", "tokyo", "dubai", "paris", "nyc", "rio"];
 const SKIN_COLORS = { green:"#01875F", tokyo:"#ff3c8e", dubai:"#c9a227", paris:"#e11d6f", nyc:"#06b6d4", rio:"#10b981" };
@@ -682,7 +675,6 @@ function applySkin(name) {
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute("content", SKIN_COLORS[name] || "#01875F");
 }
-
 function startSkinCycle() {
   if (skinTimer) clearInterval(skinTimer);
   skinTimer = setInterval(() => {
@@ -690,12 +682,10 @@ function startSkinCycle() {
     applySkin(SKINS[skinIndex]);
   }, 5000);
 }
-
 function updateThemeIcon() {
   const btn = $("#themeToggle");
   if (btn) btn.textContent = state.theme === "dark" ? "☀️" : "🌙";
 }
-
 function initTheme() {
   const savedSkin = safeLocalGet("fas_skin");
   skinIndex = (savedSkin && SKINS.includes(savedSkin)) ? SKINS.indexOf(savedSkin) : 0;
@@ -710,7 +700,6 @@ function initTheme() {
   updateThemeIcon();
   startSkinCycle();
 }
-
 function toggleTheme() {
   state.theme = state.theme === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", state.theme);
@@ -719,50 +708,42 @@ function toggleTheme() {
 }
 
 /* ============================================================
-   FIREBASE
+   REALTIME DATABASE
    ============================================================ */
-let fbModule = null;
+let fbApp = null;
 
-async function initFirebase() {
-  if (state.isSetup) return false;
+function initFirebase() {
   try {
-    const appMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
-    const fsMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
-    const app = appMod.initializeApp(firebaseConfig);
-    let db;
-    try {
-      const { initializeFirestore, persistentLocalCache } = fsMod;
-      db = initializeFirestore(app, { localCache: persistentLocalCache() });
-    } catch (e) {
-      console.warn("persistentLocalCache failed, using getFirestore", e);
-      db = fsMod.getFirestore(app);
-    }
-    state.db = db;
-    fbModule = fsMod;
+    fbApp = initializeApp(firebaseConfig);
+    state.db = getDatabase(fbApp);
     state.fbReady = true;
     return true;
   } catch (e) {
-    console.error("Firebase init failed", e);
+    console.error("[FreeAPK] Firebase init failed", e);
     return false;
   }
 }
 
 function startRealtime() {
   if (!state.fbReady || state.unsub || !state.db) return;
-  const { onSnapshot, collection } = fbModule;
   try {
-    const colRef = collection(state.db, APPS_COLLECTION);
-    let firstDocLogged = false;
-    state.unsub = onSnapshot(colRef, (snap) => {
+    const appsRef = ref(state.db, APPS_PATH);
+    let firstLogged = false;
+    state.unsub = onValue(appsRef, (snapshot) => {
+      const val = snapshot.val();
       const list = [];
-      snap.forEach(doc => {
-        if (!firstDocLogged) {
-          firstDocLogged = true;
-          console.log("[FreeAPK] First raw document:", { id: doc.id, data: doc.data() });
-        }
-        const norm = normalizeApp(doc.id, doc.data());
-        if (norm) list.push(norm);
-      });
+      if (val && typeof val === "object") {
+        Object.entries(val).forEach(([id, data]) => {
+          if (!firstLogged) {
+            firstLogged = true;
+            console.log("[FreeAPK] First raw node:", { id, data });
+          }
+          const norm = normalizeApp(id, data);
+          if (norm) list.push(norm);
+        });
+      } else {
+        console.log("[FreeAPK] /apps node is empty or null");
+      }
       state.apps = list;
       state.lastSnapshotOk = true;
       rebuildCategories();
@@ -772,34 +753,24 @@ function startRealtime() {
       else if (state.route === "app") renderDetail(state.currentDocId, true);
       else if (state.route === "help") renderHelp();
     }, (err) => {
-      console.error("[FreeAPK] Snapshot error", err);
+      console.error("[FreeAPK] RTDB onValue error", err);
       state.lastSnapshotOk = false;
       if (!state.apps.length) {
-        if (err && err.code === "permission-denied") {
-          renderError("Firestore rules me apps ka read allow karein.");
-        } else {
-          renderError(err && err.message ? err.message : "Firestore se data nahi aa raha.");
-        }
+        const msg = err && err.message ? err.message : "Realtime Database se data nahi aa raha.";
+        renderError(msg + " — Rules me /apps ka read allow karein (read: true).");
       } else {
         toast("Live update nahi mila — purani list dikh rahi hai");
       }
     });
   } catch (e) {
-    console.error("startRealtime failed", e);
-    renderError("Firestore se connect nahi ho paya.");
+    console.error("[FreeAPK] startRealtime failed", e);
+    renderError("Realtime Database se connect nahi ho paya.");
   }
 }
 
 function saveCache() {
   try {
-    const slim = state.apps.map(a => ({
-      id: a.id, name: a.name, publisher: a.publisher, category: a.category,
-      version: a.version, size: a.size, icon: a.icon, apkUrl: a.apkUrl,
-      description: a.description, fullDescription: a.fullDescription,
-      whatsNew: a.whatsNew, screenshots: a.screenshots, rating: a.rating,
-      downloads: a.downloads, featured: a.featured, createdAt: a.createdAt,
-      packageName: a.packageName, sha256: a.sha256
-    }));
+    const slim = state.apps.map(a => ({ ...a }));
     safeLocalSet("fas_cache", JSON.stringify(slim));
   } catch {}
 }
@@ -834,7 +805,6 @@ function parseHash() {
   if (h.startsWith("/help")) return { route: "help" };
   return { route: "home" };
 }
-
 function onRouteChange() {
   const { route, id } = parseHash();
   state.route = route;
@@ -843,14 +813,13 @@ function onRouteChange() {
   else if (route === "help") renderHelp();
   else renderHome();
 }
-
 function go(path) {
   if (location.hash === path) onRouteChange();
   else location.hash = path;
 }
 
 /* ============================================================
-   HOME RENDER
+   HOME
    ============================================================ */
 function getFiltered() {
   let list = state.apps.slice();
@@ -877,7 +846,6 @@ function getFiltered() {
 function renderHome() {
   const main = $("#app");
   if (!main) return;
-  if (state.isSetup) { renderSetup(); return; }
 
   if (!state.online && !state.apps.length) { renderNoInternet(); return; }
 
@@ -1016,12 +984,11 @@ function buildAppCard(a) {
 }
 
 /* ============================================================
-   DETAIL RENDER
+   DETAIL
    ============================================================ */
 function renderDetail(id, silent) {
   const main = $("#app");
   if (!main || !id) { renderHome(); return; }
-  if (state.isSetup) { renderSetup(); return; }
   const a = state.apps.find(x => x.id === id);
   if (!a) {
     if (!state.apps.length) {
@@ -1105,7 +1072,7 @@ function renderDetail(id, silent) {
       if (navigator.share) { await navigator.share({ title: a.name, text: "Download " + a.name, url }); }
       else if (navigator.clipboard) { await navigator.clipboard.writeText(url); toast("Link copy ho gaya"); }
       else { toast("Share support nahi hai"); }
-    } catch (e) { /* user cancelled */ }
+    } catch (e) { /* cancelled */ }
   });
   actions.appendChild(shareBtn);
   page.appendChild(actions);
@@ -1165,12 +1132,11 @@ function renderDetail(id, silent) {
 }
 
 /* ============================================================
-   HELP RENDER
+   HELP
    ============================================================ */
 function renderHelp() {
   const main = $("#app");
   if (!main) return;
-  if (state.isSetup) { renderSetup(); return; }
   const page = el("div", "page");
   const cs = el("div", "center-screen");
   cs.appendChild(el("h2", "", "Help & Support"));
@@ -1197,26 +1163,8 @@ function renderHelp() {
 }
 
 /* ============================================================
-   SETUP / ERROR / NO INTERNET
+   ERROR / NO INTERNET
    ============================================================ */
-function renderSetup() {
-  const main = $("#app");
-  if (!main) return;
-  main.replaceChildren();
-  const card = el("div", "setup-card");
-  card.appendChild(el("h1", "", "Setup baaki hai ⚙️"));
-  card.appendChild(el("p", "", "Firebase config me abhi bhi PASTE_ values hain. Neeche diye steps follow karein:"));
-  const ol = document.createElement("ol");
-  [
-    "Firebase Console -> Project settings -> Your apps -> Web app kholo",
-    "firebaseConfig copy karo",
-    "Is file me firebaseConfig object me saari values paste karo",
-    "Save karke page refresh karo — apps live aa jayengi"
-  ].forEach(t => ol.appendChild(el("li", "", t)));
-  card.appendChild(ol);
-  main.appendChild(card);
-}
-
 function buildCloudError() {
   const NS = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(NS, "svg");
@@ -1457,13 +1405,13 @@ function setupGlobalHandlers() {
 }
 
 /* ============================================================
-   PWA — inline service worker via Blob
+   PWA — inline SW via Blob (single-file friendly)
    ============================================================ */
 function registerSW() {
   if (!("serviceWorker" in navigator)) return;
   if (location.protocol !== "https:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") return;
   const swCode = `
-const CACHE_NAME = 'freeapk-v2';
+const CACHE_NAME = 'freeapk-rtdb-v1';
 const SHELL = ['/', '/index.html'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(SHELL).catch(()=>{})));
@@ -1510,24 +1458,18 @@ async function boot() {
   const firstLoader = $("#firstLoader");
   if (firstLoader) firstLoader.replaceChildren(createLoader(72));
 
-  if (state.isSetup) {
-    renderSetup();
-    registerSW();
-    return;
-  }
-
   const cached = loadCache();
   if (cached) { renderHome(); updateOfflineBanner(); }
 
-  const ok = await initFirebase();
+  const ok = initFirebase();
   if (!ok) {
-    if (!cached) renderError("Firebase se connect nahi ho paya. Config aur internet check karein.");
-    else toast("Live data abhi nahi mila — cached list dikh rahi hai");
+    if (!cached) renderError("Firebase init fail ho gaya. Config check karein.");
+    else toast("Live data nahi mila — cached list dikh rahi hai");
     registerSW();
     return;
   }
 
-  if (!state.online && !cached) renderNoInternet();
+  if (!state.online && !cached) { renderNoInternet(); registerSW(); return; }
 
   startRealtime();
   registerSW();
@@ -1536,7 +1478,7 @@ async function boot() {
 
   setTimeout(() => {
     if (state.online && state.fbReady && !state.lastSnapshotOk && !state.apps.length && !cached) {
-      renderError("Data load nahi ho paya. Firestore rules ya internet check karein.");
+      renderError("Data load nahi ho paya. Realtime Database rules me /apps ka read allow karein.");
     }
   }, 9000);
 }
