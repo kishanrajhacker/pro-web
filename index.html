@@ -904,13 +904,9 @@ const firebaseConfig = {
   appId: "1:529479289404:web:ddc8f00f65fae56799d139"
 };
 const APPS_PATH = "apps";
+const PAID_APPS_PATH = "paidApps";
+const PREMIUM_LINKS_PATH = "premiumLinks";
 const STORE_NAME = "Free APK Store";
-
-/* GitHub APK download source (edit here) */
-const GITHUB_USER = "kishanrajhacker";
-const GITHUB_REPO = "apk-files";
-const GITHUB_TAG  = "apps";
-const GITHUB_RELEASE_BASE = `https://github.com/${GITHUB_USER}/${GITHUB_REPO}/releases/download/${GITHUB_TAG}/`;
 
 const SUPPORT_WHATSAPP_URL = "https://api.whatsapp.com/send?phone=919507952101";
 const SUPPORT_INSTAGRAM_URL = "https://www.instagram.com/modded_1";
@@ -921,7 +917,7 @@ const WEBSITE_URL = "https://kishanrajhacker.github.io/pro-web/#/help";
    FIREBASE (lazy init)
    ============================================================ */
 let firebaseApp = null, firebaseDb = null, firebaseAuth = null, fbModules = null;
-let unsubscribeApps = null;
+let unsubscribeApps = null, unsubscribePaidApps = null;
 
 async function initFirebase() {
   if (fbModules) return fbModules;
@@ -1091,9 +1087,7 @@ function createLoader(size = 72) {
 }
 
 /* ============================================================
-   NORMALIZE (schema: name, packageName, version, versionCode,
-   size, sizeBytes, downloads, rating, icon, fullDescription,
-   whatsNew, publisher, sha256, featured, published, updatedAt)
+   NORMALIZE (reads apkUrl from d.apkUrl || d.downloadUrl || d.link)
    ============================================================ */
 function capFirst(s) { s = safeText(s).trim(); if (!s) return "Other"; return s.charAt(0).toUpperCase() + s.slice(1); }
 const isHttp = (s) => typeof s === "string" && /^https?:\/\//i.test(s.trim());
@@ -1105,7 +1099,7 @@ function toArray(v) {
   return [];
 }
 
-function normalizeApp(id, data) {
+function normalizeApp(id, data, source) {
   try {
     if (!data || typeof data !== "object") return null;
     const d = data;
@@ -1119,18 +1113,24 @@ function normalizeApp(id, data) {
     const downloads = safeText(d.downloads || "").trim();
     const ratingRaw = Number(d.rating);
     const rating = isFinite(ratingRaw) ? Math.min(5, Math.max(0, ratingRaw)) : 0;
-    const icon = isHttps(d.icon) ? d.icon.trim() : (isHttp(d.icon) ? d.icon.trim() : "");
+    const icon = isHttp(d.icon) ? d.icon.trim() : "";
     const fullDescription = safeText(d.fullDescription || d.description || "").trim();
     const whatsNew = safeText(d.whatsNew || "").trim();
     const sha256 = safeText(d.sha256 || "").trim();
+
+    // Real download link: prefer apkUrl/downloadUrl/link if https
+    const rawUrl = safeText(d.apkUrl || d.downloadUrl || d.link || "").trim();
+    const apkUrl = isHttps(rawUrl) ? rawUrl : "";
+
     const featured = d.featured === true;
-    const published = d.published !== false; // show unless explicitly false
+    const published = d.published !== false;
     const updatedAt = Number(d.updatedAt) || Number(d.createdAt) || 0;
 
     return {
-      id: safeText(id), name, publisher, packageName, version, versionCode,
+      id: safeText(id), source: source || "apps",
+      name, publisher, packageName, version, versionCode,
       size, sizeBytes, downloads, rating, icon, fullDescription, whatsNew,
-      sha256, featured, published, updatedAt
+      sha256, apkUrl, featured, published, updatedAt
     };
   } catch (err) {
     console.warn("[normalizeApp] failed for", id, err);
@@ -1150,13 +1150,37 @@ function parseDownloads(s) {
   } catch (_) { return 0; }
 }
 
-/* Build APK URL from GitHub release tag (record has no URL field) */
-function apkUrlFor(app) {
-  // If a filename can be derived from packageName + version, use it;
-  // otherwise fall back to the release page.
-  const pkg = safeText(app.packageName).trim();
-  if (!pkg) return `https://github.com/${GITHUB_USER}/${GITHUB_REPO}/releases/tag/${GITHUB_TAG}`;
-  return `${GITHUB_RELEASE_BASE}${encodeURIComponent(pkg)}.apk`;
+/* ============================================================
+   RESOLVE APK URL (premiumLinks/<id>)
+   ============================================================ */
+async function resolveApkUrl(app) {
+  // 1) Already has a valid https link on the record
+  if (app.apkUrl && /^https:\/\//i.test(app.apkUrl)) return app.apkUrl;
+
+  // 2) Fetch premiumLinks/<id>
+  const mods = await initFirebase();
+  if (!mods) throw new Error("Firebase not initialized");
+  try {
+    const snap = await mods.dbMod.get(mods.dbMod.ref(firebaseDb, `${PREMIUM_LINKS_PATH}/${app.id}`));
+    const val = snap && snap.val();
+    const url = val && (val.apkUrl || val.downloadUrl || val.link);
+    if (typeof url === "string" && /^https:\/\//i.test(url.trim())) {
+      app.apkUrl = url.trim();
+      if (val.sha256 && !app.sha256) app.sha256 = String(val.sha256);
+      return app.apkUrl;
+    }
+    throw new Error("No valid apkUrl in premiumLinks");
+  } catch (err) {
+    const code = err && (err.code || "");
+    const msg = String(err && (err.message || err));
+    if (String(code).includes("permission-denied") || /permission/i.test(msg)) {
+      console.error("[premiumLinks] permission-denied for", app.id, err);
+      toast("Is app ka link abhi available nahi hai");
+      throw err;
+    }
+    console.error("[premiumLinks] failed for", app.id, err);
+    throw err;
+  }
 }
 
 /* ============================================================
@@ -1179,7 +1203,7 @@ const state = {
 /* ============================================================
    CACHE
    ============================================================ */
-const CACHE_KEY = "fas_apps_cache_v2";
+const CACHE_KEY = "fas_apps_cache_v3";
 function saveCache(list) { try { localStorage.setItem(CACHE_KEY, JSON.stringify(list)); } catch (_) {} }
 function loadCache() {
   try {
@@ -1253,7 +1277,7 @@ function filteredApps() {
     case "downloads": sorted.sort((a, b) => parseDownloads(b.downloads) - parseDownloads(a.downloads)); break;
     case "rating": sorted.sort((a, b) => b.rating - a.rating); break;
     case "az": sorted.sort((a, b) => a.name.localeCompare(b.name)); break;
-    default: sorted.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)); // newest by updatedAt
+    default: sorted.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
   }
   return sorted;
 }
@@ -1304,13 +1328,14 @@ function featuredCard(app) {
 }
 
 /* ============================================================
-   DOWNLOAD
+   DOWNLOAD (async; resolves premiumLinks)
    ============================================================ */
-function triggerDownload(app) {
+async function triggerDownload(app) {
   if (state.offline) { toast("Internet nahi hai"); return; }
-  const url = apkUrlFor(app);
-  if (!url) { toast("Link nahi hai"); return; }
+  toast("Download link la rahe hain…");
   try {
+    const url = await resolveApkUrl(app);
+    if (!/^https:\/\//i.test(url || "")) throw new Error("URL not https");
     const a = document.createElement("a");
     a.href = url; a.download = ""; a.rel = "noopener"; a.style.display = "none";
     document.body.appendChild(a); a.click();
@@ -1318,7 +1343,12 @@ function triggerDownload(app) {
     toast("Download shuru ho raha hai");
   } catch (err) {
     console.error("[Download] failed:", err);
-    toast("Download shuru nahi ho paya");
+    // permission-denied toast is already shown inside resolveApkUrl
+    const code = err && (err.code || "");
+    const msg = String(err && (err.message || err));
+    if (!(String(code).includes("permission-denied") || /permission/i.test(msg))) {
+      toast("Link nahi mila. Admin se contact karein.");
+    }
   }
 }
 
@@ -1442,12 +1472,12 @@ function renderDetail(id) {
 
   const actions = el("div", { class: "detail-actions" });
   if (!state.offline) {
-    const dl = el("a", { class: "btn", attrs: { href: apkUrlFor(app), download: "", rel: "noopener", "aria-label": `${app.name} APK download karein` } });
+    const dl = el("button", { class: "btn", attrs: { type: "button", "aria-label": `${app.name} APK download karein` } });
     const s = svgEl("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2.4", "stroke-linecap": "round", "stroke-linejoin": "round" });
     s.appendChild(svgEl("path", { d: "M12 3v12 M6 11l6 6 6-6 M5 21h14" }));
     dl.appendChild(s);
     dl.appendChild(document.createTextNode("Download APK"));
-    dl.addEventListener("click", () => toast("Download shuru ho raha hai"));
+    dl.addEventListener("click", () => triggerDownload(app));
     actions.appendChild(dl);
   } else {
     actions.appendChild(el("button", { class: "btn", text: "Offline hai", attrs: { type: "button", disabled: "true" } }));
@@ -1705,7 +1735,7 @@ function renderRoute() {
 }
 
 /* ============================================================
-   FIREBASE SUBSCRIPTION
+   FIREBASE SUBSCRIPTION (apps + paidApps merged)
    ============================================================ */
 let retryTimer = null;
 function retryLoad() {
@@ -1714,8 +1744,20 @@ function retryLoad() {
   if (state.route.name === "home") renderRoute();
   subscribeApps();
 }
+
+function mergeLists(appsList, paidList) {
+  const map = new Map();
+  for (const a of appsList) map.set(a.id, a);
+  for (const a of paidList) {
+    // skip duplicates by id; if same id from paidApps, keep apps version
+    if (!map.has(a.id)) map.set(a.id, a);
+  }
+  return Array.from(map.values());
+}
+
 async function subscribeApps() {
   if (unsubscribeApps) { try { unsubscribeApps(); } catch (_) {} unsubscribeApps = null; }
+  if (unsubscribePaidApps) { try { unsubscribePaidApps(); } catch (_) {} unsubscribePaidApps = null; }
   const mods = await initFirebase();
   if (!mods) {
     state.loading = false;
@@ -1728,31 +1770,75 @@ async function subscribeApps() {
     return;
   }
   const { dbMod } = mods;
+
+  let appsData = { done: false, list: [] };
+  let paidData = { done: false, list: [] };
+
+  function finishIfReady() {
+    if (!appsData.done || !paidData.done) return;
+    const merged = mergeLists(appsData.list, paidData.list);
+    console.log(`[Firebase] apps: ${appsData.list.length}, paidApps: ${paidData.list.length}, merged: ${merged.length}`);
+    state.apps = merged;
+    state.loading = false; state.error = null; state.offline = false; state.usingCache = false;
+    hideOfflineBanner(); hideGlobalLoader();
+    saveCache(merged);
+    if (state.route.name === "home" || state.route.name === "detail") renderRoute();
+  }
+
+  function handlePartialError(err, which) {
+    console.error(`[Firebase] ${which} onValue error:`, err);
+    // If one node fails (e.g. permission), still proceed with the other
+    if (which === "apps") { appsData.done = true; }
+    else { paidData.done = true; }
+    // Only hard-fail if both are done and nothing came back
+    if (appsData.done && paidData.done) {
+      const merged = mergeLists(appsData.list, paidData.list);
+      if (merged.length === 0) handleDbError(err);
+      else finishIfReady();
+    }
+  }
+
   try {
-    const dbRef = dbMod.ref(firebaseDb, APPS_PATH);
-    unsubscribeApps = dbMod.onValue(dbRef, (snapshot) => {
+    const appsRef = dbMod.ref(firebaseDb, APPS_PATH);
+    unsubscribeApps = dbMod.onValue(appsRef, (snapshot) => {
       try {
         const val = snapshot.val();
-        let list = [];
-        if (val && typeof val === "object") {
-          list = Object.entries(val).map(([id, data]) => normalizeApp(id, data)).filter(Boolean);
-        }
-        console.log(`[Firebase] ${APPS_PATH}: ${list.length} record(s), published: ${list.filter(a => a.published).length}`);
-        state.apps = list;
-        state.loading = false; state.error = null; state.offline = false; state.usingCache = false;
-        hideOfflineBanner(); hideGlobalLoader();
-        saveCache(list);
-        if (state.route.name === "home" || state.route.name === "detail") renderRoute();
+        const list = (val && typeof val === "object")
+          ? Object.entries(val).map(([id, d]) => normalizeApp(id, d, "apps")).filter(Boolean)
+          : [];
+        appsData.list = list; appsData.done = true;
+        finishIfReady();
       } catch (err) {
-        console.error("[Firebase] onValue handler error:", err);
-        handleDbError(err);
+        console.error("[Firebase] apps handler error:", err);
+        handlePartialError(err, "apps");
       }
-    }, (error) => { console.error("[Firebase] onValue error:", error); handleDbError(error); });
+    }, (error) => handlePartialError(error, "apps"));
   } catch (err) {
-    console.error("[Firebase] subscribe failed:", err);
-    handleDbError(err);
+    console.error("[Firebase] apps subscribe failed:", err);
+    handlePartialError(err, "apps");
+  }
+
+  try {
+    const paidRef = dbMod.ref(firebaseDb, PAID_APPS_PATH);
+    unsubscribePaidApps = dbMod.onValue(paidRef, (snapshot) => {
+      try {
+        const val = snapshot.val();
+        const list = (val && typeof val === "object")
+          ? Object.entries(val).map(([id, d]) => normalizeApp(id, d, "paidApps")).filter(Boolean)
+          : [];
+        paidData.list = list; paidData.done = true;
+        finishIfReady();
+      } catch (err) {
+        console.error("[Firebase] paidApps handler error:", err);
+        handlePartialError(err, "paidApps");
+      }
+    }, (error) => handlePartialError(error, "paidApps"));
+  } catch (err) {
+    console.error("[Firebase] paidApps subscribe failed:", err);
+    handlePartialError(err, "paidApps");
   }
 }
+
 function handleDbError(error) {
   state.loading = false;
   const cached = loadCache();
@@ -1764,7 +1850,7 @@ function handleDbError(error) {
   const code = error && (error.code || "");
   const msg = error && (error.message || "");
   if (String(code).includes("permission-denied") || /permission/i.test(msg)) {
-    reason = "Database rules me apps ka read allow karein (permission-denied).";
+    reason = "Database rules me apps/paidApps ka read allow karein (permission-denied).";
   } else if (/network/i.test(msg) || !navigator.onLine) {
     state.offline = true; reason = "Internet nahi hai.";
   }
@@ -1996,7 +2082,7 @@ function registerSW() {
   const isSecure = location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1";
   if (!isSecure) return;
   const swCode = `
-const CACHE = "free-apk-store-v2";
+const CACHE = "free-apk-store-v3";
 const SHELL = ["./", "./index.html"];
 self.addEventListener("install", (e) => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL).catch(() => {}))); });
 self.addEventListener("activate", (e) => { e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
@@ -2031,7 +2117,7 @@ function initManifest() {
 }
 
 /* ============================================================
-   INIT  (module scripts run after DOM parse, so call directly)
+   INIT  (module scripts are deferred → DOM already parsed)
    ============================================================ */
 async function init() {
   try { $("#year").textContent = String(new Date().getFullYear()); } catch (_) {}
@@ -2084,16 +2170,13 @@ async function init() {
     subscribeApps();
   }
 
-  // Auth listener after Firebase is ready
   const mods = await initFirebase();
   if (mods) initAuth(mods);
   updateProfileBtn();
 
-  // Safety: never leave the user stuck on the global loader
   setTimeout(hideGlobalLoader, 8000);
 }
 
-// Module scripts are deferred → DOM is already parsed when this runs.
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
 else init();
 </script>
