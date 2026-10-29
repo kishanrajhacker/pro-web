@@ -10,11 +10,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@600;800&family=Cinzel:wght@600;800&display=swap" rel="stylesheet" />
 
 <style>
 /* =========================================================
-   DESIGN TOKENS — base (green) skin
+   BASE TOKENS (fallback, overridden by each theme)
    ========================================================= */
 :root {
   color-scheme: light;
@@ -56,148 +56,386 @@
   --bg-b: #22B4C4;
   --bg-c: #7C3AED;
   --bg-d: #F59E0B;
-  --hero-1: #01875F;
-  --hero-2: #22B4C4;
-  --hero-3: #7C3AED;
-  --hero-4: #F59E0B;
   --grad-main: linear-gradient(135deg, #01875F 0%, #22B4C4 55%, #7C3AED 100%);
   --grad-accent: linear-gradient(135deg, #F59E0B 0%, #EC4899 100%);
   --grad-rainbow: linear-gradient(90deg, #F59E0B, #EC4899, #7C3AED, #22B4C4, #01875F);
   --card-glow: 0 0 0 1px rgba(1,135,95,.08), 0 8px 24px rgba(1,135,95,.10);
+  --card-radius: 20px;
+  --card-bg-image: none;
+  --card-hover-transform: translateY(-3px);
+  --card-hover-shadow: 0 8px 28px rgba(1,135,95,.22);
+  --header-font: var(--font-head);
 }
 
-/* ---------- SKIN 2: TOKYO NEON ---------- */
-:root[data-skin="tokyo"] {
+/* =========================================================
+   THEME 1 — HACKING (MATRIX)
+   ========================================================= */
+:root[data-theme-id="hacking"] {
   color-scheme: dark;
-  --brand: #FF3C8E; --brand-strong: #FF6BA8; --brand-soft: #3A0F26; --brand-tint: #2A0A1A;
-  --teal: #22D3EE; --accent: #A855F7; --accent-2: #FBBF24;
-  --bg: #0B0614; --bg-elev: #17092A; --bg-soft: #221140;
-  --text: #F5E9FF; --text-soft: #B49CD6; --text-mute: #7E68A3;
-  --border: #3A1D5E; --border-strong: #552B85;
-  --shadow-sm: 0 2px 8px rgba(255,60,142,.15); --shadow-md: 0 8px 24px rgba(255,60,142,.20); --shadow-lg: 0 16px 48px rgba(255,60,142,.30);
+  --brand: #00FF66;
+  --brand-strong: #00CC52;
+  --brand-soft: #062B14;
+  --brand-tint: #041A0D;
+  --teal: #39FF14;
+  --accent: #00FF9C;
+  --accent-2: #C8FF00;
+  --bg: #000000;
+  --bg-elev: #04140A;
+  --bg-soft: #061F10;
+  --text: #C8FFC8;
+  --text-soft: #7CFF9E;
+  --text-mute: #4DAF6E;
+  --border: #0F3D1F;
+  --border-strong: #1A6B37;
+  --shadow-sm: 0 0 6px rgba(0,255,102,.25);
+  --shadow-md: 0 0 18px rgba(0,255,102,.30);
+  --shadow-lg: 0 0 40px rgba(0,255,102,.45);
+  --danger: #FF4D4D;
+  --danger-soft: #2A0505;
+  --star: #C8FF00;
+  --loader-track: #0F3D1F;
+  --loader-center: #00FF66;
+  --bg-a: #00FF66; --bg-b: #00FF9C; --bg-c: #39FF14; --bg-d: #C8FF00;
+  --grad-main: linear-gradient(135deg, #00FF66 0%, #00FF9C 60%, #C8FF00 100%);
+  --grad-accent: linear-gradient(135deg, #C8FF00 0%, #00FF66 100%);
+  --grad-rainbow: linear-gradient(90deg, #00FF66, #39FF14, #C8FF00, #00FF9C, #00FF66);
+  --card-glow: 0 0 0 1px rgba(0,255,102,.25), 0 8px 26px rgba(0,255,102,.18);
+  --card-radius: 6px;
+  --card-hover-shadow: 0 0 36px rgba(0,255,102,.55);
+  --font-head: "JetBrains Mono", monospace;
+  --header-font: "JetBrains Mono", monospace;
+}
+
+/* =========================================================
+   THEME 2 — 3D
+   ========================================================= */
+:root[data-theme-id="3d"] {
+  color-scheme: dark;
+  --brand: #8B5CF6;
+  --brand-strong: #A78BFA;
+  --brand-soft: #241243;
+  --brand-tint: #180B2E;
+  --teal: #22D3EE;
+  --accent: #F472B6;
+  --accent-2: #FBBF24;
+  --bg: #0B0A1E;
+  --bg-elev: #171335;
+  --bg-soft: #221A4D;
+  --text: #F0EBFF;
+  --text-soft: #B7A8E0;
+  --text-mute: #7E6DAF;
+  --border: #332669;
+  --border-strong: #4C3A9A;
+  --shadow-sm: 0 4px 12px rgba(139,92,246,.30);
+  --shadow-md: 0 12px 30px rgba(139,92,246,.35);
+  --shadow-lg: 0 24px 60px rgba(139,92,246,.45);
   --danger: #FF5470; --danger-soft: #4A0E23; --star: #FBBF24;
-  --loader-track: #3A1D5E; --loader-center: #FF3C8E;
-  --bg-a: #FF3C8E; --bg-b: #A855F7; --bg-c: #22D3EE; --bg-d: #FBBF24;
-  --hero-1: #FF3C8E; --hero-2: #A855F7; --hero-3: #22D3EE; --hero-4: #FBBF24;
-  --grad-main: linear-gradient(135deg, #FF3C8E 0%, #A855F7 55%, #22D3EE 100%);
-  --grad-accent: linear-gradient(135deg, #FBBF24 0%, #FF3C8E 100%);
-  --grad-rainbow: linear-gradient(90deg, #FF3C8E, #A855F7, #22D3EE, #FBBF24, #FF3C8E);
-  --card-glow: 0 0 0 1px rgba(255,60,142,.18), 0 8px 28px rgba(255,60,142,.22);
-}
-
-/* ---------- SKIN 3: DUBAI GOLD ---------- */
-:root[data-skin="dubai"] {
-  color-scheme: dark;
-  --brand: #E8B923; --brand-strong: #F5D142; --brand-soft: #3A2E08; --brand-tint: #2A2106;
-  --teal: #06B6D4; --accent: #F97316; --accent-2: #EC4899;
-  --bg: #14100A; --bg-elev: #1E1810; --bg-soft: #2A2216;
-  --text: #FFF6DC; --text-soft: #C9B98E; --text-mute: #8F8058;
-  --border: #3D3219; --border-strong: #5A4A22;
-  --shadow-sm: 0 2px 8px rgba(232,185,35,.15); --shadow-md: 0 8px 24px rgba(232,185,35,.22); --shadow-lg: 0 16px 48px rgba(232,185,35,.32);
-  --danger: #F43F5E; --danger-soft: #4A0E1C; --star: #FBBF24;
-  --loader-track: #3D3219; --loader-center: #E8B923;
-  --bg-a: #E8B923; --bg-b: #F97316; --bg-c: #EC4899; --bg-d: #06B6D4;
-  --hero-1: #E8B923; --hero-2: #F97316; --hero-3: #EC4899; --hero-4: #06B6D4;
-  --grad-main: linear-gradient(135deg, #E8B923 0%, #F97316 55%, #EC4899 100%);
-  --grad-accent: linear-gradient(135deg, #06B6D4 0%, #E8B923 100%);
-  --grad-rainbow: linear-gradient(90deg, #E8B923, #F97316, #EC4899, #06B6D4, #E8B923);
-  --card-glow: 0 0 0 1px rgba(232,185,35,.18), 0 8px 28px rgba(232,185,35,.22);
-}
-
-/* ---------- SKIN 4: PARIS ROSE ---------- */
-:root[data-skin="paris"] {
-  color-scheme: light;
-  --brand: #E11D6F; --brand-strong: #C0175C; --brand-soft: #FFE4EF; --brand-tint: #FFF0F6;
-  --teal: #06B6D4; --accent: #7C3AED; --accent-2: #F59E0B;
-  --bg: #FFF5F9; --bg-elev: #FFFFFF; --bg-soft: #FFE8F1;
-  --text: #2B0A19; --text-soft: #8A4A63; --text-mute: #B87A93;
-  --border: #F8D3E2; --border-strong: #F0B4CC;
-  --shadow-sm: 0 1px 3px rgba(225,29,111,.08); --shadow-md: 0 4px 14px rgba(225,29,111,.12); --shadow-lg: 0 12px 32px rgba(225,29,111,.18);
-  --danger: #DC2626; --danger-soft: #FEE2E2; --star: #F59E0B;
-  --loader-track: #F8D3E2; --loader-center: #E11D6F;
-  --bg-a: #E11D6F; --bg-b: #7C3AED; --bg-c: #06B6D4; --bg-d: #F59E0B;
-  --hero-1: #E11D6F; --hero-2: #7C3AED; --hero-3: #06B6D4; --hero-4: #F59E0B;
-  --grad-main: linear-gradient(135deg, #E11D6F 0%, #7C3AED 55%, #06B6D4 100%);
-  --grad-accent: linear-gradient(135deg, #F59E0B 0%, #E11D6F 100%);
-  --grad-rainbow: linear-gradient(90deg, #E11D6F, #7C3AED, #06B6D4, #F59E0B, #E11D6F);
-  --card-glow: 0 0 0 1px rgba(225,29,111,.08), 0 8px 24px rgba(225,29,111,.12);
-}
-
-/* ---------- SKIN 5: NYC CYBER ---------- */
-:root[data-skin="nyc"] {
-  color-scheme: dark;
-  --brand: #06B6D4; --brand-strong: #22D3EE; --brand-soft: #062E38; --brand-tint: #04222B;
-  --teal: #10B981; --accent: #8B5CF6; --accent-2: #F472B6;
-  --bg: #050A12; --bg-elev: #0B1420; --bg-soft: #101F2E;
-  --text: #E0F2FF; --text-soft: #7FA8C4; --text-mute: #4E7A98;
-  --border: #1E3A52; --border-strong: #2E5474;
-  --shadow-sm: 0 2px 8px rgba(6,182,212,.15); --shadow-md: 0 8px 24px rgba(6,182,212,.22); --shadow-lg: 0 16px 48px rgba(6,182,212,.32);
-  --danger: #EF4444; --danger-soft: #450A0A; --star: #FBBF24;
-  --loader-track: #1E3A52; --loader-center: #06B6D4;
-  --bg-a: #06B6D4; --bg-b: #8B5CF6; --bg-c: #10B981; --bg-d: #F472B6;
-  --hero-1: #06B6D4; --hero-2: #8B5CF6; --hero-3: #10B981; --hero-4: #F472B6;
-  --grad-main: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 55%, #10B981 100%);
-  --grad-accent: linear-gradient(135deg, #F472B6 0%, #06B6D4 100%);
-  --grad-rainbow: linear-gradient(90deg, #06B6D4, #8B5CF6, #10B981, #F472B6, #06B6D4);
-  --card-glow: 0 0 0 1px rgba(6,182,212,.18), 0 8px 28px rgba(6,182,212,.22);
-}
-
-/* ---------- SKIN 6: RIO CARNIVAL ---------- */
-:root[data-skin="rio"] {
-  color-scheme: light;
-  --brand: #10B981; --brand-strong: #059669; --brand-soft: #D1FAE5; --brand-tint: #ECFDF5;
-  --teal: #06B6D4; --accent: #EF4444; --accent-2: #FBBF24;
-  --bg: #F0FDF4; --bg-elev: #FFFFFF; --bg-soft: #DCFCE7;
-  --text: #052E16; --text-soft: #3F6B52; --text-mute: #6E9B80;
-  --border: #BBF7D0; --border-strong: #86EFAC;
-  --shadow-sm: 0 1px 3px rgba(16,185,129,.08); --shadow-md: 0 4px 14px rgba(16,185,129,.14); --shadow-lg: 0 12px 32px rgba(16,185,129,.22);
-  --danger: #DC2626; --danger-soft: #FEE2E2; --star: #FBBF24;
-  --loader-track: #BBF7D0; --loader-center: #10B981;
-  --bg-a: #10B981; --bg-b: #FBBF24; --bg-c: #EF4444; --bg-d: #06B6D4;
-  --hero-1: #10B981; --hero-2: #FBBF24; --hero-3: #EF4444; --hero-4: #06B6D4;
-  --grad-main: linear-gradient(135deg, #10B981 0%, #FBBF24 55%, #EF4444 100%);
-  --grad-accent: linear-gradient(135deg, #06B6D4 0%, #10B981 100%);
-  --grad-rainbow: linear-gradient(90deg, #10B981, #FBBF24, #EF4444, #06B6D4, #10B981);
-  --card-glow: 0 0 0 1px rgba(16,185,129,.10), 0 8px 24px rgba(16,185,129,.14);
-}
-
-/* ---------- Dark theme override ---------- */
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --brand: #4FD1A0; --brand-strong: #3BB98A; --brand-soft: #11342A; --brand-tint: #0D241D;
-  --teal: #3ECFDF; --accent: #A78BFA; --accent-2: #FBBF24;
-  --bg: #0A1512; --bg-elev: #10201B; --bg-soft: #142923;
-  --text: #E8F5EF; --text-soft: #A9C3B8; --text-mute: #6F8A7F;
-  --border: #1E3730; --border-strong: #2C4D42;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.4); --shadow-md: 0 6px 20px rgba(0,0,0,.45); --shadow-lg: 0 16px 40px rgba(0,0,0,.55);
-  --danger: #FF6B5E; --danger-soft: #3A1714; --star: #FBBF24;
-  --loader-track: #1E3730; --loader-center: #4FD1A0;
-  --bg-a: #4FD1A0; --bg-b: #3ECFDF; --bg-c: #A78BFA; --bg-d: #FBBF24;
-  --hero-1: #4FD1A0; --hero-2: #3ECFDF; --hero-3: #A78BFA; --hero-4: #FBBF24;
-  --grad-main: linear-gradient(135deg, #4FD1A0 0%, #3ECFDF 55%, #A78BFA 100%);
+  --loader-track: #332669; --loader-center: #8B5CF6;
+  --bg-a: #8B5CF6; --bg-b: #22D3EE; --bg-c: #F472B6; --bg-d: #FBBF24;
+  --grad-main: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 55%, #F472B6 100%);
   --grad-accent: linear-gradient(135deg, #FBBF24 0%, #F472B6 100%);
-  --grad-rainbow: linear-gradient(90deg, #4FD1A0, #3ECFDF, #A78BFA, #FBBF24, #F472B6);
-  --card-glow: 0 0 0 1px rgba(79,209,160,.15), 0 8px 28px rgba(0,0,0,.45);
+  --grad-rainbow: linear-gradient(90deg, #8B5CF6, #22D3EE, #F472B6, #FBBF24, #8B5CF6);
+  --card-glow: 0 0 0 1px rgba(139,92,246,.30), 0 14px 34px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.10);
+  --card-radius: 22px;
+  --card-bg-image: linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,0) 60%);
+  --card-hover-transform: translateY(-6px) rotateX(4deg) rotateY(-4deg);
+  --card-hover-shadow: 0 26px 60px rgba(139,92,246,.55), inset 0 1px 0 rgba(255,255,255,.18);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --brand: #4FD1A0; --brand-strong: #3BB98A; --brand-soft: #11342A; --brand-tint: #0D241D;
-    --teal: #3ECFDF; --accent: #A78BFA; --accent-2: #FBBF24;
-    --bg: #0A1512; --bg-elev: #10201B; --bg-soft: #142923;
-    --text: #E8F5EF; --text-soft: #A9C3B8; --text-mute: #6F8A7F;
-    --border: #1E3730; --border-strong: #2C4D42;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,.4); --shadow-md: 0 6px 20px rgba(0,0,0,.45); --shadow-lg: 0 16px 40px rgba(0,0,0,.55);
-    --danger: #FF6B5E; --danger-soft: #3A1714; --star: #FBBF24;
-    --loader-track: #1E3730; --loader-center: #4FD1A0;
-    --bg-a: #4FD1A0; --bg-b: #3ECFDF; --bg-c: #A78BFA; --bg-d: #FBBF24;
-    --hero-1: #4FD1A0; --hero-2: #3ECFDF; --hero-3: #A78BFA; --hero-4: #FBBF24;
-    --grad-main: linear-gradient(135deg, #4FD1A0 0%, #3ECFDF 55%, #A78BFA 100%);
-    --grad-accent: linear-gradient(135deg, #FBBF24 0%, #F472B6 100%);
-    --grad-rainbow: linear-gradient(90deg, #4FD1A0, #3ECFDF, #A78BFA, #FBBF24, #F472B6);
-    --card-glow: 0 0 0 1px rgba(79,209,160,.15), 0 8px 28px rgba(0,0,0,.45);
-  }
+/* =========================================================
+   THEME 3 — GIRLY PINK
+   ========================================================= */
+:root[data-theme-id="girly"] {
+  color-scheme: light;
+  --brand: #F472B6;
+  --brand-strong: #EC4899;
+  --brand-soft: #FFE4F0;
+  --brand-tint: #FFF0F7;
+  --teal: #A78BFA;
+  --accent: #FB7185;
+  --accent-2: #FDBA74;
+  --bg: #FFF5FA;
+  --bg-elev: #FFFFFF;
+  --bg-soft: #FFE8F2;
+  --text: #3D1533;
+  --text-soft: #7A3A63;
+  --text-mute: #B37A95;
+  --border: #FAD1E4;
+  --border-strong: #F4A8CC;
+  --shadow-sm: 0 1px 3px rgba(244,114,182,.14);
+  --shadow-md: 0 6px 18px rgba(244,114,182,.20);
+  --shadow-lg: 0 16px 40px rgba(244,114,182,.30);
+  --danger: #DC2626; --danger-soft: #FEE2E2; --star: #F59E0B;
+  --loader-track: #FAD1E4; --loader-center: #F472B6;
+  --bg-a: #F9A8D4; --bg-b: #C4B5FD; --bg-c: #FDBA74; --bg-d: #FBCFE8;
+  --grad-main: linear-gradient(135deg, #F472B6 0%, #A78BFA 55%, #FB7185 100%);
+  --grad-accent: linear-gradient(135deg, #FDBA74 0%, #F472B6 100%);
+  --grad-rainbow: linear-gradient(90deg, #F472B6, #A78BFA, #FB7185, #FDBA74, #F472B6);
+  --card-glow: 0 0 0 1px rgba(244,114,182,.14), 0 10px 26px rgba(244,114,182,.18);
+  --card-radius: 26px;
+  --card-hover-shadow: 0 16px 36px rgba(244,114,182,.32);
+}
+
+/* =========================================================
+   THEME 4 — GALAXY
+   ========================================================= */
+:root[data-theme-id="galaxy"] {
+  color-scheme: dark;
+  --brand: #818CF8;
+  --brand-strong: #A5B4FC;
+  --brand-soft: #1B1A4A;
+  --brand-tint: #0F0E33;
+  --teal: #22D3EE;
+  --accent: #C084FC;
+  --accent-2: #F0ABFC;
+  --bg: #05021A;
+  --bg-elev: #0D0930;
+  --bg-soft: #161043;
+  --text: #EDE9FE;
+  --text-soft: #B8AEDC;
+  --text-mute: #8079A8;
+  --border: #241C56;
+  --border-strong: #3B2F87;
+  --shadow-sm: 0 2px 8px rgba(129,140,248,.20);
+  --shadow-md: 0 10px 26px rgba(129,140,248,.30);
+  --shadow-lg: 0 20px 54px rgba(129,140,248,.40);
+  --danger: #FF5470; --danger-soft: #4A0E23; --star: #F0ABFC;
+  --loader-track: #241C56; --loader-center: #818CF8;
+  --bg-a: #818CF8; --bg-b: #22D3EE; --bg-c: #C084FC; --bg-d: #F0ABFC;
+  --grad-main: linear-gradient(135deg, #818CF8 0%, #C084FC 55%, #22D3EE 100%);
+  --grad-accent: linear-gradient(135deg, #F0ABFC 0%, #818CF8 100%);
+  --grad-rainbow: linear-gradient(90deg, #818CF8, #C084FC, #22D3EE, #F0ABFC, #818CF8);
+  --card-glow: 0 0 0 1px rgba(129,140,248,.25), 0 12px 32px rgba(80,40,180,.45);
+  --card-radius: 20px;
+  --card-hover-shadow: 0 20px 50px rgba(129,140,248,.55);
+}
+
+/* =========================================================
+   THEME 5 — LUXURY
+   ========================================================= */
+:root[data-theme-id="luxury"] {
+  color-scheme: dark;
+  --brand: #D4AF37;
+  --brand-strong: #F0D779;
+  --brand-soft: #2B2308;
+  --brand-tint: #1A1605;
+  --teal: #C9A227;
+  --accent: #B8860B;
+  --accent-2: #FDE68A;
+  --bg: #0A0A0A;
+  --bg-elev: #151410;
+  --bg-soft: #201D15;
+  --text: #F5EFD6;
+  --text-soft: #C8B98A;
+  --text-mute: #8A7C52;
+  --border: #3A3218;
+  --border-strong: #5C4E24;
+  --shadow-sm: 0 1px 3px rgba(212,175,55,.20);
+  --shadow-md: 0 8px 22px rgba(212,175,55,.25);
+  --shadow-lg: 0 18px 46px rgba(212,175,55,.35);
+  --danger: #E11D48; --danger-soft: #3A0512; --star: #FDE68A;
+  --loader-track: #3A3218; --loader-center: #D4AF37;
+  --bg-a: #D4AF37; --bg-b: #F0D779; --bg-c: #B8860B; --bg-d: #FDE68A;
+  --grad-main: linear-gradient(135deg, #B8860B 0%, #F0D779 50%, #D4AF37 100%);
+  --grad-accent: linear-gradient(135deg, #FDE68A 0%, #B8860B 100%);
+  --grad-rainbow: linear-gradient(90deg, #B8860B, #F0D779, #D4AF37, #FDE68A, #B8860B);
+  --card-glow: 0 0 0 1px rgba(212,175,55,.35), 0 12px 30px rgba(0,0,0,.55), inset 0 1px 0 rgba(240,215,121,.10);
+  --card-radius: 14px;
+  --card-hover-shadow: 0 20px 50px rgba(212,175,55,.45);
+  --font-head: "Cinzel", "Bricolage Grotesque", serif;
+  --header-font: "Cinzel", serif;
+}
+
+/* =========================================================
+   THEME 6 — SOLAR SYSTEM (AAKASH MANDAL)
+   ========================================================= */
+:root[data-theme-id="solar"] {
+  color-scheme: dark;
+  --brand: #F97316;
+  --brand-strong: #FB923C;
+  --brand-soft: #3A1B06;
+  --brand-tint: #241004;
+  --teal: #FACC15;
+  --accent: #EF4444;
+  --accent-2: #38BDF8;
+  --bg: #02030E;
+  --bg-elev: #090B22;
+  --bg-soft: #111538;
+  --text: #FEF3C7;
+  --text-soft: #C7B98A;
+  --text-mute: #807C5E;
+  --border: #1F2450;
+  --border-strong: #333B7A;
+  --shadow-sm: 0 2px 8px rgba(249,115,22,.20);
+  --shadow-md: 0 10px 26px rgba(249,115,22,.30);
+  --shadow-lg: 0 20px 50px rgba(249,115,22,.40);
+  --danger: #EF4444; --danger-soft: #3A0A0A; --star: #FACC15;
+  --loader-track: #1F2450; --loader-center: #F97316;
+  --bg-a: #F97316; --bg-b: #FACC15; --bg-c: #EF4444; --bg-d: #38BDF8;
+  --grad-main: linear-gradient(135deg, #F97316 0%, #FACC15 55%, #EF4444 100%);
+  --grad-accent: linear-gradient(135deg, #38BDF8 0%, #F97316 100%);
+  --grad-rainbow: linear-gradient(90deg, #F97316, #FACC15, #EF4444, #38BDF8, #F97316);
+  --card-glow: 0 0 0 1px rgba(249,115,22,.25), 0 12px 32px rgba(0,0,0,.55);
+  --card-hover-shadow: 0 20px 50px rgba(249,115,22,.45);
+  --font-head: "Orbitron", "Bricolage Grotesque", sans-serif;
+  --header-font: "Orbitron", sans-serif;
+}
+
+/* =========================================================
+   THEME 7 — CYBERPUNK NEON
+   ========================================================= */
+:root[data-theme-id="cyber"] {
+  color-scheme: dark;
+  --brand: #FF2FA0;
+  --brand-strong: #FF66C4;
+  --brand-soft: #2A0A1E;
+  --brand-tint: #1A0612;
+  --teal: #00F0FF;
+  --accent: #00F0FF;
+  --accent-2: #FFE500;
+  --bg: #060312;
+  --bg-elev: #0F0620;
+  --bg-soft: #180A2E;
+  --text: #FFF0FA;
+  --text-soft: #C9A8DC;
+  --text-mute: #886BA8;
+  --border: #2A1050;
+  --border-strong: #4A1D8F;
+  --shadow-sm: 0 0 10px rgba(255,47,160,.35);
+  --shadow-md: 0 0 26px rgba(255,47,160,.45);
+  --shadow-lg: 0 0 50px rgba(255,47,160,.55);
+  --danger: #FF3860; --danger-soft: #3A0512; --star: #FFE500;
+  --loader-track: #2A1050; --loader-center: #FF2FA0;
+  --bg-a: #FF2FA0; --bg-b: #00F0FF; --bg-c: #FFE500; --bg-d: #B026FF;
+  --grad-main: linear-gradient(135deg, #FF2FA0 0%, #B026FF 55%, #00F0FF 100%);
+  --grad-accent: linear-gradient(135deg, #FFE500 0%, #FF2FA0 100%);
+  --grad-rainbow: linear-gradient(90deg, #FF2FA0, #B026FF, #00F0FF, #FFE500, #FF2FA0);
+  --card-glow: 0 0 0 1px rgba(255,47,160,.35), 0 0 24px rgba(0,240,255,.20), 0 12px 32px rgba(0,0,0,.55);
+  --card-radius: 8px;
+  --card-hover-shadow: 0 0 40px rgba(255,47,160,.65), 0 0 60px rgba(0,240,255,.35);
+  --font-head: "Orbitron", "Bricolage Grotesque", sans-serif;
+  --header-font: "Orbitron", sans-serif;
+}
+
+/* =========================================================
+   THEME 8 — OCEAN
+   ========================================================= */
+:root[data-theme-id="ocean"] {
+  color-scheme: dark;
+  --brand: #22D3EE;
+  --brand-strong: #67E8F9;
+  --brand-soft: #082F3D;
+  --brand-tint: #051E29;
+  --teal: #06B6D4;
+  --accent: #0EA5E9;
+  --accent-2: #A5F3FC;
+  --bg: #01141F;
+  --bg-elev: #052133;
+  --bg-soft: #0A3050;
+  --text: #E0F7FF;
+  --text-soft: #9CC8DB;
+  --text-mute: #5E8BA1;
+  --border: #0E3A57;
+  --border-strong: #16557F;
+  --shadow-sm: 0 2px 8px rgba(34,211,238,.20);
+  --shadow-md: 0 10px 26px rgba(34,211,238,.30);
+  --shadow-lg: 0 20px 50px rgba(34,211,238,.40);
+  --danger: #F43F5E; --danger-soft: #3A0A18; --star: #FDE68A;
+  --loader-track: #0E3A57; --loader-center: #22D3EE;
+  --bg-a: #22D3EE; --bg-b: #0EA5E9; --bg-c: #06B6D4; --bg-d: #A5F3FC;
+  --grad-main: linear-gradient(135deg, #0EA5E9 0%, #22D3EE 55%, #A5F3FC 100%);
+  --grad-accent: linear-gradient(135deg, #67E8F9 0%, #0EA5E9 100%);
+  --grad-rainbow: linear-gradient(90deg, #0EA5E9, #22D3EE, #06B6D4, #A5F3FC, #0EA5E9);
+  --card-glow: 0 0 0 1px rgba(34,211,238,.25), 0 12px 32px rgba(0,30,60,.55);
+  --card-hover-shadow: 0 20px 50px rgba(34,211,238,.50);
+}
+
+/* =========================================================
+   THEME 9 — SUNSET
+   ========================================================= */
+:root[data-theme-id="sunset"] {
+  color-scheme: dark;
+  --brand: #FB7185;
+  --brand-strong: #FDA4AF;
+  --brand-soft: #3D0E1E;
+  --brand-tint: #250814;
+  --teal: #F59E0B;
+  --accent: #C026D3;
+  --accent-2: #FDE047;
+  --bg: #1A0A1E;
+  --bg-elev: #2A1024;
+  --bg-soft: #3D1830;
+  --text: #FFF1E6;
+  --text-soft: #E0B8A8;
+  --text-mute: #A38073;
+  --border: #4A1F3A;
+  --border-strong: #6E2D55;
+  --shadow-sm: 0 2px 8px rgba(251,113,133,.20);
+  --shadow-md: 0 10px 26px rgba(251,113,133,.30);
+  --shadow-lg: 0 20px 50px rgba(251,113,133,.40);
+  --danger: #EF4444; --danger-soft: #3A0A0A; --star: #FDE047;
+  --loader-track: #4A1F3A; --loader-center: #FB7185;
+  --bg-a: #FB7185; --bg-b: #F59E0B; --bg-c: #C026D3; --bg-d: #FDE047;
+  --grad-main: linear-gradient(135deg, #F59E0B 0%, #FB7185 55%, #C026D3 100%);
+  --grad-accent: linear-gradient(135deg, #FDE047 0%, #FB7185 100%);
+  --grad-rainbow: linear-gradient(90deg, #F59E0B, #FB7185, #C026D3, #FDE047, #F59E0B);
+  --card-glow: 0 0 0 1px rgba(251,113,133,.25), 0 12px 32px rgba(40,10,30,.55);
+  --card-hover-shadow: 0 20px 50px rgba(251,113,133,.45);
+}
+
+/* =========================================================
+   THEME 10 — AURORA
+   ========================================================= */
+:root[data-theme-id="aurora"] {
+  color-scheme: dark;
+  --brand: #34D399;
+  --brand-strong: #6EE7B7;
+  --brand-soft: #052A22;
+  --brand-tint: #031A15;
+  --teal: #22D3EE;
+  --accent: #A78BFA;
+  --accent-2: #F0ABFC;
+  --bg: #010D10;
+  --bg-elev: #051B22;
+  --bg-soft: #0A2A33;
+  --text: #E0FFF5;
+  --text-soft: #9CCFC4;
+  --text-mute: #5E998C;
+  --border: #0E3842;
+  --border-strong: #1A5A68;
+  --shadow-sm: 0 2px 8px rgba(52,211,153,.20);
+  --shadow-md: 0 10px 26px rgba(52,211,153,.30);
+  --shadow-lg: 0 20px 50px rgba(52,211,153,.40);
+  --danger: #F43F5E; --danger-soft: #3A0A18; --star: #FDE68A;
+  --loader-track: #0E3842; --loader-center: #34D399;
+  --bg-a: #34D399; --bg-b: #22D3EE; --bg-c: #A78BFA; --bg-d: #F0ABFC;
+  --grad-main: linear-gradient(135deg, #34D399 0%, #22D3EE 55%, #A78BFA 100%);
+  --grad-accent: linear-gradient(135deg, #F0ABFC 0%, #34D399 100%);
+  --grad-rainbow: linear-gradient(90deg, #34D399, #22D3EE, #A78BFA, #F0ABFC, #34D399);
+  --card-glow: 0 0 0 1px rgba(52,211,153,.25), 0 12px 32px rgba(0,20,30,.55);
+  --card-hover-shadow: 0 20px 50px rgba(52,211,153,.45);
+}
+
+/* ---------- Manual dark / light override (kept working) ---------- */
+:root[data-manual="dark"] {
+  --bg: #0A1512;
+  --bg-elev: #10201B;
+  --bg-soft: #142923;
+  --text: #E8F5EF;
+  --text-soft: #A9C3B8;
+  --text-mute: #6F8A7F;
+  --border: #1E3730;
+  --border-strong: #2C4D42;
+}
+:root[data-manual="light"] {
+  --bg: #F7FBF9;
+  --bg-elev: #FFFFFF;
+  --bg-soft: #EFF6F2;
+  --text: #10231C;
+  --text-soft: #4A5F57;
+  --text-mute: #7A8C85;
+  --border: #DDEAE4;
+  --border-strong: #C4D8CF;
 }
 
 /* =========================================================
@@ -207,11 +445,16 @@
 html, body { margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
-  background: var(--bg); color: var(--text);
-  font-family: var(--font-body); font-size: 15px; line-height: 1.5;
-  min-height: 100dvh; overflow-x: hidden;
-  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-  transition: background-color .5s var(--ease), color .5s var(--ease);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color .8s var(--ease), color .8s var(--ease);
   position: relative;
 }
 h1,h2,h3,h4 { font-family: var(--font-head); font-weight: 700; line-height: 1.2; margin: 0; letter-spacing: -.01em; }
@@ -226,29 +469,192 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   html { scroll-behavior: auto; }
+  #themeCanvas { display: none !important; }
 }
 
 /* =========================================================
-   VIRAL ANIMATED AURORA BACKGROUND
+   THEME BACKGROUND LAYERS
    ========================================================= */
-.viral-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; background: var(--bg); transition: background .6s ease; pointer-events: none; }
-.viral-bg .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; mix-blend-mode: screen; will-change: transform; }
-:root:not([data-theme="dark"]) .viral-bg .blob { mix-blend-mode: multiply; opacity: .35; }
-.viral-bg .blob.b1 { width: 55vmax; height: 55vmax; top: -20vmax; left: -15vmax; background: var(--bg-a); animation: float1 18s ease-in-out infinite; }
-.viral-bg .blob.b2 { width: 45vmax; height: 45vmax; bottom: -18vmax; right: -12vmax; background: var(--bg-b); animation: float2 22s ease-in-out infinite; }
-.viral-bg .blob.b3 { width: 35vmax; height: 35vmax; top: 35%; left: 40%; background: var(--bg-c); animation: float3 26s ease-in-out infinite; }
-.viral-bg .blob.b4 { width: 28vmax; height: 28vmax; top: 5%; right: 5%; background: var(--bg-d); opacity: .4; animation: float4 20s ease-in-out infinite; }
-.viral-bg .grid-overlay {
-  position: absolute; inset: 0;
-  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 48px 48px; opacity: .07;
-  mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 78%);
-  -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 78%);
+#themeCanvas {
+  position: fixed; inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  width: 100%; height: 100%;
+  display: block;
+  transition: opacity .8s var(--ease);
 }
-@keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(8vmax,6vmax) scale(1.18)} }
-@keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-7vmax,-5vmax) scale(1.22)} }
-@keyframes float3 { 0%,100%{transform:translate(0,0) scale(.9)} 50%{transform:translate(6vmax,-8vmax) scale(1.12)} }
-@keyframes float4 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-4vmax,7vmax) scale(1.15)} }
+.theme-bg {
+  position: fixed; inset: 0; z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .8s var(--ease), background .8s var(--ease);
+}
+.theme-bg.active { opacity: 1; }
+.theme-bg::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--bg);
+  transition: background .8s var(--ease);
+}
+
+/* ---- Hacking: green scanlines + vignette ---- */
+.theme-bg.hacking::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,255,102,.05) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 40%, #000 100%);
+  pointer-events: none;
+}
+
+/* ---- 3D: floating glossy cubes ---- */
+.theme-bg.theme-3d .cube {
+  position: absolute;
+  width: 80px; height: 80px;
+  background: var(--grad-main);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(139,92,246,.45), inset 0 2px 0 rgba(255,255,255,.35);
+  animation: cubeFloat 14s ease-in-out infinite;
+  opacity: .8;
+  transform-style: preserve-3d;
+}
+.theme-bg.theme-3d .cube:nth-child(1) { top: 12%; left: 8%; animation-delay: 0s; }
+.theme-bg.theme-3d .cube:nth-child(2) { top: 60%; left: 78%; width: 110px; height: 110px; animation-delay: -3s; }
+.theme-bg.theme-3d .cube:nth-child(3) { top: 30%; left: 55%; width: 60px; height: 60px; animation-delay: -6s; }
+.theme-bg.theme-3d .cube:nth-child(4) { top: 75%; left: 20%; width: 90px; height: 90px; animation-delay: -9s; }
+@keyframes cubeFloat {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(0,-30px) rotate(20deg); }
+}
+
+/* ---- Girly: soft gradient + floating hearts ---- */
+.theme-bg.girly::before {
+  background:
+    radial-gradient(circle at 20% 20%, #FFE4F0 0%, transparent 45%),
+    radial-gradient(circle at 80% 80%, #E9D5FF 0%, transparent 45%),
+    radial-gradient(circle at 60% 30%, #FFEAD5 0%, transparent 40%),
+    #FFF5FA;
+}
+.theme-bg.girly .heart {
+  position: absolute;
+  font-size: 28px;
+  opacity: .55;
+  animation: heartFloat 12s ease-in-out infinite;
+  color: #F472B6;
+  filter: drop-shadow(0 4px 8px rgba(244,114,182,.4));
+}
+.theme-bg.girly .heart:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; font-size: 22px; }
+.theme-bg.girly .heart:nth-child(2) { top: 65%; left: 82%; animation-delay: -2s; font-size: 34px; color: #A78BFA; }
+.theme-bg.girly .heart:nth-child(3) { top: 40%; left: 60%; animation-delay: -4s; font-size: 18px; color: #FB7185; }
+.theme-bg.girly .heart:nth-child(4) { top: 80%; left: 25%; animation-delay: -6s; font-size: 26px; color: #FDBA74; }
+.theme-bg.girly .heart:nth-child(5) { top: 25%; left: 75%; animation-delay: -8s; font-size: 20px; }
+@keyframes heartFloat {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-40px) rotate(10deg); }
+}
+
+/* ---- Galaxy / Solar: nebula gradient base ---- */
+.theme-bg.galaxy::before {
+  background:
+    radial-gradient(circle at 15% 30%, rgba(129,140,248,.35) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(192,132,252,.30) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(34,211,238,.15) 0%, transparent 55%),
+    #05021A;
+}
+.theme-bg.solar::before {
+  background:
+    radial-gradient(circle at 20% 25%, rgba(249,115,22,.30) 0%, transparent 40%),
+    radial-gradient(circle at 80% 75%, rgba(239,68,68,.25) 0%, transparent 45%),
+    #02030E;
+}
+
+/* ---- Luxury: gold shimmer ---- */
+.theme-bg.luxury::before { background: #0A0A0A; }
+.theme-bg.luxury::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(212,175,55,.20) 50%, transparent 70%);
+  animation: goldShimmer 6s linear infinite;
+}
+@keyframes goldShimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+/* ---- Cyberpunk: scanlines + neon glow ---- */
+.theme-bg.cyber::before { background: #060312; }
+.theme-bg.cyber::after {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(255,47,160,.06) 0 1px, transparent 1px 4px);
+  animation: scanMove 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes scanMove { 0% { background-position: 0 0; } 100% { background-position: 0 100px; } }
+
+/* ---- Ocean: waves + gradients ---- */
+.theme-bg.ocean::before {
+  background: linear-gradient(180deg, #01141F 0%, #052133 55%, #0A3050 100%);
+}
+.theme-bg.ocean .wave {
+  position: absolute; left: -10%; right: -10%; bottom: 0;
+  height: 200px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(34,211,238,.35), transparent 60%);
+  animation: waveMove 8s ease-in-out infinite;
+}
+.theme-bg.ocean .wave:nth-child(2) { animation-delay: -2s; opacity: .7; height: 260px; }
+.theme-bg.ocean .wave:nth-child(3) { animation-delay: -4s; opacity: .5; height: 320px; }
+@keyframes waveMove { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+/* ---- Sunset: clouds ---- */
+.theme-bg.sunset::before {
+  background: linear-gradient(160deg, #F59E0B 0%, #FB7185 40%, #C026D3 80%, #1A0A1E 100%);
+}
+.theme-bg.sunset .cloud {
+  position: absolute;
+  width: 200px; height: 70px;
+  background: rgba(253,224,71,.20);
+  border-radius: 100px;
+  filter: blur(20px);
+  animation: cloudDrift 30s linear infinite;
+}
+.theme-bg.sunset .cloud:nth-child(2) { top: 20%; left: 0; animation-delay: 0s; }
+.theme-bg.sunset .cloud:nth-child(3) { top: 40%; left: -30%; animation-delay: -10s; width: 260px; height: 90px; opacity: .7; }
+.theme-bg.sunset .cloud:nth-child(4) { top: 60%; left: -60%; animation-delay: -20s; width: 320px; height: 110px; opacity: .5; }
+@keyframes cloudDrift { 0% { transform: translateX(-100%); } 100% { transform: translateX(150vw); } }
+
+/* ---- Aurora: light ribbons ---- */
+.theme-bg.aurora::before { background: #010D10; }
+.theme-bg.aurora .ribbon {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(115deg, transparent 30%, rgba(52,211,153,.25) 45%, rgba(34,211,238,.20) 55%, transparent 70%);
+  animation: auroraFlow 10s ease-in-out infinite;
+}
+.theme-bg.aurora .ribbon:nth-child(2) { animation-delay: -3s; background: linear-gradient(115deg, transparent 25%, rgba(167,139,250,.25) 45%, rgba(240,171,252,.18) 60%, transparent 75%); }
+.theme-bg.aurora .ribbon:nth-child(3) { animation-delay: -6s; background: linear-gradient(115deg, transparent 35%, rgba(34,211,238,.20) 50%, transparent 65%); }
+@keyframes auroraFlow {
+  0%,100% { transform: translateX(-15%) scaleY(1); opacity: .8; }
+  50% { transform: translateX(15%) scaleY(1.3); opacity: 1; }
+}
+
+/* ---- Theme name badge (header ke neeche) ---- */
+#themeBadge {
+  position: fixed;
+  top: calc(var(--header-h) + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--grad-main);
+  color: #fff;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .02em;
+  box-shadow: var(--shadow-md);
+  z-index: 120;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+  white-space: nowrap;
+}
+#themeBadge.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* =========================================================
    LAYOUT / HEADER
@@ -262,7 +668,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   border-bottom: 1px solid var(--border);
-  transition: background .4s ease, border-color .4s ease;
+  transition: background .8s ease, border-color .8s ease;
 }
 .site-header::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
@@ -281,7 +687,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .brand:hover .brand-logo { transform: rotate(-8deg) scale(1.05); }
 .brand-logo svg { width: 18px; height: 18px; }
 .brand-name {
-  font-family: var(--font-head); font-weight: 800; font-size: 16px; white-space: nowrap;
+  font-family: var(--header-font); font-weight: 800; font-size: 16px; white-space: nowrap;
   background: var(--grad-main); -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
 }
@@ -292,7 +698,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   width: 100%; height: var(--tap); padding: 0 40px 0 38px;
   border-radius: var(--radius-xl); border: 1px solid var(--border-strong);
   background: var(--bg); color: var(--text); font: inherit; font-size: 14px;
-  transition: border-color .18s, box-shadow .18s;
+  transition: border-color .18s, box-shadow .18s, background .8s ease;
 }
 .search-box input::placeholder { color: var(--text-mute); }
 .search-box input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 25%, transparent); }
@@ -337,13 +743,13 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   cursor: pointer; display: grid; place-items: center;
   font-size: 15px; font-weight: 800; font-family: var(--font-head);
   overflow: hidden; padding: 0;
-  transition: transform .15s, border-color .15s, box-shadow .2s;
+  transition: transform .15s, border-color .15s, box-shadow .2s, background .8s ease;
 }
 .profile-btn:hover { transform: translateY(-1px); border-color: var(--brand); }
 .profile-btn.logged { background: var(--grad-main); color: #fff; border-color: transparent; box-shadow: 0 4px 14px color-mix(in srgb, var(--brand) 45%, transparent); }
 
 /* =========================================================
-   GLOBAL BANNERS / TOASTS
+   BANNERS / TOASTS
    ========================================================= */
 .offline-banner {
   display: none; align-items: center; gap: 10px;
@@ -353,9 +759,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
 }
 .offline-banner.show { display: flex; }
-.offline-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent); transform: translateX(-100%); animation: bannerSweep 2.4s ease-in-out infinite; }
-@keyframes bannerSweep { 0% { transform: translateX(-100%);} 60%,100% { transform: translateX(100%);} }
-.offline-banner svg { flex-shrink: 0; }
 
 .toast-stack {
   position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom));
@@ -372,7 +775,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @keyframes toastIn { from { opacity: 0; transform: translateY(12px);} to { opacity: 1; transform: translateY(0);} }
 
 /* =========================================================
-   MAIN CONTENT / PAGE TRANSITIONS
+   MAIN CONTENT
    ========================================================= */
 main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); position: relative; z-index: 1; }
 .page { animation: pageIn .28s var(--ease); }
@@ -383,7 +786,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .section-title .muted { font-size: 12.5px; color: var(--text-mute); font-weight: 600; }
 
 /* =========================================================
-   TOOLBAR: CHIPS + SORT
+   TOOLBAR
    ========================================================= */
 .toolbar { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
 .chip-row { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 6px; margin: 0 -2px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -404,7 +807,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
   height: 38px; padding: 0 34px 0 14px; border-radius: var(--radius-sm);
   border: 1px solid var(--border-strong); background: var(--bg-elev); color: var(--text);
   font: inherit; font-size: 13.5px; font-weight: 600; appearance: none; -webkit-appearance: none;
-  cursor: pointer; transition: border-color .15s;
+  cursor: pointer; transition: border-color .15s, background .8s ease, color .8s ease;
 }
 .sort-select:hover { border-color: var(--brand); }
 .sort-wrap::after {
@@ -423,21 +826,29 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 
 .app-card {
   content-visibility: auto; contain-intrinsic-size: 132px;
-  background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg);
-  padding: 12px; box-shadow: var(--card-glow); display: flex; gap: 12px; align-items: center;
-  transition: box-shadow .22s, transform .22s, border-color .22s;
+  background: var(--bg-elev);
+  background-image: var(--card-bg-image);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 12px;
+  box-shadow: var(--card-glow);
+  display: flex; gap: 12px; align-items: center;
+  transition: box-shadow .3s var(--ease), transform .3s var(--ease), border-color .3s var(--ease), background .8s ease;
   cursor: pointer; text-align: left; width: 100%; position: relative; overflow: hidden;
 }
-.app-card::before { content: ""; position: absolute; inset: 0; background: var(--grad-main); opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 0; }
-.app-card:hover { box-shadow: 0 8px 28px color-mix(in srgb, var(--brand) 22%, transparent); border-color: color-mix(in srgb, var(--brand) 50%, var(--border-strong)); transform: translateY(-3px); }
+.app-card:hover {
+  box-shadow: var(--card-hover-shadow);
+  border-color: color-mix(in srgb, var(--brand) 50%, var(--border-strong));
+  transform: var(--card-hover-transform);
+}
 .app-card:active { transform: scale(.99); }
-.app-card > * { position: relative; z-index: 1; }
 
 .card-icon {
   width: 60px; height: 60px; flex-shrink: 0; border-radius: 15px; overflow: hidden;
   background: var(--grad-main); display: grid; place-items: center;
   font-family: var(--font-head); font-weight: 800; font-size: 24px; color: #fff;
   border: 1px solid var(--border); box-shadow: 0 4px 12px color-mix(in srgb, var(--brand) 25%, transparent);
+  transition: background .8s ease;
 }
 .card-icon img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -467,14 +878,16 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .featured-row { display: flex; gap: 12px; overflow-x: auto; padding: 4px 2px 10px; margin: 0 -2px; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .featured-row::-webkit-scrollbar { display: none; }
 .featured-card {
-  flex: 0 0 240px; scroll-snap-align: start; background: var(--bg-elev);
-  border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px;
+  flex: 0 0 240px; scroll-snap-align: start;
+  background: var(--bg-elev);
+  background-image: var(--card-bg-image);
+  border: 1px solid var(--border); border-radius: var(--card-radius); padding: 14px;
   display: flex; flex-direction: column; gap: 10px; box-shadow: var(--card-glow);
-  transition: box-shadow .2s, transform .2s, border-color .2s;
+  transition: box-shadow .2s, transform .2s, border-color .2s, background .8s ease;
   cursor: pointer; text-align: left; position: relative; overflow: hidden;
 }
 .featured-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--grad-rainbow); background-size: 300% 100%; animation: rainbowSlide 4s linear infinite; }
-.featured-card:hover { box-shadow: 0 12px 32px color-mix(in srgb, var(--brand) 25%, transparent); border-color: color-mix(in srgb, var(--brand) 45%, var(--border-strong)); transform: translateY(-3px); }
+.featured-card:hover { box-shadow: var(--card-hover-shadow); border-color: color-mix(in srgb, var(--brand) 45%, var(--border-strong)); transform: var(--card-hover-transform); }
 .featured-card .card-icon { width: 52px; height: 52px; font-size: 22px; border-radius: 13px; }
 .featured-badge {
   align-self: flex-start; font-size: 10.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
@@ -485,7 +898,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 /* =========================================================
    SKELETON
    ========================================================= */
-.skeleton-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px; display: flex; gap: 12px; align-items: center; }
+.skeleton-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 12px; display: flex; gap: 12px; align-items: center; }
 .sk { background: linear-gradient(90deg, var(--bg-soft) 25%, color-mix(in srgb, var(--brand) 14%, var(--bg-soft)) 50%, var(--bg-soft) 75%); background-size: 200% 100%; animation: shimmer 1.2s linear infinite; border-radius: 8px; }
 @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .sk-icon { width: 60px; height: 60px; border-radius: 15px; flex-shrink: 0; }
@@ -496,7 +909,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .sk-btn { width: 76px; height: 34px; border-radius: 999px; flex-shrink: 0; }
 
 /* =========================================================
-   EMPTY / ERROR / NO-INTERNET SCREENS
+   EMPTY / ERROR
    ========================================================= */
 .state-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 20px; gap: 14px; min-height: 52vh; }
 .state-screen h2 { font-size: 22px; }
@@ -521,11 +934,6 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .cloud-float.shake { animation: cloudShake .4s ease-in-out; }
 @keyframes cloudFloat { from { transform: translateY(-6px);} to { transform: translateY(6px);} }
 @keyframes cloudShake { 0%,100% { transform: translateX(0);} 20% { transform: translateX(-6px);} 40% { transform: translateX(6px);} 60% { transform: translateX(-4px);} 80% { transform: translateX(4px);} }
-.wifi-arc { opacity: 0; animation: wifiPulse 2.4s ease-in-out infinite; }
-.wifi-arc:nth-child(1) { animation-delay: 0s; }
-.wifi-arc:nth-child(2) { animation-delay: .35s; }
-.wifi-arc:nth-child(3) { animation-delay: .7s; }
-@keyframes wifiPulse { 0%,100% { opacity: 0; } 35%,65% { opacity: .9; } }
 
 /* =========================================================
    LOADER
@@ -538,19 +946,12 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .loader-svg .orbit-dot:nth-child(2) { animation-delay: -0.8s; }
 .loader-svg .orbit-dot:nth-child(3) { animation-delay: -1.6s; }
 .loader-svg .dot-pulse { transform-origin: center; animation: dotBreath 1.5s ease-in-out infinite; }
-.loader-svg .orbit-dot:nth-child(2) .dot-pulse { animation-delay: .3s; }
-.loader-svg .orbit-dot:nth-child(3) .dot-pulse { animation-delay: .6s; }
 .loader-svg .center-arrow { transform-origin: center; animation: arrowPulse .9s ease-in-out infinite alternate; }
 @keyframes spinCW { to { transform: rotate(360deg); } }
 @keyframes spinCCW { to { transform: rotate(-360deg); } }
 @keyframes orbit { to { transform: rotate(360deg); } }
 @keyframes dotBreath { 0%,100% { transform: scale(.6); opacity: .6; } 50% { transform: scale(1.15); opacity: 1; } }
 @keyframes arrowPulse { from { transform: scale(.85); opacity: .7; } to { transform: scale(1.1); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) {
-  .loader-svg .ring-outer { animation-duration: 4s; }
-  .loader-svg .ring-dashed { animation-duration: 6s; }
-  .loader-svg .center-arrow { animation-duration: 2s; }
-}
 .loader-text { font-size: 14px; color: var(--text-soft); font-weight: 600; }
 
 /* =========================================================
@@ -594,12 +995,6 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .detail-actions .btn { flex: 1; }
 .detail-actions .btn.icon-only { flex: 0 0 var(--tap); padding: 0; }
 
-.screenshots-row { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 12px; margin: 0 -2px; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.screenshots-row::-webkit-scrollbar { display: none; }
-.shot { flex: 0 0 auto; scroll-snap-align: start; height: 220px; aspect-ratio: 9 / 16; border-radius: var(--radius-md); overflow: hidden; background: var(--bg-soft); border: 1px solid var(--border); transition: transform .2s; }
-.shot:hover { transform: scale(1.03); }
-.shot img { width: 100%; height: 100%; object-fit: cover; }
-
 .detail-block { margin: 22px 0 0; }
 .detail-block h3 { font-size: 17px; margin-bottom: 8px; }
 .detail-block p { color: var(--text-soft); font-size: 14.5px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; }
@@ -613,7 +1008,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .help-card {
   margin-top: 18px; background: var(--brand-tint);
   border: 1px solid color-mix(in srgb, var(--brand) 30%, var(--border));
-  border-radius: var(--radius-lg); padding: 16px; position: relative; overflow: hidden;
+  border-radius: var(--card-radius); padding: 16px; position: relative; overflow: hidden;
 }
 .help-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad-rainbow); background-size: 300% 100%; animation: rainbowSlide 5s linear infinite; }
 .help-card h4 { font-size: 14px; margin-bottom: 8px; color: var(--brand-strong); }
@@ -629,10 +1024,10 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .support-buttons { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; max-width: 460px; }
 .support-btn {
   display: flex; align-items: center; gap: 14px; padding: 16px;
-  border-radius: var(--radius-lg); background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--card-radius); background: var(--bg-elev); border: 1px solid var(--border);
   box-shadow: var(--card-glow); transition: transform .18s, box-shadow .18s, border-color .18s;
 }
-.support-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px color-mix(in srgb, var(--brand) 22%, transparent); border-color: color-mix(in srgb, var(--brand) 45%, var(--border-strong)); }
+.support-btn:hover { transform: translateY(-3px); box-shadow: var(--card-hover-shadow); border-color: color-mix(in srgb, var(--brand) 45%, var(--border-strong)); }
 .support-btn .sb-icon { width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0; display: grid; place-items: center; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
 .support-btn .sb-wa { background: linear-gradient(135deg, #25D366, #128C7E); }
 .support-btn .sb-ig { background: linear-gradient(135deg, #F58529, #DD2A7B 55%, #8134AF); }
@@ -641,7 +1036,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .support-btn .sb-sub { font-size: 12.5px; color: var(--text-mute); }
 .support-btn svg.arrow { margin-left: auto; color: var(--text-mute); flex-shrink: 0; }
 
-.about-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; max-width: 560px; }
+.about-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 18px; max-width: 560px; }
 .about-card h2 { font-size: 17px; margin-bottom: 8px; }
 .about-card p { color: var(--text-soft); font-size: 14.5px; line-height: 1.65; }
 
@@ -659,7 +1054,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .site-footer a:hover { text-decoration: underline; }
 
 /* =========================================================
-   DIALOGS (Login, Settings)
+   DIALOGS
    ========================================================= */
 .dlg-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 500; display: none; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(4px); }
 .dlg-backdrop.show { display: flex; }
@@ -698,7 +1093,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .dlg .err { background: var(--danger-soft); color: var(--danger); padding: 8px 12px; border-radius: 8px; font-size: .82rem; margin-bottom: 10px; display: none; border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent); }
 .dlg .err.show { display: block; }
 
-.dlg.settings { max-width: 380px; }
+.dlg.settings { max-width: 420px; }
 .dlg.settings .who { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-soft); border-radius: 12px; margin-bottom: 16px; }
 .dlg.settings .who .av { width: 48px; height: 48px; border-radius: 50%; background: var(--grad-main); color: #fff; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 12px color-mix(in srgb, var(--brand) 40%, transparent); }
 .dlg.settings .who .info { min-width: 0; }
@@ -733,6 +1128,28 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 .color-circles button[data-color="#d93025"] { background: #d93025; }
 .color-circles button[data-color="#202124"] { background: #202124; }
 
+/* ---- 10 theme mini swatches (Settings) ---- */
+.theme-swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 8px; }
+.theme-swatch {
+  width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; border: 2px solid var(--border);
+  cursor: pointer; padding: 0; position: relative; overflow: hidden;
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.theme-swatch:hover { transform: translateY(-2px) scale(1.03); }
+.theme-swatch.active { border-color: var(--text); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 40%, transparent); }
+.theme-swatch .sw-emoji { font-size: 15px; margin-bottom: 4px; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.theme-swatch[data-th="hacking"] { background: linear-gradient(135deg, #000 0%, #00FF66 100%); }
+.theme-swatch[data-th="3d"]      { background: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%); }
+.theme-swatch[data-th="girly"]   { background: linear-gradient(135deg, #F9A8D4 0%, #C4B5FD 60%, #FDBA74 100%); }
+.theme-swatch[data-th="galaxy"]  { background: linear-gradient(135deg, #05021A 0%, #818CF8 60%, #C084FC 100%); }
+.theme-swatch[data-th="luxury"]  { background: linear-gradient(135deg, #0A0A0A 0%, #D4AF37 60%, #F0D779 100%); }
+.theme-swatch[data-th="solar"]   { background: linear-gradient(135deg, #02030E 0%, #F97316 55%, #FACC15 100%); }
+.theme-swatch[data-th="cyber"]   { background: linear-gradient(135deg, #FF2FA0 0%, #00F0FF 100%); }
+.theme-swatch[data-th="ocean"]   { background: linear-gradient(135deg, #01141F 0%, #22D3EE 100%); }
+.theme-swatch[data-th="sunset"]  { background: linear-gradient(135deg, #F59E0B 0%, #FB7185 50%, #C026D3 100%); }
+.theme-swatch[data-th="aurora"]  { background: linear-gradient(135deg, #010D10 0%, #34D399 55%, #A78BFA 100%); }
+
 .logout-btn { width: 100%; padding: 12px; border-radius: 12px; border: none; cursor: pointer; background: linear-gradient(135deg, #EF4444, #DC2626); color: #fff; font-family: var(--font-body); font-weight: 800; font-size: .92rem; margin-top: 14px; box-shadow: 0 4px 14px rgba(239,68,68,.4); transition: filter .15s, transform .1s; }
 .logout-btn:hover { filter: brightness(1.08); }
 .logout-btn:active { transform: scale(.98); }
@@ -740,19 +1157,20 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
 /* =========================================================
    GLOBAL LOADER
    ========================================================= */
-#globalLoader { position: fixed; inset: 0; z-index: 300; background: var(--bg); display: flex; align-items: center; justify-content: center; transition: opacity .3s var(--ease), visibility .3s; }
+#globalLoader { position: fixed; inset: 0; z-index: 300; background: var(--bg); display: flex; align-items: center; justify-content: center; transition: opacity .3s var(--ease), visibility .3s, background .8s ease; }
 #globalLoader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
 </style>
 </head>
+
 <body>
-<!-- Viral background -->
-<div class="viral-bg" aria-hidden="true">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-  <div class="blob b4"></div>
-  <div class="grid-overlay"></div>
-</div>
+<!-- Theme background canvas (per-theme animation) -->
+<canvas id="themeCanvas" aria-hidden="true"></canvas>
+
+<!-- Theme background CSS layer (per-theme decorative elements) -->
+<div class="theme-bg" id="themeBg" aria-hidden="true"></div>
+
+<!-- Theme change badge -->
+<div id="themeBadge" role="status" aria-live="polite"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
@@ -790,7 +1208,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M9.2 9a2.9 2.9 0 0 1 5.6 1c0 1.9-2.8 2.4-2.8 4" /><path d="M12 17.5h.01" /></svg>
           <span>Help</span>
         </a>
-        <button id="themeToggle" class="icon-btn" type="button" aria-label="Theme badlein">
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="Dark / Light toggle">
           <svg id="themeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
         </button>
         <button id="installBtn" class="install-btn" type="button" aria-label="App install karein">
@@ -844,11 +1262,12 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
   </div>
 </div>
 
-<!-- SETTINGS DIALOG -->
+<!-- SETTINGS DIALOG (with Theme section) -->
 <div class="dlg-backdrop" id="settingsBackdrop" role="presentation">
   <div class="dlg settings" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
     <button class="close-x" id="settingsClose" aria-label="Close" type="button">×</button>
     <h2 id="settingsTitle">Settings</h2>
+
     <div class="who">
       <div class="av" id="setAvatar">U</div>
       <div class="info">
@@ -856,10 +1275,37 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
         <div class="em" id="setEmail">user@example.com</div>
       </div>
     </div>
+
     <div class="setting-row">
-      <div><div class="lbl">Dark mode</div><div class="desc">Switch theme instantly</div></div>
+      <div><div class="lbl">Dark mode</div><div class="desc">Manual light / dark override</div></div>
       <label class="switch"><input type="checkbox" id="setDark" /><span class="sl"></span></label>
     </div>
+
+    <div class="setting-row" style="flex-direction:column; align-items:stretch;">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+        <div>
+          <div class="lbl">Theme</div>
+          <div class="desc">Auto change har 8 second me</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="autoThemeSwitch" checked />
+          <span class="sl"></span>
+        </label>
+      </div>
+      <div class="theme-swatches" id="themeSwatches" role="tablist" aria-label="Theme choose karein">
+        <button class="theme-swatch" type="button" data-th="hacking" role="tab" aria-label="Hacking theme"><span class="sw-emoji">💻</span></button>
+        <button class="theme-swatch" type="button" data-th="3d" role="tab" aria-label="3D theme"><span class="sw-emoji">🧊</span></button>
+        <button class="theme-swatch" type="button" data-th="girly" role="tab" aria-label="Girly theme"><span class="sw-emoji">🌸</span></button>
+        <button class="theme-swatch" type="button" data-th="galaxy" role="tab" aria-label="Galaxy theme"><span class="sw-emoji">🌌</span></button>
+        <button class="theme-swatch" type="button" data-th="luxury" role="tab" aria-label="Luxury theme"><span class="sw-emoji">👑</span></button>
+        <button class="theme-swatch" type="button" data-th="solar" role="tab" aria-label="Solar system theme"><span class="sw-emoji">🪐</span></button>
+        <button class="theme-swatch" type="button" data-th="cyber" role="tab" aria-label="Cyberpunk theme"><span class="sw-emoji">⚡</span></button>
+        <button class="theme-swatch" type="button" data-th="ocean" role="tab" aria-label="Ocean theme"><span class="sw-emoji">🌊</span></button>
+        <button class="theme-swatch" type="button" data-th="sunset" role="tab" aria-label="Sunset theme"><span class="sw-emoji">🌅</span></button>
+        <button class="theme-swatch" type="button" data-th="aurora" role="tab" aria-label="Aurora theme"><span class="sw-emoji">✨</span></button>
+      </div>
+    </div>
+
     <div class="setting-row">
       <div><div class="lbl">Bhasha / Language</div><div class="desc">Site ki language badlein</div></div>
       <div class="lang-row">
@@ -867,6 +1313,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
         <button type="button" data-lang="en">English</button>
       </div>
     </div>
+
     <div class="setting-row" style="flex-direction:column; align-items:stretch;">
       <div class="lbl">Navbar ka rang</div>
       <div class="color-circles" id="colorCircles">
@@ -879,6 +1326,7 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
         <button type="button" data-color="#202124" aria-label="Black"></button>
       </div>
     </div>
+
     <div class="setting-row" style="flex-direction:column; align-items:stretch;">
       <div class="lbl">Profile edit karein</div>
       <div style="display:flex; gap:8px; margin-top:6px;">
@@ -886,13 +1334,13 @@ main { flex: 1; padding-bottom: calc(40px + env(safe-area-inset-bottom)); positi
         <button type="button" id="saveNameBtn" style="padding:9px 14px; border-radius:8px; border:none; background:var(--grad-main); color:#fff; font-weight:800; font-size:.82rem; cursor:pointer; font-family:var(--font-body);">Save</button>
       </div>
     </div>
+
     <button type="button" class="logout-btn" id="logoutBtn">Logout</button>
   </div>
 </div>
-
-<script type="module">
+  <script type="module">
 /* ============================================================
-   CONFIG
+   CONFIG  (unchanged)
    ============================================================ */
 const firebaseConfig = {
   apiKey: "AIzaSyDazB0gpgOS3RKqURgWcG8QgL3qOpoFGdI",
@@ -914,7 +1362,7 @@ const ANDROID_APP_URL = "https://github.com/kishanrajhacker/apk-files/releases/d
 const WEBSITE_URL = "https://kishanrajhacker.github.io/pro-web/#/help";
 
 /* ============================================================
-   FIREBASE (lazy init)
+   FIREBASE (lazy init)  (unchanged)
    ============================================================ */
 let firebaseApp = null, firebaseDb = null, firebaseAuth = null, fbModules = null;
 let unsubscribeApps = null, unsubscribePaidApps = null;
@@ -939,7 +1387,7 @@ async function initFirebase() {
 }
 
 /* ============================================================
-   DOM HELPERS
+   DOM HELPERS  (unchanged)
    ============================================================ */
 const $ = (sel, root = document) => root.querySelector(sel);
 const appEl = $("#app");
@@ -976,7 +1424,7 @@ const svgEl = (tag, attrs = {}) => {
 };
 
 /* ============================================================
-   TOASTS
+   TOASTS  (unchanged)
    ============================================================ */
 function toast(msg, ms = 2600) {
   const t = el("div", { class: "toast", text: msg });
@@ -989,42 +1437,627 @@ function toast(msg, ms = 2600) {
 }
 
 /* ============================================================
-   THEME + SKIN
+   THEME ENGINE — 10 themes, canvas + CSS, 8s cycle, badge, pause
    ============================================================ */
-const SKINS = ["green", "tokyo", "dubai", "paris", "nyc", "rio"];
-let skinIndex = 0, skinTimer = null;
+const THEMES = [
+  { id: "hacking", name: "Hacking", emoji: "💻" },
+  { id: "3d",      name: "3D",      emoji: "🧊" },
+  { id: "girly",   name: "Girly Pink", emoji: "🌸" },
+  { id: "galaxy",  name: "Galaxy",  emoji: "🌌" },
+  { id: "luxury",  name: "Luxury",  emoji: "👑" },
+  { id: "solar",   name: "Solar System", emoji: "🪐" },
+  { id: "cyber",   name: "Cyberpunk", emoji: "⚡" },
+  { id: "ocean",   name: "Ocean",   emoji: "🌊" },
+  { id: "sunset",  name: "Sunset",  emoji: "🌅" },
+  { id: "aurora",  name: "Aurora",  emoji: "✨" }
+];
+const THEME_CYCLE_MS = 8000;
+const THEME_BADGE_MS = 1500;
+const THEME_LS_KEY = "fas_theme_id";
+const THEME_AUTO_LS_KEY = "fas_theme_auto";
 
-function applySkin(name) {
-  document.documentElement.setAttribute("data-skin", name);
-  try { localStorage.setItem("fas_skin", name); } catch (_) {}
+const prefersReducedMotion = () =>
+  window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const themeCanvas = $("#themeCanvas");
+const themeBg = $("#themeBg");
+const themeBadge = $("#themeBadge");
+
+let currentThemeIdx = 0;
+let autoThemeOn = true;
+let themeTimer = null;
+let themeBadgeTimer = null;
+let rafId = null;
+let canvasCtx = null;
+let canvasW = 0, canvasH = 0, canvasDpr = 1;
+let particles = [];
+let animFn = null;
+let isPaused = false;
+
+/* -------- localStorage helpers (try/catch) -------- */
+function safeGet(key, fallback = null) { try { return localStorage.getItem(key) ?? fallback; } catch (_) { return fallback; } }
+function safeSet(key, val) { try { localStorage.setItem(key, val); } catch (_) {} }
+
+/* -------- Badge -------- */
+function showThemeBadge(theme) {
+  if (!themeBadge) return;
+  themeBadge.textContent = `${theme.name} ${theme.emoji}`;
+  themeBadge.classList.add("show");
+  if (themeBadgeTimer) clearTimeout(themeBadgeTimer);
+  themeBadgeTimer = setTimeout(() => themeBadge.classList.remove("show"), THEME_BADGE_MS);
 }
-function startSkinCycle() {
-  if (skinTimer) clearInterval(skinTimer);
-  skinTimer = setInterval(() => {
-    skinIndex = (skinIndex + 1) % SKINS.length;
-    applySkin(SKINS[skinIndex]);
-  }, 5000);
+
+/* -------- CSS decorative children for each theme -------- */
+function buildCssDecor(themeId) {
+  if (!themeBg) return;
+  themeBg.className = "theme-bg";
+  themeBg.replaceChildren();
+  switch (themeId) {
+    case "hacking": themeBg.classList.add("hacking"); break;
+    case "3d":
+      themeBg.classList.add("theme-3d");
+      for (let i = 0; i < 4; i++) themeBg.appendChild(el("div", { class: "cube" }));
+      break;
+    case "girly": {
+      themeBg.classList.add("girly");
+      const hearts = ["💖", "💕", "🌸", "🌷", "✨"];
+      hearts.forEach(h => themeBg.appendChild(el("span", { class: "heart", text: h })));
+      break;
+    }
+    case "galaxy": themeBg.classList.add("galaxy"); break;
+    case "luxury": themeBg.classList.add("luxury"); break;
+    case "solar": themeBg.classList.add("solar"); break;
+    case "cyber": themeBg.classList.add("cyber"); break;
+    case "ocean":
+      themeBg.classList.add("ocean");
+      for (let i = 0; i < 3; i++) themeBg.appendChild(el("div", { class: "wave" }));
+      break;
+    case "sunset":
+      themeBg.classList.add("sunset");
+      for (let i = 0; i < 3; i++) themeBg.appendChild(el("div", { class: "cloud" }));
+      break;
+    case "aurora":
+      themeBg.classList.add("aurora");
+      for (let i = 0; i < 3; i++) themeBg.appendChild(el("div", { class: "ribbon" }));
+      break;
+  }
+  // Fade in
+  requestAnimationFrame(() => themeBg.classList.add("active"));
 }
-function getStoredTheme() { try { return localStorage.getItem("fas_theme"); } catch (_) { return null; } }
-function setStoredTheme(v) { try { if (v) localStorage.setItem("fas_theme", v); else localStorage.removeItem("fas_theme"); } catch (_) {} }
-function applyTheme(theme) {
-  if (theme === "dark" || theme === "light") document.documentElement.setAttribute("data-theme", theme);
-  else document.documentElement.removeAttribute("data-theme");
-  updateThemeIcon();
+
+/* -------- Canvas sizing (DPR aware) -------- */
+function resizeCanvas() {
+  if (!themeCanvas) return;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvasDpr = dpr;
+  canvasW = window.innerWidth;
+  canvasH = window.innerHeight;
+  themeCanvas.width = Math.floor(canvasW * dpr);
+  themeCanvas.height = Math.floor(canvasH * dpr);
+  themeCanvas.style.width = canvasW + "px";
+  themeCanvas.style.height = canvasH + "px";
+  if (canvasCtx) canvasCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
-function currentTheme() {
-  const attr = document.documentElement.getAttribute("data-theme");
+
+/* -------- Particle count (mobile-friendly) -------- */
+function particleCount(desktop) {
+  const mobile = window.innerWidth < 700;
+  return mobile ? Math.round(desktop * 0.55) : desktop;
+}
+
+/* ============================================================
+   PER-THEME ANIMATIONS (canvas)
+   Each returns a step() called each frame + initParticles array
+   ============================================================ */
+function initHacking() {
+  const count = particleCount(90);
+  const cols = Math.max(12, Math.floor(canvasW / 22));
+  const drops = [];
+  for (let i = 0; i < cols; i++) {
+    drops.push({ x: i * 22 + 11, y: Math.random() * canvasH, speed: 60 + Math.random() * 140, chars: [] });
+    for (let j = 0; j < 12; j++) drops[i].chars.push(String.fromCharCode(0x30A0 + Math.random() * 96));
+  }
+  const glyphs = "01アカサタナハマヤラワ0123456789";
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.fillStyle = "rgba(0,0,0,0.10)";
+      ctx.fillRect(0, 0, canvasW, canvasH);
+      ctx.font = "16px 'JetBrains Mono', monospace";
+      for (const d of drops) {
+        d.y += d.speed * dt;
+        if (d.y > canvasH + 20) { d.y = -20 - Math.random() * canvasH * 0.5; d.x = Math.random() * canvasW; }
+        const ch = glyphs[Math.floor(Math.random() * glyphs.length)];
+        const alpha = 0.55 + Math.random() * 0.45;
+        ctx.fillStyle = `rgba(0,255,102,${alpha})`;
+        ctx.shadowColor = "rgba(0,255,102,0.8)";
+        ctx.shadowBlur = 8;
+        ctx.fillText(ch, d.x, d.y);
+        ctx.shadowBlur = 0;
+      }
+    }
+  };
+}
+
+function init3D() {
+  const count = particleCount(50);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvasW, y: Math.random() * canvasH,
+      r: 3 + Math.random() * 10, vx: (Math.random() - .5) * 20, vy: (Math.random() - .5) * 20,
+      hue: 250 + Math.random() * 80, a: 0.3 + Math.random() * 0.5
+    });
+  }
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.x += p.vx * dt; p.y += p.vy * dt;
+        if (p.x < -20) p.x = canvasW + 20; if (p.x > canvasW + 20) p.x = -20;
+        if (p.y < -20) p.y = canvasH + 20; if (p.y > canvasH + 20) p.y = -20;
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
+        g.addColorStop(0, `hsla(${p.hue},90%,70%,${p.a})`);
+        g.addColorStop(1, `hsla(${p.hue},90%,70%,0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  };
+}
+
+function initGirly() {
+  const count = particleCount(45);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvasW, y: Math.random() * canvasH,
+      r: 2 + Math.random() * 5, vy: -10 - Math.random() * 25, vx: (Math.random() - .5) * 15,
+      a: 0.4 + Math.random() * 0.5, rot: Math.random() * Math.PI * 2
+    });
+  }
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.x += p.vx * dt; p.y += p.vy * dt; p.rot += dt;
+        if (p.y < -20) { p.y = canvasH + 20; p.x = Math.random() * canvasW; }
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+        ctx.fillStyle = `rgba(244,114,182,${p.a})`;
+        ctx.beginPath();
+        ctx.arc(0, 0, p.r, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+      }
+    }
+  };
+}
+
+function initGalaxy() {
+  const count = particleCount(120);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvasW, y: Math.random() * canvasH,
+      r: 0.4 + Math.random() * 1.8, tw: Math.random() * 0.6 + 0.2, phase: Math.random() * 6.28
+    });
+  }
+  const shooters = [];
+  let shootTimer = 0;
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.phase += dt * 2 * p.tw;
+        const a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(p.phase));
+        ctx.fillStyle = `rgba(230,230,255,${a})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+      shootTimer -= dt;
+      if (shootTimer <= 0) {
+        shootTimer = 2.5 + Math.random() * 3;
+        shooters.push({ x: Math.random() * canvasW * 0.6, y: Math.random() * canvasH * 0.4, len: 0, speed: 400 + Math.random() * 200, life: 1 });
+      }
+      for (let i = shooters.length - 1; i >= 0; i--) {
+        const s = shooters[i];
+        s.x += s.speed * dt * 0.6; s.y += s.speed * dt * 0.4; s.life -= dt * 0.8; s.len = Math.min(120, s.len + dt * 400);
+        if (s.life <= 0 || s.x > canvasW + 100 || s.y > canvasH + 100) { shooters.splice(i, 1); continue; }
+        const grad = ctx.createLinearGradient(s.x - s.len * 0.6, s.y - s.len * 0.4, s.x, s.y);
+        grad.addColorStop(0, "rgba(255,255,255,0)");
+        grad.addColorStop(1, `rgba(255,255,255,${Math.max(0, s.life)})`);
+        ctx.strokeStyle = grad; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(s.x - s.len * 0.6, s.y - s.len * 0.4); ctx.lineTo(s.x, s.y); ctx.stroke();
+      }
+    }
+  };
+}
+
+function initLuxury() {
+  const count = particleCount(60);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvasW, y: Math.random() * canvasH,
+      r: 0.5 + Math.random() * 1.8, vy: -5 - Math.random() * 15, phase: Math.random() * 6.28
+    });
+  }
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.y += p.vy * dt; p.phase += dt * 3;
+        if (p.y < -10) { p.y = canvasH + 10; p.x = Math.random() * canvasW; }
+        const a = 0.3 + 0.6 * (0.5 + 0.5 * Math.sin(p.phase));
+        ctx.fillStyle = `rgba(212,175,55,${a})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  };
+}
+
+function initSolar() {
+  const count = particleCount(90);
+  for (let i = 0; i < count; i++) {
+    particles.push({ x: Math.random() * canvasW, y: Math.random() * canvasH, r: 0.4 + Math.random() * 1.4, phase: Math.random() * 6.28 });
+  }
+  const planets = [
+    { orbit: 120, r: 6, speed: 0.5, color: "#F97316" },
+    { orbit: 190, r: 9, speed: 0.35, color: "#FACC15" },
+    { orbit: 270, r: 7, speed: 0.25, color: "#EF4444" },
+    { orbit: 350, r: 10, speed: 0.18, color: "#38BDF8" }
+  ];
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.phase += dt * 2;
+        const a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(p.phase));
+        ctx.fillStyle = `rgba(255,240,200,${a})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+      const cx = canvasW / 2, cy = canvasH / 2;
+      const sunGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 60);
+      sunGrad.addColorStop(0, "rgba(253,224,71,0.9)");
+      sunGrad.addColorStop(1, "rgba(249,115,22,0)");
+      ctx.fillStyle = sunGrad;
+      ctx.beginPath(); ctx.arc(cx, cy, 60, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#FDE047";
+      ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2); ctx.fill();
+      for (const pl of planets) {
+        pl.speed += dt;
+        const x = cx + Math.cos(pl.speed) * pl.orbit;
+        const y = cy + Math.sin(pl.speed) * pl.orbit * 0.55;
+        ctx.fillStyle = pl.color;
+        ctx.beginPath(); ctx.arc(x, y, pl.r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  };
+}
+
+function initCyber() {
+  const count = particleCount(70);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvasW, y: Math.random() * canvasH,
+      vx: (Math.random() - .5) * 40, vy: (Math.random() - .5) * 40,
+      color: Math.random() > 0.5 ? "255,47,160" : "0,240,255", a: 0.3 + Math.random() * 0.5
+    });
+  }
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.x += p.vx * dt; p.y += p.vy * dt;
+        if (p.x < 0) p.x = canvasW; if (p.x > canvasW) p.x = 0;
+        if (p.y < 0) p.y = canvasH; if (p.y > canvasH) p.y = 0;
+        ctx.fillStyle = `rgba(${p.color},${p.a})`;
+        ctx.shadowColor = `rgba(${p.color},0.8)`;
+        ctx.shadowBlur = 8;
+        ctx.fillRect(p.x, p.y, 2, 2);
+        ctx.shadowBlur = 0;
+      }
+      // occasional glitch strip
+      if (Math.random() < 0.02) {
+        const y = Math.random() * canvasH, h = 2 + Math.random() * 4;
+        ctx.fillStyle = "rgba(0,240,255,0.25)";
+        ctx.fillRect(0, y, canvasW, h);
+      }
+    }
+  };
+}
+
+function initOcean() {
+  const count = particleCount(50);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvasW, y: Math.random() * canvasH,
+      r: 2 + Math.random() * 6, vy: -20 - Math.random() * 30, phase: Math.random() * 6.28
+    });
+  }
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.y += p.vy * dt; p.phase += dt * 2;
+        const sway = Math.sin(p.phase) * 12;
+        if (p.y < -20) { p.y = canvasH + 20; p.x = Math.random() * canvasW; }
+        ctx.strokeStyle = `rgba(165,243,252,${0.5})`;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.arc(p.x + sway, p.y, p.r, 0, Math.PI * 2); ctx.stroke();
+        ctx.fillStyle = `rgba(34,211,238,0.15)`;
+        ctx.fill();
+      }
+    }
+  };
+}
+
+function initSunset() {
+  const count = particleCount(45);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvasW, y: Math.random() * canvasH,
+      r: 1 + Math.random() * 2.5, vy: -5 - Math.random() * 10, phase: Math.random() * 6.28
+    });
+  }
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.y += p.vy * dt; p.phase += dt * 1.5;
+        if (p.y < -5) { p.y = canvasH + 5; p.x = Math.random() * canvasW; }
+        const a = 0.4 + 0.4 * (0.5 + 0.5 * Math.sin(p.phase));
+        ctx.fillStyle = `rgba(253,224,71,${a})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  };
+}
+
+function initAurora() {
+  const count = particleCount(60);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvasW, y: Math.random() * canvasH,
+      r: 1 + Math.random() * 2, phase: Math.random() * 6.28, hue: 140 + Math.random() * 140
+    });
+  }
+  return {
+    step(dt) {
+      const ctx = canvasCtx;
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      for (const p of particles) {
+        p.phase += dt * 1.2;
+        p.y += Math.sin(p.phase) * 8 * dt;
+        const a = 0.3 + 0.6 * (0.5 + 0.5 * Math.sin(p.phase));
+        ctx.fillStyle = `hsla(${p.hue},80%,60%,${a})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  };
+}
+
+/* ============================================================
+   CANVAS LOOP
+   ============================================================ */
+let lastTs = 0;
+function canvasLoop(ts) {
+  if (isPaused) return;
+  if (!lastTs) lastTs = ts;
+  const dt = Math.min(0.05, (ts - lastTs) / 1000);
+  lastTs = ts;
+  if (animFn && canvasCtx) {
+    try { animFn.step(dt); } catch (err) { console.error("[theme] anim error:", err); }
+  }
+  rafId = requestAnimationFrame(canvasLoop);
+}
+function startCanvasLoop() {
+  if (rafId) return;
+  lastTs = 0;
+  rafId = requestAnimationFrame(canvasLoop);
+}
+function stopCanvasLoop() {
+  if (rafId) cancelAnimationFrame(rafId);
+  rafId = null;
+}
+
+/* ============================================================
+   APPLY THEME
+   ============================================================ */
+function applyTheme(idx, opts = {}) {
+  const { announce = true, persist = true, stopAuto = false } = opts;
+  const theme = THEMES[idx];
+  if (!theme) return;
+
+  // Update root theme id (CSS tokens switch)
+  document.documentElement.setAttribute("data-theme-id", theme.id);
+
+  // CSS decorative layer
+  buildCssDecor(theme.id);
+
+  // Canvas
+  particles = [];
+  if (canvasCtx) canvasCtx.clearRect(0, 0, canvasW, canvasH);
+  const factory = {
+    hacking: initHacking, "3d": init3D, girly: initGirly, galaxy: initGalaxy,
+    luxury: initLuxury, solar: initSolar, cyber: initCyber, ocean: initOcean,
+    sunset: initSunset, aurora: initAurora
+  }[theme.id];
+  animFn = factory ? factory() : null;
+  startCanvasLoop();
+
+  // Badge
+  if (announce && !prefersReducedMotion()) showThemeBadge(theme);
+
+  // Persist
+  if (persist) safeSet(THEME_LS_KEY, theme.id);
+
+  currentThemeIdx = idx;
+
+  // Sync swatches
+  document.querySelectorAll(".theme-swatch").forEach(b => {
+    b.classList.toggle("active", b.dataset.th === theme.id);
+    b.setAttribute("aria-selected", b.dataset.th === theme.id ? "true" : "false");
+  });
+
+  // Manual selection disables auto
+  if (stopAuto) {
+    autoThemeOn = false;
+    safeSet(THEME_AUTO_LS_KEY, "0");
+    const sw = $("#autoThemeSwitch");
+    if (sw) sw.checked = false;
+    stopAutoCycle();
+  }
+}
+
+/* ============================================================
+   CYCLE CONTROL
+   ============================================================ */
+function startAutoCycle() {
+  stopAutoCycle();
+  themeTimer = setInterval(() => {
+    if (document.hidden || isPaused) return;
+    currentThemeIdx = (currentThemeIdx + 1) % THEMES.length;
+    applyTheme(currentThemeIdx, { announce: true, persist: true });
+  }, THEME_CYCLE_MS);
+}
+function stopAutoCycle() {
+  if (themeTimer) { clearInterval(themeTimer); themeTimer = null; }
+}
+function setAutoTheme(on) {
+  autoThemeOn = !!on;
+  safeSet(THEME_AUTO_LS_KEY, on ? "1" : "0");
+  const sw = $("#autoThemeSwitch");
+  if (sw) sw.checked = !!on;
+  if (on) startAutoCycle();
+  else stopAutoCycle();
+}
+
+/* ============================================================
+   VISIBILITY / REDUCED-MOTION / RESIZE
+   ============================================================ */
+function pauseAll() {
+  isPaused = true;
+  stopCanvasLoop();
+  stopAutoCycle();
+}
+function resumeAll() {
+  isPaused = false;
+  if (!prefersReducedMotion()) startCanvasLoop();
+  if (autoThemeOn) startAutoCycle();
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) pauseAll();
+  else resumeAll();
+});
+window.addEventListener("resize", () => {
+  resizeCanvas();
+  // Rebuild current animation so particles fit new size
+  applyTheme(currentThemeIdx, { announce: false, persist: false });
+  if (document.hidden || prefersReducedMotion()) stopCanvasLoop();
+  else startCanvasLoop();
+});
+window.matchMedia?.("(prefers-reduced-motion: reduce)")?.addEventListener?.("change", () => {
+  if (prefersReducedMotion()) {
+    stopCanvasLoop();
+  } else if (!document.hidden) {
+    startCanvasLoop();
+  }
+});
+
+/* ============================================================
+   THEME INIT (reads localStorage, sets auto default)
+   ============================================================ */
+function initThemeEngine() {
+  // Find saved theme
+  const savedId = safeGet(THEME_LS_KEY);
+  const savedIdx = savedId ? THEMES.findIndex(t => t.id === savedId) : -1;
+  currentThemeIdx = savedIdx >= 0 ? savedIdx : 0;
+
+  // Auto flag (default on; off if user manually chose)
+  const savedAuto = safeGet(THEME_AUTO_LS_KEY);
+  autoThemeOn = savedAuto === null ? true : savedAuto === "1";
+  const sw = $("#autoThemeSwitch");
+  if (sw) sw.checked = autoThemeOn;
+
+  // Init canvas
+  if (themeCanvas) {
+    canvasCtx = themeCanvas.getContext("2d", { alpha: true });
+    resizeCanvas();
+  }
+
+  // Apply saved theme without announcement on first load
+  applyTheme(currentThemeIdx, { announce: false, persist: false });
+
+  // Reduced motion: don't auto-cycle
+  if (prefersReducedMotion()) stopCanvasLoop();
+  if (autoThemeOn) startAutoCycle();
+
+  // Wire up settings controls
+  const autoSw = $("#autoThemeSwitch");
+  if (autoSw) autoSw.addEventListener("change", () => setAutoTheme(autoSw.checked));
+
+  document.querySelectorAll(".theme-swatch").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = THEMES.findIndex(t => t.id === btn.dataset.th);
+      if (idx < 0) return;
+      applyTheme(idx, { announce: true, persist: true, stopAuto: true });
+      toast(`Theme: ${THEMES[idx].name} ${THEMES[idx].emoji}`);
+    });
+  });
+}
+
+/* ============================================================
+   MANUAL LIGHT / DARK OVERRIDE (existing feature preserved)
+   ============================================================ */
+const LS_THEME = "fas_manual_theme";
+function applyManualTheme(theme) {
+  if (theme === "dark" || theme === "light") {
+    document.documentElement.setAttribute("data-manual", theme);
+    safeSet(LS_THEME, theme);
+  } else {
+    document.documentElement.removeAttribute("data-manual");
+    try { localStorage.removeItem(LS_THEME); } catch (_) {}
+  }
+  updateManualThemeIcon();
+}
+function getManualTheme() {
+  const attr = document.documentElement.getAttribute("data-manual");
   if (attr) return attr;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
 }
-function updateThemeIcon() {
+function updateManualThemeIcon() {
   const icon = $("#themeIcon");
   if (!icon) return;
-  const dark = currentTheme() === "dark";
+  const dark = getManualTheme() === "dark";
   icon.innerHTML = dark
     ? '<path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z" />'
     : '<circle cx="12" cy="12" r="4.2" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />';
 }
+function initManualTheme() {
+  let stored = null;
+  try { stored = localStorage.getItem(LS_THEME); } catch (_) {}
+  applyManualTheme(stored === "dark" || stored === "light" ? stored : null);
+  const btn = $("#themeToggle");
+  if (btn) btn.addEventListener("click", () => {
+    const next = getManualTheme() === "dark" ? "light" : "dark";
+    applyManualTheme(next);
+  });
+  window.matchMedia?.("(prefers-color-scheme: dark)")?.addEventListener?.("change", () => {
+    let still = null;
+    try { still = localStorage.getItem(LS_THEME); } catch (_) {}
+    if (!still) updateManualThemeIcon();
+  });
+}
+
+/* ============================================================
+   NAVBAR COLOR (existing feature preserved)
+   ============================================================ */
 function applyNavbarColor() {
   const stored = (() => { try { return localStorage.getItem("fas_navcolor") || "auto"; } catch (_) { return "auto"; } })();
   const header = $(".site-header");
@@ -1032,26 +2065,19 @@ function applyNavbarColor() {
   if (stored === "auto") header.style.background = "";
   else header.style.background = `color-mix(in srgb, ${stored} 80%, transparent)`;
 }
-function initTheme() {
-  const savedSkin = (() => { try { return localStorage.getItem("fas_skin"); } catch (_) { return null; } })();
-  skinIndex = (savedSkin && SKINS.includes(savedSkin)) ? SKINS.indexOf(savedSkin) : 0;
-  applySkin(SKINS[skinIndex]);
-  startSkinCycle();
-  const stored = getStoredTheme();
-  applyTheme(stored === "dark" || stored === "light" ? stored : null);
+function initNavbarColorUI() {
+  document.querySelectorAll("#colorCircles button").forEach(b => b.addEventListener("click", () => {
+    try { localStorage.setItem("fas_navcolor", b.dataset.color); } catch (_) {}
+    applyNavbarColor();
+    document.querySelectorAll("#colorCircles button").forEach(x => x.classList.toggle("active", x.dataset.color === b.dataset.color));
+  }));
+  const storedColor = (() => { try { return localStorage.getItem("fas_navcolor") || "auto"; } catch (_) { return "auto"; } })();
+  document.querySelectorAll("#colorCircles button").forEach(b => b.classList.toggle("active", b.dataset.color === storedColor));
   applyNavbarColor();
-  const btn = $("#themeToggle");
-  if (btn) btn.addEventListener("click", () => {
-    const next = currentTheme() === "dark" ? "light" : "dark";
-    applyTheme(next); setStoredTheme(next);
-  });
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-    if (!getStoredTheme()) updateThemeIcon();
-  });
 }
 
 /* ============================================================
-   LOADER SVG
+   LOADER SVG  (unchanged)
    ============================================================ */
 function createLoader(size = 72) {
   const wrap = el("div", { class: "loader-wrap" });
@@ -1059,24 +2085,12 @@ function createLoader(size = 72) {
   const outerR = r - 6, innerR = outerR - 8;
   const dotOrbitR = (outerR + innerR) / 2;
   const svg = svgEl("svg", { width: size, height: size, viewBox: `0 0 ${size} ${size}`, class: "loader-svg", "aria-hidden": "true" });
-
   const arcLen = 2 * Math.PI * outerR * 0.75;
-  svg.appendChild(svgEl("circle", {
-    cx, cy, r: outerR, fill: "none", stroke: "url(#loaderGrad)", "stroke-width": 5,
-    "stroke-linecap": "round", "stroke-dasharray": `${arcLen} ${2 * Math.PI * outerR}`, class: "ring-outer"
-  }));
-  svg.appendChild(svgEl("circle", {
-    cx, cy, r: innerR, fill: "none", stroke: "var(--loader-track)", "stroke-width": 2,
-    "stroke-dasharray": "4 6", class: "ring-dashed"
-  }));
-
+  svg.appendChild(svgEl("circle", { cx, cy, r: outerR, fill: "none", stroke: "url(#loaderGrad)", "stroke-width": 5, "stroke-linecap": "round", "stroke-dasharray": `${arcLen} ${2 * Math.PI * outerR}`, class: "ring-outer" }));
+  svg.appendChild(svgEl("circle", { cx, cy, r: innerR, fill: "none", stroke: "var(--loader-track)", "stroke-width": 2, "stroke-dasharray": "4 6", class: "ring-dashed" }));
   const arrowGroup = svgEl("g", { class: "center-arrow", transform: `translate(${cx}, ${cy})` });
-  arrowGroup.appendChild(svgEl("path", {
-    d: "M0,-7 L0,5 M-6,0 L0,6 L6,0", fill: "none", stroke: "var(--loader-center)",
-    "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round"
-  }));
+  arrowGroup.appendChild(svgEl("path", { d: "M0,-7 L0,5 M-6,0 L0,6 L6,0", fill: "none", stroke: "var(--loader-center)", "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round" }));
   svg.appendChild(arrowGroup);
-
   for (let i = 0; i < 3; i++) {
     const g = svgEl("g", { class: "orbit-dot", transform: `rotate(${i * 120}, ${cx}, ${cy})` });
     g.appendChild(svgEl("circle", { cx, cy: cy - dotOrbitR, r: 2.6, fill: "var(--brand)", class: "dot-pulse" }));
@@ -1087,17 +2101,10 @@ function createLoader(size = 72) {
 }
 
 /* ============================================================
-   NORMALIZE (reads apkUrl from d.apkUrl || d.downloadUrl || d.link)
+   NORMALIZE  (unchanged)
    ============================================================ */
-function capFirst(s) { s = safeText(s).trim(); if (!s) return "Other"; return s.charAt(0).toUpperCase() + s.slice(1); }
 const isHttp = (s) => typeof s === "string" && /^https?:\/\//i.test(s.trim());
 const isHttps = (s) => typeof s === "string" && /^https:\/\//i.test(s.trim());
-function toArray(v) {
-  if (!v) return [];
-  if (Array.isArray(v)) return v;
-  if (typeof v === "object") return Object.values(v);
-  return [];
-}
 
 function normalizeApp(id, data, source) {
   try {
@@ -1117,27 +2124,17 @@ function normalizeApp(id, data, source) {
     const fullDescription = safeText(d.fullDescription || d.description || "").trim();
     const whatsNew = safeText(d.whatsNew || "").trim();
     const sha256 = safeText(d.sha256 || "").trim();
-
-    // Real download link: prefer apkUrl/downloadUrl/link if https
     const rawUrl = safeText(d.apkUrl || d.downloadUrl || d.link || "").trim();
     const apkUrl = isHttps(rawUrl) ? rawUrl : "";
-
     const featured = d.featured === true;
     const published = d.published !== false;
     const updatedAt = Number(d.updatedAt) || Number(d.createdAt) || 0;
-
-    return {
-      id: safeText(id), source: source || "apps",
-      name, publisher, packageName, version, versionCode,
-      size, sizeBytes, downloads, rating, icon, fullDescription, whatsNew,
-      sha256, apkUrl, featured, published, updatedAt
-    };
+    return { id: safeText(id), source: source || "apps", name, publisher, packageName, version, versionCode, size, sizeBytes, downloads, rating, icon, fullDescription, whatsNew, sha256, apkUrl, featured, published, updatedAt };
   } catch (err) {
     console.warn("[normalizeApp] failed for", id, err);
     return null;
   }
 }
-
 function parseDownloads(s) {
   try {
     if (!s) return 0;
@@ -1151,13 +2148,10 @@ function parseDownloads(s) {
 }
 
 /* ============================================================
-   RESOLVE APK URL (premiumLinks/<id>)
+   RESOLVE APK URL  (unchanged)
    ============================================================ */
 async function resolveApkUrl(app) {
-  // 1) Already has a valid https link on the record
   if (app.apkUrl && /^https:\/\//i.test(app.apkUrl)) return app.apkUrl;
-
-  // 2) Fetch premiumLinks/<id>
   const mods = await initFirebase();
   if (!mods) throw new Error("Firebase not initialized");
   try {
@@ -1184,24 +2178,16 @@ async function resolveApkUrl(app) {
 }
 
 /* ============================================================
-   STATE
+   STATE  (unchanged)
    ============================================================ */
 const state = {
-  apps: [],
-  search: "",
-  category: "All",
-  sort: "newest",
-  loading: true,
-  error: null,
-  offline: false,
-  usingCache: false,
-  route: { name: "home", id: null },
-  user: null,
-  loginTab: "login"
+  apps: [], search: "", category: "All", sort: "newest",
+  loading: true, error: null, offline: false, usingCache: false,
+  route: { name: "home", id: null }, user: null, loginTab: "login"
 };
 
 /* ============================================================
-   CACHE
+   CACHE  (unchanged)
    ============================================================ */
 const CACHE_KEY = "fas_apps_cache_v3";
 function saveCache(list) { try { localStorage.setItem(CACHE_KEY, JSON.stringify(list)); } catch (_) {} }
@@ -1215,7 +2201,7 @@ function loadCache() {
 }
 
 /* ============================================================
-   SKELETON
+   SKELETON  (unchanged)
    ============================================================ */
 function renderSkeleton() {
   const grid = el("div", { class: "app-grid", attrs: { "aria-hidden": "true" } });
@@ -1234,7 +2220,7 @@ function renderSkeleton() {
 }
 
 /* ============================================================
-   ICON / STARS
+   ICON / STARS  (unchanged)
    ============================================================ */
 function starEl(rating) {
   const wrap = el("span", { class: "stars", attrs: { "aria-label": `Rating ${rating} out of 5` } });
@@ -1256,7 +2242,7 @@ function iconNode(app, sizeClass) {
 }
 
 /* ============================================================
-   FILTER + SORT
+   FILTER + SORT  (unchanged)
    ============================================================ */
 function getCategories(apps) {
   const set = new Set();
@@ -1283,7 +2269,7 @@ function filteredApps() {
 }
 
 /* ============================================================
-   CARDS
+   CARDS  (unchanged)
    ============================================================ */
 function appCard(app) {
   const card = el("article", { class: "app-card", attrs: { role: "button", tabindex: "0", "aria-label": `${app.name} details` } });
@@ -1299,7 +2285,6 @@ function appCard(app) {
   }
   body.appendChild(meta);
   card.appendChild(body);
-
   const dlBtn = el("button", { class: "card-dl", attrs: { type: "button", "aria-label": `${app.name} download` } });
   const dlSvg = svgEl("svg", { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2.4", "stroke-linecap": "round", "stroke-linejoin": "round" });
   dlSvg.appendChild(svgEl("path", { d: "M12 3v12 M6 11l6 6 6-6 M5 21h14" }));
@@ -1308,13 +2293,11 @@ function appCard(app) {
   if (state.offline) dlBtn.disabled = true;
   dlBtn.addEventListener("click", (e) => { e.stopPropagation(); triggerDownload(app); });
   card.appendChild(dlBtn);
-
   const go = () => navigate(`#/app/${encodeURIComponent(app.id)}`);
   card.addEventListener("click", go);
   card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
   return card;
 }
-
 function featuredCard(app) {
   const card = el("article", { class: "featured-card", attrs: { role: "button", tabindex: "0", "aria-label": `${app.name} featured` } });
   card.appendChild(el("span", { class: "featured-badge", text: "Featured" }));
@@ -1328,7 +2311,7 @@ function featuredCard(app) {
 }
 
 /* ============================================================
-   DOWNLOAD (async; resolves premiumLinks)
+   DOWNLOAD  (unchanged)
    ============================================================ */
 async function triggerDownload(app) {
   if (state.offline) { toast("Internet nahi hai"); return; }
@@ -1343,7 +2326,6 @@ async function triggerDownload(app) {
     toast("Download shuru ho raha hai");
   } catch (err) {
     console.error("[Download] failed:", err);
-    // permission-denied toast is already shown inside resolveApkUrl
     const code = err && (err.code || "");
     const msg = String(err && (err.message || err));
     if (!(String(code).includes("permission-denied") || /permission/i.test(msg))) {
@@ -1353,11 +2335,10 @@ async function triggerDownload(app) {
 }
 
 /* ============================================================
-   HOME
+   HOME  (unchanged)
    ============================================================ */
 function renderHome() {
   const frag = document.createDocumentFragment();
-
   const featured = state.apps.filter(a => a.published && a.featured)
     .sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
   if (featured.length > 0) {
@@ -1371,7 +2352,6 @@ function renderHome() {
     sec.appendChild(row);
     frag.appendChild(sec);
   }
-
   const toolbar = el("div", { class: "toolbar" });
   const cats = getCategories(state.apps);
   const chipRow = el("div", { class: "chip-row", attrs: { role: "tablist", "aria-label": "Categories" } });
@@ -1385,11 +2365,9 @@ function renderHome() {
     chipRow.appendChild(chip);
   });
   toolbar.appendChild(chipRow);
-
   const filtered = filteredApps();
   const toolbarRow = el("div", { class: "toolbar-row" });
   toolbarRow.appendChild(el("span", { class: "result-count", text: `${filtered.length} app${filtered.length === 1 ? "" : "s"} mile` }));
-
   const sortWrap = el("div", { class: "sort-wrap" });
   const sortSel = el("select", { class: "sort-select", attrs: { "aria-label": "Sort apps" } });
   [["newest", "Newest"], ["downloads", "Most downloaded"], ["rating", "Top rated"], ["az", "A-Z"]].forEach(([val, label]) => {
@@ -1402,17 +2380,12 @@ function renderHome() {
   toolbarRow.appendChild(sortWrap);
   toolbar.appendChild(toolbarRow);
   frag.appendChild(toolbar);
-
   if (state.loading && state.apps.length === 0) {
     frag.appendChild(renderSkeleton());
   } else if (filtered.length === 0) {
     const empty = el("div", { class: "state-screen" });
     empty.appendChild(el("h2", { text: state.apps.length === 0 ? "Abhi koi app nahi" : "Koi app nahi mili" }));
-    empty.appendChild(el("p", {
-      text: state.apps.length === 0
-        ? "Database abhi khali hai. Admin apps add karega to yahan turant dikh jayenge."
-        : "Search ya filter change karke dobara try karein."
-    }));
+    empty.appendChild(el("p", { text: state.apps.length === 0 ? "Database abhi khali hai. Admin apps add karega to yahan turant dikh jayenge." : "Search ya filter change karke dobara try karein." }));
     if (state.search || state.category !== "All") {
       const btn = el("button", { class: "btn secondary", text: "Filter clear karein", attrs: { type: "button" } });
       btn.addEventListener("click", () => {
@@ -1428,18 +2401,16 @@ function renderHome() {
     filtered.forEach(a => grid.appendChild(appCard(a)));
     frag.appendChild(grid);
   }
-
   appEl.replaceChildren(el("div", { class: "page" }, [frag]));
 }
 
 /* ============================================================
-   DETAIL
+   DETAIL  (unchanged)
    ============================================================ */
 function renderDetail(id) {
   const app = state.apps.find(a => a.id === id && a.published);
   const frag = document.createDocumentFragment();
   frag.appendChild(makeBackBtn());
-
   if (!app) {
     const empty = el("div", { class: "state-screen" });
     empty.appendChild(el("h2", { text: "App nahi mili" }));
@@ -1451,7 +2422,6 @@ function renderDetail(id) {
     appEl.replaceChildren(el("div", { class: "page" }, [frag]));
     return;
   }
-
   const detail = el("div", { class: "detail" });
   const hero = el("div", { class: "detail-hero" });
   hero.appendChild(iconNode(app, "detail-icon"));
@@ -1461,7 +2431,6 @@ function renderDetail(id) {
   if (app.packageName) head.appendChild(el("span", { class: "detail-cat", text: app.packageName }));
   hero.appendChild(head);
   detail.appendChild(hero);
-
   const stats = el("div", { class: "stats-row" });
   [["Rating", app.rating > 0 ? app.rating.toFixed(1) : "—"], ["Size", app.size || "—"], ["Downloads", app.downloads || "—"], ["Version", app.version || "—"]]
     .forEach(([label, value]) => stats.appendChild(el("div", { class: "stat" }, [
@@ -1469,7 +2438,6 @@ function renderDetail(id) {
       el("span", { class: "stat-label", text: label })
     ])));
   detail.appendChild(stats);
-
   const actions = el("div", { class: "detail-actions" });
   if (!state.offline) {
     const dl = el("button", { class: "btn", attrs: { type: "button", "aria-label": `${app.name} APK download karein` } });
@@ -1482,7 +2450,6 @@ function renderDetail(id) {
   } else {
     actions.appendChild(el("button", { class: "btn", text: "Offline hai", attrs: { type: "button", disabled: "true" } }));
   }
-
   const shareBtn = el("button", { class: "btn secondary icon-only", attrs: { type: "button", "aria-label": "App share karein" } });
   const ss = svgEl("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2.2", "stroke-linecap": "round", "stroke-linejoin": "round" });
   ["M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7", "M16 6l-4-4-4 4", "M12 2v13"].forEach(d => ss.appendChild(svgEl("path", { d })));
@@ -1491,7 +2458,6 @@ function renderDetail(id) {
   actions.appendChild(shareBtn);
   detail.appendChild(actions);
   detail.appendChild(helpCard());
-
   if (app.fullDescription) {
     const sec = el("section", { class: "detail-block" });
     sec.appendChild(el("h3", { text: "About app" }));
@@ -1520,11 +2486,9 @@ function renderDetail(id) {
     sec.appendChild(chip);
     detail.appendChild(sec);
   }
-
   frag.appendChild(detail);
   appEl.replaceChildren(el("div", { class: "page" }, [frag]));
 }
-
 function makeBackBtn() {
   const btn = el("button", { class: "back-btn", attrs: { type: "button", "aria-label": "Wapas jayein" } });
   const svg = svgEl("svg", { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2.4", "stroke-linecap": "round", "stroke-linejoin": "round" });
@@ -1564,7 +2528,7 @@ async function copyText(text) {
 }
 
 /* ============================================================
-   HELP PAGE
+   HELP PAGE  (unchanged)
    ============================================================ */
 function renderHelp() {
   const frag = document.createDocumentFragment();
@@ -1572,7 +2536,6 @@ function renderHelp() {
   const page = el("div", { class: "help-page" });
   page.appendChild(el("h1", { text: "Help & Support" }));
   page.appendChild(el("p", { class: "lead", text: "Koi dikkat ho, app download na ho rahi ho, ya suggestion dena ho — seedha message karein. Hum jaldi reply karte hain." }));
-
   const wrap = el("div", { class: "support-buttons" });
   const wa = el("a", { class: "support-btn", attrs: { href: SUPPORT_WHATSAPP_URL, target: "_blank", rel: "noopener noreferrer", "aria-label": "WhatsApp par contact karein" } });
   const waIcon = el("div", { class: "sb-icon sb-wa" });
@@ -1583,7 +2546,6 @@ function renderHelp() {
   waText.appendChild(el("span", { class: "sb-sub", text: "Seedha message karein" }));
   wa.appendChild(waText); wa.appendChild(arrowSvg());
   wrap.appendChild(wa);
-
   const ig = el("a", { class: "support-btn", attrs: { href: SUPPORT_INSTAGRAM_URL, target: "_blank", rel: "noopener noreferrer", "aria-label": "Instagram par follow karein" } });
   const igIcon = el("div", { class: "sb-icon sb-ig" });
   igIcon.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>';
@@ -1594,7 +2556,6 @@ function renderHelp() {
   ig.appendChild(igText); ig.appendChild(arrowSvg());
   wrap.appendChild(ig);
   page.appendChild(wrap);
-
   const cardA = el("div", { class: "about-card", style: "margin-bottom: 16px;" });
   cardA.appendChild(el("h2", { text: "Hamara Android app" }));
   cardA.appendChild(el("p", { text: "Free APK Store ka official Android app download karein." }));
@@ -1606,7 +2567,6 @@ function renderHelp() {
   rowA.appendChild(copyA);
   cardA.appendChild(rowA);
   page.appendChild(cardA);
-
   const cardB = el("div", { class: "about-card", style: "margin-bottom: 16px;" });
   cardB.appendChild(el("h2", { text: "Website ka link" }));
   cardB.appendChild(el("p", { text: "Website ka shareable link." }));
@@ -1624,12 +2584,10 @@ function renderHelp() {
   rowB.appendChild(shareB);
   cardB.appendChild(rowB);
   page.appendChild(cardB);
-
   const about = el("div", { class: "about-card" });
   about.appendChild(el("h2", { text: "About Free APK Store" }));
   about.appendChild(el("p", { text: "Free APK Store ek free Android APK download website hai. Yahan sab apps bilkul free hain — koi login nahi, koi payment nahi, koi premium lock nahi, koi ads nahi." }));
   page.appendChild(about);
-
   frag.appendChild(page);
   appEl.replaceChildren(el("div", { class: "page" }, [frag]));
 }
@@ -1640,7 +2598,7 @@ function arrowSvg() {
 }
 
 /* ============================================================
-   STATE SCREENS
+   STATE SCREENS  (unchanged)
    ============================================================ */
 function cloudArt(opts = {}) {
   const { error = false } = opts;
@@ -1649,11 +2607,10 @@ function cloudArt(opts = {}) {
   const floatWrap = el("div", { class: "cloud-float" });
   const svg = svgEl("svg", { viewBox: "0 0 200 170", width: "180", height: "160", fill: "none" });
   for (let i = 0; i < 3; i++) {
-    const arc = svgEl("path", {
+    svg.appendChild(svgEl("path", {
       d: i === 0 ? "M86 18 A 16 16 0 0 1 114 18" : i === 1 ? "M78 30 A 26 26 0 0 1 122 30" : "M70 42 A 36 36 0 0 1 130 42",
       stroke: "var(--brand)", "stroke-width": "4", "stroke-linecap": "round", class: "wifi-arc"
-    });
-    svg.appendChild(arc);
+    }));
   }
   const cloudColor = error ? "color-mix(in srgb, var(--danger) 22%, var(--bg-elev))" : "color-mix(in srgb, var(--brand) 20%, var(--bg-elev))";
   const cloudStroke = error ? "var(--danger)" : "var(--brand-strong)";
@@ -1711,7 +2668,7 @@ function retryAction(btn, cloudEl) {
 }
 
 /* ============================================================
-   ROUTING
+   ROUTING  (unchanged)
    ============================================================ */
 function parseRoute() {
   const hash = location.hash || "#/";
@@ -1735,7 +2692,7 @@ function renderRoute() {
 }
 
 /* ============================================================
-   FIREBASE SUBSCRIPTION (apps + paidApps merged)
+   FIREBASE SUBSCRIPTION  (unchanged)
    ============================================================ */
 let retryTimer = null;
 function retryLoad() {
@@ -1744,17 +2701,12 @@ function retryLoad() {
   if (state.route.name === "home") renderRoute();
   subscribeApps();
 }
-
 function mergeLists(appsList, paidList) {
   const map = new Map();
   for (const a of appsList) map.set(a.id, a);
-  for (const a of paidList) {
-    // skip duplicates by id; if same id from paidApps, keep apps version
-    if (!map.has(a.id)) map.set(a.id, a);
-  }
+  for (const a of paidList) { if (!map.has(a.id)) map.set(a.id, a); }
   return Array.from(map.values());
 }
-
 async function subscribeApps() {
   if (unsubscribeApps) { try { unsubscribeApps(); } catch (_) {} unsubscribeApps = null; }
   if (unsubscribePaidApps) { try { unsubscribePaidApps(); } catch (_) {} unsubscribePaidApps = null; }
@@ -1770,10 +2722,8 @@ async function subscribeApps() {
     return;
   }
   const { dbMod } = mods;
-
   let appsData = { done: false, list: [] };
   let paidData = { done: false, list: [] };
-
   function finishIfReady() {
     if (!appsData.done || !paidData.done) return;
     const merged = mergeLists(appsData.list, paidData.list);
@@ -1784,20 +2734,15 @@ async function subscribeApps() {
     saveCache(merged);
     if (state.route.name === "home" || state.route.name === "detail") renderRoute();
   }
-
   function handlePartialError(err, which) {
     console.error(`[Firebase] ${which} onValue error:`, err);
-    // If one node fails (e.g. permission), still proceed with the other
-    if (which === "apps") { appsData.done = true; }
-    else { paidData.done = true; }
-    // Only hard-fail if both are done and nothing came back
+    if (which === "apps") appsData.done = true; else paidData.done = true;
     if (appsData.done && paidData.done) {
       const merged = mergeLists(appsData.list, paidData.list);
       if (merged.length === 0) handleDbError(err);
       else finishIfReady();
     }
   }
-
   try {
     const appsRef = dbMod.ref(firebaseDb, APPS_PATH);
     unsubscribeApps = dbMod.onValue(appsRef, (snapshot) => {
@@ -1808,16 +2753,9 @@ async function subscribeApps() {
           : [];
         appsData.list = list; appsData.done = true;
         finishIfReady();
-      } catch (err) {
-        console.error("[Firebase] apps handler error:", err);
-        handlePartialError(err, "apps");
-      }
+      } catch (err) { console.error("[Firebase] apps handler error:", err); handlePartialError(err, "apps"); }
     }, (error) => handlePartialError(error, "apps"));
-  } catch (err) {
-    console.error("[Firebase] apps subscribe failed:", err);
-    handlePartialError(err, "apps");
-  }
-
+  } catch (err) { console.error("[Firebase] apps subscribe failed:", err); handlePartialError(err, "apps"); }
   try {
     const paidRef = dbMod.ref(firebaseDb, PAID_APPS_PATH);
     unsubscribePaidApps = dbMod.onValue(paidRef, (snapshot) => {
@@ -1828,17 +2766,10 @@ async function subscribeApps() {
           : [];
         paidData.list = list; paidData.done = true;
         finishIfReady();
-      } catch (err) {
-        console.error("[Firebase] paidApps handler error:", err);
-        handlePartialError(err, "paidApps");
-      }
+      } catch (err) { console.error("[Firebase] paidApps handler error:", err); handlePartialError(err, "paidApps"); }
     }, (error) => handlePartialError(error, "paidApps"));
-  } catch (err) {
-    console.error("[Firebase] paidApps subscribe failed:", err);
-    handlePartialError(err, "paidApps");
-  }
+  } catch (err) { console.error("[Firebase] paidApps subscribe failed:", err); handlePartialError(err, "paidApps"); }
 }
-
 function handleDbError(error) {
   state.loading = false;
   const cached = loadCache();
@@ -1865,7 +2796,7 @@ function handleDbError(error) {
 }
 
 /* ============================================================
-   BANNER / LOADER
+   BANNER / LOADER  (unchanged)
    ============================================================ */
 function showOfflineBanner() { offlineBanner.classList.add("show"); }
 function hideOfflineBanner() { offlineBanner.classList.remove("show"); }
@@ -1875,7 +2806,7 @@ function hideGlobalLoader() {
 }
 
 /* ============================================================
-   ONLINE / OFFLINE
+   ONLINE / OFFLINE  (unchanged)
    ============================================================ */
 let wasOffline = !navigator.onLine;
 function handleOffline() {
@@ -1894,7 +2825,7 @@ function handleOnline() {
 }
 
 /* ============================================================
-   SEARCH
+   SEARCH  (unchanged)
    ============================================================ */
 let searchDebounce = null;
 function onSearchInput() {
@@ -1913,7 +2844,7 @@ function onSearchInput() {
 }
 
 /* ============================================================
-   AUTH + DIALOGS
+   AUTH  (unchanged)
    ============================================================ */
 function updateProfileBtn() {
   const btn = $("#profileBtn");
@@ -1965,10 +2896,12 @@ function openSettingsDialog() {
   if (nm) nm.textContent = state.user.displayName || (state.user.email || "").split("@")[0];
   if (em) em.textContent = state.user.email || "";
   if (nameInput) nameInput.value = state.user.displayName || "";
-  const dark = $("#setDark"); if (dark) dark.checked = currentTheme() === "dark";
+  const dark = $("#setDark"); if (dark) dark.checked = getManualTheme() === "dark";
   document.querySelectorAll(".lang-row button").forEach(b => b.classList.toggle("active", b.dataset.lang === (localStorage.getItem("fas_lang") || "hi")));
   const storedColor = localStorage.getItem("fas_navcolor") || "auto";
   document.querySelectorAll("#colorCircles button").forEach(b => b.classList.toggle("active", b.dataset.color === storedColor));
+  const autoSw = $("#autoThemeSwitch"); if (autoSw) autoSw.checked = autoThemeOn;
+  document.querySelectorAll(".theme-swatch").forEach(b => b.classList.toggle("active", b.dataset.th === THEMES[currentThemeIdx].id));
   openDialog("settingsBackdrop");
 }
 async function handleLoginSubmit(e) {
@@ -2040,17 +2973,12 @@ function setupAuthUI() {
   $("#settingsBackdrop")?.addEventListener("click", (e) => { if (e.target === $("#settingsBackdrop")) closeDialog("settingsBackdrop"); });
   $("#setDark")?.addEventListener("change", () => {
     const theme = $("#setDark").checked ? "dark" : "light";
-    applyTheme(theme); setStoredTheme(theme);
+    applyManualTheme(theme);
   });
   document.querySelectorAll(".lang-row button").forEach(b => b.addEventListener("click", () => {
     try { localStorage.setItem("fas_lang", b.dataset.lang); } catch (_) {}
     document.querySelectorAll(".lang-row button").forEach(x => x.classList.toggle("active", x.dataset.lang === b.dataset.lang));
     toast(b.dataset.lang === "hi" ? "भाषा बदल दी" : "Language changed");
-  }));
-  document.querySelectorAll("#colorCircles button").forEach(b => b.addEventListener("click", () => {
-    try { localStorage.setItem("fas_navcolor", b.dataset.color); } catch (_) {}
-    applyNavbarColor();
-    document.querySelectorAll("#colorCircles button").forEach(x => x.classList.toggle("active", x.dataset.color === b.dataset.color));
   }));
   $("#saveNameBtn")?.addEventListener("click", handleSaveName);
   $("#logoutBtn")?.addEventListener("click", handleLogout);
@@ -2058,7 +2986,7 @@ function setupAuthUI() {
 }
 
 /* ============================================================
-   PWA
+   PWA  (unchanged)
    ============================================================ */
 let deferredInstallPrompt = null;
 function initInstallPrompt() {
@@ -2117,12 +3045,14 @@ function initManifest() {
 }
 
 /* ============================================================
-   INIT  (module scripts are deferred → DOM already parsed)
+   INIT
    ============================================================ */
 async function init() {
   try { $("#year").textContent = String(new Date().getFullYear()); } catch (_) {}
 
-  initTheme();
+  initManualTheme();
+  initThemeEngine();
+  initNavbarColorUI();
   initManifest();
   registerSW();
   initInstallPrompt();
